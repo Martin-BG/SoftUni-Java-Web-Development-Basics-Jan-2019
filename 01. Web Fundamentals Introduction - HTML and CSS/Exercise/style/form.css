@@ -5,7 +5,8 @@ form {
 }
 
 /* Makes responsive fields. Sets size and field alignment.*/
-input, select {
+input, select, textarea {
+    background-color: white;
     box-sizing: border-box;
     display: block;
     margin: 10px auto 20px;
@@ -16,12 +17,6 @@ input, select {
 }
 
 input[type=number], input[type="date"], textarea {
-    display: block;
-    margin: 10px auto 20px;
-    width: 75%;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #FE9E00;
 }
 
 textarea {

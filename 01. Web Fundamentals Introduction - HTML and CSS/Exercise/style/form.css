@@ -16,9 +16,6 @@ input, select, textarea {
     border: 1px solid #FE9E00;
 }
 
-input[type=number], input[type="date"], textarea {
-}
-
 textarea {
     resize: none;
 }

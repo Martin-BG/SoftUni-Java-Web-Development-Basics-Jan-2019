@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 public class HttpParser {
 
     private static final Logger LOGGER = Logger.getLogger(HttpParser.class.getName());
+
     private static final String HTTP_LINE_SEPARATOR = "\r\n";
     private static final String HEADER_SEPARATOR = ": ";
     private static final String REQUEST_METHOD = "method";
@@ -32,21 +33,28 @@ public class HttpParser {
     private static final String HTTP_1_1 = "HTTP/1.1";
     private static final String KEY = "key";
     private static final String VALUE = "value";
+
     private static final String RESPONSE_LINE = HTTP_1_1 + " %d %s";
     private static final String RESPONSE_BODY_GET = "Greetings %s!";
     private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET +
             " You have successfully created %s with quantity – %s, price – %s.";
+
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     private static final Pattern REQUEST_LINE_PATTERN = Pattern.compile(String.format(
             "^(?<%s>[A-Z]{3,6}) (?<%s>/[a-zA-Z0-9/]+) (?<%s>HTTP/[0-9.]+)$",
             REQUEST_METHOD, REQUEST_RESOURCE, REQUEST_HTTP_VERSION));
+
     private static final Pattern BODY_PARAMS_PATTERN = Pattern.compile(String.format(
             "&?(?<%s>[A-Za-z0-9]+)=(?<%s>[A-Za-z0-9]+)",
             KEY, VALUE));
+
     private static final Pattern HEADER_PATTERN = Pattern.compile(String.format(
             "^(?<%s>[^ :]+)%s(?<%s>.+)$",
             KEY, HEADER_SEPARATOR, VALUE));
+
     private static final Pattern URLS_PATTERN = Pattern.compile("(/[^ ]+)");
+
     private static final List<String> RESPONSE_HEADERS = List.of(HEADER_DATE, "Host", "Content-Type");
     private static final Set<String> VALID_HEADERS = Set.of(HEADER_DATE, "Host", "Content-Type", HEADER_AUTHORIZATION);
     private static final Set<String> REQUIRED_BODY_PARAMS = Set.of(PARAM_NAME, PARAM_QUANTITY, PARAM_PRICE);

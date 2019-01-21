@@ -15,7 +15,6 @@ public class HttpRequestImpl implements HttpRequest {
     private Map<String, String> bodyParameters;
     private String method;
     private String requestUrl;
-    private boolean isResource;
 
     public HttpRequestImpl(String request) {
         headers = new HashMap<>();
@@ -30,9 +29,8 @@ public class HttpRequestImpl implements HttpRequest {
         }
 
         String[] requestLineTokens = REQUEST_LINE_SPLIT_PATTERN.split(lines.get(0));
-        method = requestLineTokens[0];
-        requestUrl = requestLineTokens[1];
-        isResource = requestUrl.contains(".");
+        setMethod(requestLineTokens[0]);
+        setRequestUrl(requestLineTokens[1]);
 
         int lineIndex = 1;
         for (; lineIndex < lines.size() && !lines.get(lineIndex).isEmpty(); lineIndex++) {
@@ -89,6 +87,6 @@ public class HttpRequestImpl implements HttpRequest {
 
     @Override
     public boolean isResource() {
-        return isResource;
+        return requestUrl.contains(".");
     }
 }

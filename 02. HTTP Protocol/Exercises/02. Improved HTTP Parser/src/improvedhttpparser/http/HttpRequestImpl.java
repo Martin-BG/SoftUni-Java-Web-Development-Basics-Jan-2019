@@ -17,13 +17,13 @@ public class HttpRequestImpl implements HttpRequest {
     private String requestUrl;
 
     public HttpRequestImpl(String request) {
-        headers = new HashMap<>();
+        headers = new LinkedHashMap<>();
         bodyParameters = new HashMap<>();
         parseRequest(request);
     }
 
     private void parseRequest(String request) {
-        List<String> lines = Arrays.asList(LINE_SPLIT_PATTERN.split(request));
+        List<String> lines = Arrays.asList(LINE_SPLIT_PATTERN.split(request, -1));
         if (lines.isEmpty()) {
             return;
         }
@@ -32,16 +32,15 @@ public class HttpRequestImpl implements HttpRequest {
         setMethod(requestLineTokens[0]);
         setRequestUrl(requestLineTokens[1]);
 
-        int lineIndex = 1;
-        for (; lineIndex < lines.size() && !lines.get(lineIndex).isEmpty(); lineIndex++) {
-            String[] kvp = HEADERS_SPLIT_PATTERN.split(lines.get(lineIndex));
-            addHeader(kvp[0], kvp[1]);
+        for (int lineIndex = 1; lineIndex < lines.size() && !lines.get(lineIndex).isEmpty(); lineIndex++) {
+            String[] headerKvp = HEADERS_SPLIT_PATTERN.split(lines.get(lineIndex));
+            addHeader(headerKvp[0], headerKvp[1]);
         }
 
-        if (lineIndex == lines.size() - 2) {
+        if (!lines.get(lines.size() - 1).isEmpty()) {
             Arrays.stream(PARAMS_DELIMITER_SPLIT_PATTERN.split(lines.get(lines.size() - 1)))
                     .map(PARAMS_SPLIT_PATTERN::split)
-                    .forEach(kvp -> addBodyParameter(kvp[0], kvp[1]));
+                    .forEach(parameterKvp -> addBodyParameter(parameterKvp[0], parameterKvp[1]));
         }
     }
 

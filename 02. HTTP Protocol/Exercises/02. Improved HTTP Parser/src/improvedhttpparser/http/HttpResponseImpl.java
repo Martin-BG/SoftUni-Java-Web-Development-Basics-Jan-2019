@@ -1,7 +1,7 @@
 package improvedhttpparser.http;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class HttpResponseImpl implements HttpResponse {
@@ -12,7 +12,7 @@ public class HttpResponseImpl implements HttpResponse {
 
     public HttpResponseImpl() {
         content = new byte[0];
-        headers = new HashMap<>();
+        headers = new LinkedHashMap<>();
     }
 
     @Override

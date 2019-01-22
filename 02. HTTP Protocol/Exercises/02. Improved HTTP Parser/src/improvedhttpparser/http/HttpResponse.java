@@ -6,9 +6,9 @@ public interface HttpResponse {
 
     Map<String, String> getHeaders();
 
-    StatusCode getStatusCode();
+    HttpStatus getHttpStatus();
 
-    void setStatusCode(StatusCode statusCode);
+    void setHttpStatus(HttpStatus httpStatus);
 
     byte[] getContent();
 

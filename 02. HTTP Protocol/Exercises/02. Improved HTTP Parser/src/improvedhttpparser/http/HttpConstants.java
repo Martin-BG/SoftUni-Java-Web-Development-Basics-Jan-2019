@@ -3,7 +3,7 @@ package improvedhttpparser.http;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public final class Constants {
+public final class HttpConstants {
 
     public static final Charset CHARSET = StandardCharsets.UTF_8;
 
@@ -14,6 +14,6 @@ public final class Constants {
     public static final String PARAMS_SEPARATOR = "=";
     public static final String REQUEST_LINE_SEPARATOR = " ";
 
-    private Constants() {
+    private HttpConstants() {
     }
 }

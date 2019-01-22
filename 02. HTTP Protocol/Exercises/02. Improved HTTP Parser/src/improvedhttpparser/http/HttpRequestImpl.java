@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public class HttpRequestImpl implements HttpRequest {
 
-    private static final Pattern LINE_SPLIT_PATTERN = Pattern.compile(Constants.HTTP_LINE_SEPARATOR);
-    private static final Pattern REQUEST_LINE_SPLIT_PATTERN = Pattern.compile(Constants.REQUEST_LINE_SEPARATOR);
-    private static final Pattern HEADERS_SPLIT_PATTERN = Pattern.compile(Constants.HEADERS_SEPARATOR);
-    private static final Pattern PARAMS_DELIMITER_SPLIT_PATTERN = Pattern.compile(Constants.PARAMS_DELIMITER);
-    private static final Pattern PARAMS_SPLIT_PATTERN = Pattern.compile(Constants.PARAMS_SEPARATOR);
+    private static final Pattern LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.HTTP_LINE_SEPARATOR);
+    private static final Pattern REQUEST_LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.REQUEST_LINE_SEPARATOR);
+    private static final Pattern HEADERS_SPLIT_PATTERN = Pattern.compile(HttpConstants.HEADERS_SEPARATOR);
+    private static final Pattern PARAMS_DELIMITER_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_DELIMITER);
+    private static final Pattern PARAMS_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_SEPARATOR);
 
     private Map<String, String> headers;
     private Map<String, String> bodyParameters;

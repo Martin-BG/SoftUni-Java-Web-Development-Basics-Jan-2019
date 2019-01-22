@@ -8,7 +8,7 @@ public class HttpResponseImpl implements HttpResponse {
 
     private Map<String, String> headers;
     private byte[] content;
-    private StatusCode statusCode;
+    private HttpStatus httpStatus;
 
     public HttpResponseImpl() {
         content = new byte[0];
@@ -21,13 +21,13 @@ public class HttpResponseImpl implements HttpResponse {
     }
 
     @Override
-    public StatusCode getStatusCode() {
-        return statusCode;
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
     }
 
     @Override
-    public void setStatusCode(StatusCode statusCode) {
-        this.statusCode = statusCode;
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
     @Override
@@ -43,21 +43,21 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public byte[] getBytes() {
         StringBuilder response = new StringBuilder()
-                .append(Constants.HTTP_VERSION)
-                .append(Constants.REQUEST_LINE_SEPARATOR)
-                .append(statusCode.getCode())
-                .append(Constants.REQUEST_LINE_SEPARATOR)
-                .append(statusCode.getName())
-                .append(Constants.HTTP_LINE_SEPARATOR);
+                .append(HttpConstants.HTTP_VERSION)
+                .append(HttpConstants.REQUEST_LINE_SEPARATOR)
+                .append(httpStatus.getCode())
+                .append(HttpConstants.REQUEST_LINE_SEPARATOR)
+                .append(httpStatus.getName())
+                .append(HttpConstants.HTTP_LINE_SEPARATOR);
         headers.forEach((key, value) -> response
                 .append(key)
-                .append(Constants.HEADERS_SEPARATOR)
+                .append(HttpConstants.HEADERS_SEPARATOR)
                 .append(value)
-                .append(Constants.HTTP_LINE_SEPARATOR));
-        response.append(Constants.HTTP_LINE_SEPARATOR)
-                .append(new String(content, Constants.CHARSET));
+                .append(HttpConstants.HTTP_LINE_SEPARATOR));
+        response.append(HttpConstants.HTTP_LINE_SEPARATOR)
+                .append(new String(content, HttpConstants.CHARSET));
 
-        return response.toString().getBytes(Constants.CHARSET);
+        return response.toString().getBytes(HttpConstants.CHARSET);
     }
 
     @Override

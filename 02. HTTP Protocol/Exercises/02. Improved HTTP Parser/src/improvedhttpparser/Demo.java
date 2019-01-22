@@ -30,10 +30,10 @@ public class Demo {
         System.out.println("getResourceRequest isResource: " + getResourceRequest.isResource());
 
         HttpResponse httpResponse = new HttpResponseImpl();
-        httpResponse.setStatusCode(StatusCode.OK);
+        httpResponse.setHttpStatus(HttpStatus.OK);
         postRequest.getHeaders().forEach(httpResponse::addHeader);
-        httpResponse.setContent("Hello World!".getBytes(Constants.CHARSET));
+        httpResponse.setContent("Hello World!".getBytes(HttpConstants.CHARSET));
 
-        System.out.println(new String(httpResponse.getBytes(), Constants.CHARSET));
+        System.out.println(new String(httpResponse.getBytes(), HttpConstants.CHARSET));
     }
 }

@@ -1,6 +1,6 @@
 package improvedhttpparser.http;
 
-public enum StatusCode {
+public enum HttpStatus {
     OK(200, "OK"),
     BAD_REQUEST(400, "Bad Request"),
     UNAUTHORIZED(401, "Unauthorized"),
@@ -9,7 +9,7 @@ public enum StatusCode {
     private int code;
     private String name;
 
-    StatusCode(int code, String name) {
+    HttpStatus(int code, String name) {
         this.code = code;
         this.name = name;
     }

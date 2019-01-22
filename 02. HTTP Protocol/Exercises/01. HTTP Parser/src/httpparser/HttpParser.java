@@ -26,6 +26,8 @@ public class HttpParser {
     private static final String PARAM_QUANTITY = "quantity";
     private static final String PARAM_PRICE = "price";
     private static final String HEADER_DATE = "Date";
+    private static final String HEADER_HOST = "Host";
+    private static final String HEADER_CONTENT_TYPE = "Content-Type";
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_PREFIX = "Basic ";
     private static final String HTTP_1_1 = "HTTP/1.1";
@@ -51,17 +53,22 @@ public class HttpParser {
 
     private static final Pattern URLS_PATTERN = Pattern.compile("(/[^ ]+)");
 
-    private static final List<String> RESPONSE_HEADERS = List.of(HEADER_DATE, "Host", "Content-Type");
-    private static final Set<String> VALID_HEADERS = Set.of(HEADER_DATE, "Host", "Content-Type", HEADER_AUTHORIZATION);
+    private static final Set<String> RESPONSE_HEADERS = Set.of(HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE);
+
+    private static final Set<String> VALID_HEADERS = Set.of(
+            HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE, HEADER_AUTHORIZATION);
+
     private static final Set<String> REQUIRED_BODY_PARAMS = Set.of(PARAM_NAME, PARAM_QUANTITY, PARAM_PRICE);
+
     private static final Set<String> HTTP_VERSIONS = Set.of(HTTP_1_1);
+
     private static final Set<String> HTTP_METHODS = Stream.of(HttpMethod.values())
             .map(Enum::name)
             .collect(Collectors.toUnmodifiableSet());
 
+
     public static void main(String[] args) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
-
             Set<String> urls = parseUrls(reader);
             Map<String, String> request = parseRequestLine(reader);
             Map<String, String> headers = parseHeaders(reader);

@@ -51,7 +51,7 @@ public class HttpParser {
             "^(?<%s>[^ :]+)%s(?<%s>.+)$",
             KEY, HEADER_SEPARATOR, VALUE));
 
-    private static final Pattern URLS_PATTERN = Pattern.compile("(/[^ ]+)");
+    private static final Pattern URLS_PATTERN = Pattern.compile("/[^ ]+");
 
     private static final Set<String> RESPONSE_HEADERS = Set.of(HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE);
 

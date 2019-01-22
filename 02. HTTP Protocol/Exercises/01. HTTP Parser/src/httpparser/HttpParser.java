@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,9 +35,7 @@ public class HttpParser {
     private static final String RESPONSE_LINE = HTTP_1_1 + " %d %s";
     private static final String RESPONSE_BODY_GET = "Greetings %s!";
     private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET +
-            " You have successfully created %s with quantity – %s, price – %s.";
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            " You have successfully created %s with quantity - %s, price - %s.";
 
     private static final Pattern REQUEST_LINE_PATTERN = Pattern.compile(String.format(
             "^(?<%s>[A-Z]{3,6}) (?<%s>/[a-zA-Z0-9/]+) (?<%s>HTTP/[0-9.]+)$",
@@ -73,7 +69,7 @@ public class HttpParser {
 
             StringBuilder responseBuilder = new StringBuilder();
             if (isValidRequest(urls, request, headers, bodyParams, responseBuilder)) {
-                buildResponse(request.get(REQUEST_METHOD), headers, bodyParams, responseBuilder);
+                processRequest(request.get(REQUEST_METHOD), headers, bodyParams, responseBuilder);
             }
 
             System.out.println(responseBuilder.toString());
@@ -86,10 +82,10 @@ public class HttpParser {
         return String.format(RESPONSE_LINE, response.code, response.name);
     }
 
-    private static void buildResponse(String method,
-                                      Map<String, String> headers,
-                                      Map<String, String> bodyParams,
-                                      StringBuilder responseBuilder) {
+    private static void processRequest(String method,
+                                       Map<String, String> headers,
+                                       Map<String, String> bodyParams,
+                                       StringBuilder responseBuilder) {
         String username = decodeAuthorization(headers.get(HEADER_AUTHORIZATION));
 
         String responseBody;
@@ -126,7 +122,6 @@ public class HttpParser {
                                           Map<String, String> headers,
                                           Map<String, String> bodyParams,
                                           StringBuilder responseBuilder) {
-
         if (!urls.contains(request.get(REQUEST_RESOURCE))) {
             buildResponse(headers, responseBuilder,
                     getResponseLine(HttpResponse.NOT_FOUND),
@@ -151,29 +146,19 @@ public class HttpParser {
                                       StringBuilder responseBuilder,
                                       String responseLine,
                                       String responseBody) {
-        responseBuilder.append(responseLine)
-                .append(HTTP_LINE_SEPARATOR);
+        responseBuilder.append(responseLine).append(HTTP_LINE_SEPARATOR);
         attachResponseHeaders(headers, responseBuilder);
         responseBuilder.append(responseBody);
     }
 
     private static void attachResponseHeaders(Map<String, String> headers, StringBuilder responseBuilder) {
-        for (String responseHeader : RESPONSE_HEADERS) {
-            if (HEADER_DATE.equals(responseHeader)) {
-                responseBuilder.append(responseHeader)
+        headers.entrySet().stream()
+                .filter(kvp -> RESPONSE_HEADERS.contains(kvp.getKey()))
+                .forEach(kvp -> responseBuilder
+                        .append(kvp.getKey())
                         .append(HEADER_SEPARATOR)
-                        .append(LocalDate.now().format(DATE_FORMATTER))
-                        .append(HTTP_LINE_SEPARATOR);
-                continue;
-            }
-            String value = headers.get(responseHeader);
-            if (value != null) {
-                responseBuilder.append(responseHeader)
-                        .append(HEADER_SEPARATOR)
-                        .append(value)
-                        .append(HTTP_LINE_SEPARATOR);
-            }
-        }
+                        .append(kvp.getValue())
+                        .append(HTTP_LINE_SEPARATOR));
         responseBuilder.append(HTTP_LINE_SEPARATOR);
     }
 
@@ -210,7 +195,7 @@ public class HttpParser {
     }
 
     private static Map<String, String> parseHeaders(BufferedReader reader) throws IOException {
-        Map<String, String> headers = new HashMap<>();
+        Map<String, String> headers = new LinkedHashMap<>();
         String header;
         while ((header = reader.readLine()) != null && header.length() > 0) {
             Matcher matcher = HEADER_PATTERN.matcher(header);

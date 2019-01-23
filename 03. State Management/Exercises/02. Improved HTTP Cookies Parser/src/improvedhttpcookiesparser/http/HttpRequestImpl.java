@@ -8,17 +8,21 @@ public class HttpRequestImpl implements HttpRequest {
     private static final Pattern LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.HTTP_LINE_SEPARATOR);
     private static final Pattern REQUEST_LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.REQUEST_LINE_SEPARATOR);
     private static final Pattern HEADERS_SPLIT_PATTERN = Pattern.compile(HttpConstants.HEADERS_SEPARATOR);
-    private static final Pattern PARAMS_DELIMITER_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_DELIMITER);
     private static final Pattern PARAMS_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_SEPARATOR);
+    private static final Pattern PARAMS_PAIR_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAM_PAIR_SEPARATOR);
+    private static final Pattern COOKIES_SPLIT_PATTERN = Pattern.compile(HttpConstants.COOKIES_SEPARATOR);
+    private static final Pattern COOKIES_PAIR_SPLIT_PATTERN = Pattern.compile(HttpConstants.COOKIE_PAIR_SEPARATOR);
 
     private Map<String, String> headers;
     private Map<String, String> bodyParameters;
+    private List<HttpCookie> cookies;
     private String method;
     private String requestUrl;
 
     public HttpRequestImpl(String request) {
         headers = new LinkedHashMap<>();
         bodyParameters = new HashMap<>();
+        cookies = new ArrayList<>();
         parseRequest(request);
     }
 
@@ -38,9 +42,15 @@ public class HttpRequestImpl implements HttpRequest {
         }
 
         if (!lines.get(lines.size() - 1).isEmpty()) {
-            Arrays.stream(PARAMS_DELIMITER_SPLIT_PATTERN.split(lines.get(lines.size() - 1)))
-                    .map(PARAMS_SPLIT_PATTERN::split)
+            Arrays.stream(PARAMS_SPLIT_PATTERN.split(lines.get(lines.size() - 1)))
+                    .map(PARAMS_PAIR_SPLIT_PATTERN::split)
                     .forEach(parameterKvp -> addBodyParameter(parameterKvp[0], parameterKvp[1]));
+        }
+
+        if (headers.containsKey(HttpConstants.HEADER_COOKIE)) {
+            Arrays.stream(COOKIES_SPLIT_PATTERN.split(headers.get(HttpConstants.HEADER_COOKIE)))
+                    .map(COOKIES_PAIR_SPLIT_PATTERN::split)
+                    .forEach(kvp -> addCookie(kvp[0], kvp[1]));
         }
     }
 
@@ -52,6 +62,11 @@ public class HttpRequestImpl implements HttpRequest {
     @Override
     public Map<String, String> getBodyParameters() {
         return Collections.unmodifiableMap(bodyParameters);
+    }
+
+    @Override
+    public List<HttpCookie> getCookies() {
+        return Collections.unmodifiableList(cookies);
     }
 
     @Override
@@ -82,6 +97,11 @@ public class HttpRequestImpl implements HttpRequest {
     @Override
     public void addBodyParameter(String parameter, String value) {
         bodyParameters.put(parameter, value);
+    }
+
+    @Override
+    public void addCookie(String key, String value) {
+        this.cookies.add(new HttpCookie(key, value));
     }
 
     @Override

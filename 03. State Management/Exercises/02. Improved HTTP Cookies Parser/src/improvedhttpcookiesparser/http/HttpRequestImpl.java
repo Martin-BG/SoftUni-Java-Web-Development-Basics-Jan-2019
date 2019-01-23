@@ -23,10 +23,10 @@ public class HttpRequestImpl implements HttpRequest {
         headers = new LinkedHashMap<>();
         bodyParameters = new HashMap<>();
         cookies = new ArrayList<>();
-        parseRequest(request);
+        init(request);
     }
 
-    private void parseRequest(String request) {
+    private void init(String request) {
         List<String> lines = Arrays.asList(LINE_SPLIT_PATTERN.split(request, -1));
         if (lines.isEmpty()) {
             return;
@@ -50,7 +50,7 @@ public class HttpRequestImpl implements HttpRequest {
         if (headers.containsKey(HttpConstants.HEADER_COOKIE)) {
             Arrays.stream(COOKIES_SPLIT_PATTERN.split(headers.get(HttpConstants.HEADER_COOKIE)))
                     .map(COOKIES_PAIR_SPLIT_PATTERN::split)
-                    .forEach(kvp -> addCookie(kvp[0], kvp[1]));
+                    .forEach(cookieKvp -> addCookie(cookieKvp[0], cookieKvp[1]));
         }
     }
 

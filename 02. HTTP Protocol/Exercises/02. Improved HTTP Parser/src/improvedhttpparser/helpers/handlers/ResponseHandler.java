@@ -1,8 +1,8 @@
-package improvedhttpparser.utils;
+package improvedhttpparser.helpers.handlers;
 
+import improvedhttpparser.helpers.reader.HttpReader;
 import improvedhttpparser.http.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -13,7 +13,8 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RequestHandler {
+public class ResponseHandler implements Handler {
+
     private static final Pattern URLS_PATTERN = Pattern.compile("/[^ ]+");
 
     private static final String PARAM_NAME = "name";
@@ -38,10 +39,10 @@ public class RequestHandler {
             "There was an error with the requested functionality due to malformed request.";
 
     private Consumer<String> resultConsumer;
-    private BufferedReader reader;
+    private HttpReader httpReader;
 
-    public RequestHandler(BufferedReader reader, Consumer<String> resultConsumer) {
-        this.reader = reader;
+    public ResponseHandler(HttpReader httpReader, Consumer<String> resultConsumer) {
+        this.httpReader = httpReader;
         this.resultConsumer = resultConsumer;
     }
 
@@ -94,32 +95,21 @@ public class RequestHandler {
                 StandardCharsets.UTF_8);
     }
 
-    private static Set<String> parseUrls(BufferedReader reader) throws IOException {
+    private static Set<String> parseUrls(String urlsLine) {
         Set<String> urls = new HashSet<>();
-        String urlsLine = reader.readLine();
-        Matcher matcher = URLS_PATTERN.matcher(urlsLine);
-        while (matcher.find()) {
-            urls.add(matcher.group());
+        if (urlsLine != null) {
+            Matcher matcher = URLS_PATTERN.matcher(urlsLine);
+            while (matcher.find()) {
+                urls.add(matcher.group());
+            }
         }
         return Collections.unmodifiableSet(urls);
     }
 
-    private static String parseInput(BufferedReader reader) throws IOException {
-        StringBuilder request = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            request.append(line).append(HttpConstants.HTTP_LINE_SEPARATOR);
-            if (line.isEmpty()) {
-                break;
-            }
-        }
-        request.append(reader.readLine());
-        return request.toString();
-    }
-
+    @Override
     public void handle() throws IOException {
-        Set<String> validUrls = parseUrls(reader);
-        String request = parseInput(reader);
+        Set<String> validUrls = parseUrls(httpReader.readLine());
+        String request = httpReader.readHttpRequest();
         HttpRequest httpRequest = new HttpRequestImpl(request);
         HttpResponse httpResponse = buildResponse(validUrls, httpRequest);
         resultConsumer.accept(new String(httpResponse.getBytes(), HttpConstants.CHARSET));

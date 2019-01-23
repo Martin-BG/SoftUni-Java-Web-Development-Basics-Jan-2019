@@ -5,7 +5,6 @@ import improvedhttpparser.helpers.reader.HttpReader;
 import improvedhttpparser.http.*;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.HashSet;
@@ -92,8 +91,8 @@ public class ResponseHandler implements Handler {
             throw new IllegalArgumentException("Unknown encoding for string: " + encoded);
         }
         return new String(Base64.getDecoder()
-                .decode(encoded.substring(AUTHORIZATION_PREFIX.length()).getBytes(StandardCharsets.UTF_8)),
-                StandardCharsets.UTF_8);
+                .decode(encoded.substring(AUTHORIZATION_PREFIX.length()).getBytes(HttpConstants.CHARSET)),
+                HttpConstants.CHARSET);
     }
 
     private static Set<String> parseUrls(String urlsLine) {

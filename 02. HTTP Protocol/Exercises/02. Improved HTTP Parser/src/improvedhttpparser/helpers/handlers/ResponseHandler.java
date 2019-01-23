@@ -1,5 +1,6 @@
 package improvedhttpparser.helpers.handlers;
 
+
 import improvedhttpparser.helpers.reader.HttpReader;
 import improvedhttpparser.http.*;
 
@@ -61,7 +62,7 @@ public class ResponseHandler implements Handler {
         } else if (!request.getHeaders().containsKey(HEADER_AUTHORIZATION)) {
             response.setHttpStatus(HttpStatus.UNAUTHORIZED);
             response.setContent(RESPONSE_BODY_UNAUTHORIZED.getBytes(HttpConstants.CHARSET));
-        } else if ("POST".equals(request.getMethod()) &&
+        } else if ((request.getMethod() == HttpMethod.POST) &&
                 !request.getBodyParameters().keySet().containsAll(REQUIRED_BODY_PARAMS)) {
             response.setHttpStatus(HttpStatus.BAD_REQUEST);
             response.setContent(RESPONSE_BODY_BAD_REQUEST.getBytes(HttpConstants.CHARSET));
@@ -69,13 +70,13 @@ public class ResponseHandler implements Handler {
             response.setHttpStatus(HttpStatus.OK);
             String username = decodeAuthorization(request.getHeaders().get(HEADER_AUTHORIZATION));
             switch (request.getMethod()) {
-            case "POST":
+            case POST:
                 response.setContent(String.format(RESPONSE_BODY_POST, username,
                         request.getBodyParameters().get(PARAM_NAME),
                         request.getBodyParameters().get(PARAM_QUANTITY),
                         request.getBodyParameters().get(PARAM_PRICE)).getBytes(HttpConstants.CHARSET));
                 break;
-            case "GET":
+            case GET:
                 response.setContent(String.format(RESPONSE_BODY_GET, username).getBytes(HttpConstants.CHARSET));
                 break;
             default:

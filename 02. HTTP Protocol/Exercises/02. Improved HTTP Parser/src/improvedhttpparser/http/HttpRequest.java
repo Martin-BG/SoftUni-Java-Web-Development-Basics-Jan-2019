@@ -8,9 +8,9 @@ public interface HttpRequest {
 
     Map<String, String> getBodyParameters();
 
-    String getMethod();
+    HttpMethod getMethod();
 
-    void setMethod(String method);
+    void setMethod(HttpMethod method);
 
     String getRequestUrl();
 

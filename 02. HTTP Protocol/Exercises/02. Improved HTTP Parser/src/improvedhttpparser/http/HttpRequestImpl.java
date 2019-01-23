@@ -8,28 +8,28 @@ public class HttpRequestImpl implements HttpRequest {
     private static final Pattern LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.HTTP_LINE_SEPARATOR);
     private static final Pattern REQUEST_LINE_SPLIT_PATTERN = Pattern.compile(HttpConstants.REQUEST_LINE_SEPARATOR);
     private static final Pattern HEADERS_SPLIT_PATTERN = Pattern.compile(HttpConstants.HEADERS_SEPARATOR);
-    private static final Pattern PARAMS_DELIMITER_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_DELIMITER);
     private static final Pattern PARAMS_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_SEPARATOR);
+    private static final Pattern PARAMS_PAIR_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAM_PAIR_SEPARATOR);
 
     private Map<String, String> headers;
     private Map<String, String> bodyParameters;
-    private String method;
+    private HttpMethod method;
     private String requestUrl;
 
     public HttpRequestImpl(String request) {
         headers = new LinkedHashMap<>();
         bodyParameters = new HashMap<>();
-        parseRequest(request);
+        init(request);
     }
 
-    private void parseRequest(String request) {
+    private void init(String request) {
         List<String> lines = Arrays.asList(LINE_SPLIT_PATTERN.split(request, -1));
         if (lines.isEmpty()) {
             return;
         }
 
         String[] requestLineTokens = REQUEST_LINE_SPLIT_PATTERN.split(lines.get(0));
-        setMethod(requestLineTokens[0]);
+        setMethod(HttpMethod.get(requestLineTokens[0]));
         setRequestUrl(requestLineTokens[1]);
 
         for (int lineIndex = 1; lineIndex < lines.size() && !lines.get(lineIndex).isEmpty(); lineIndex++) {
@@ -38,8 +38,8 @@ public class HttpRequestImpl implements HttpRequest {
         }
 
         if (!lines.get(lines.size() - 1).isEmpty()) {
-            Arrays.stream(PARAMS_DELIMITER_SPLIT_PATTERN.split(lines.get(lines.size() - 1)))
-                    .map(PARAMS_SPLIT_PATTERN::split)
+            Arrays.stream(PARAMS_SPLIT_PATTERN.split(lines.get(lines.size() - 1)))
+                    .map(PARAMS_PAIR_SPLIT_PATTERN::split)
                     .forEach(parameterKvp -> addBodyParameter(parameterKvp[0], parameterKvp[1]));
         }
     }
@@ -55,12 +55,12 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
-    public String getMethod() {
+    public HttpMethod getMethod() {
         return method;
     }
 
     @Override
-    public void setMethod(String method) {
+    public void setMethod(HttpMethod method) {
         this.method = method;
     }
 

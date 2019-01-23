@@ -16,7 +16,7 @@ public class HttpRequestImpl implements HttpRequest {
     private Map<String, String> headers;
     private Map<String, String> bodyParameters;
     private List<HttpCookie> cookies;
-    private String method;
+    private HttpMethod method;
     private String requestUrl;
 
     public HttpRequestImpl(String request) {
@@ -33,7 +33,7 @@ public class HttpRequestImpl implements HttpRequest {
         }
 
         String[] requestLineTokens = REQUEST_LINE_SPLIT_PATTERN.split(lines.get(0));
-        setMethod(requestLineTokens[0]);
+        setMethod(HttpMethod.get(requestLineTokens[0]));
         setRequestUrl(requestLineTokens[1]);
 
         for (int lineIndex = 1; lineIndex < lines.size() && !lines.get(lineIndex).isEmpty(); lineIndex++) {
@@ -70,12 +70,12 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
-    public String getMethod() {
+    public HttpMethod getMethod() {
         return method;
     }
 
     @Override
-    public void setMethod(String method) {
+    public void setMethod(HttpMethod method) {
         this.method = method;
     }
 

@@ -11,9 +11,9 @@ public interface HttpRequest {
 
     List<HttpCookie> getCookies();
 
-    String getMethod();
+    HttpMethod getMethod();
 
-    void setMethod(String method);
+    void setMethod(HttpMethod method);
 
     String getRequestUrl();
 

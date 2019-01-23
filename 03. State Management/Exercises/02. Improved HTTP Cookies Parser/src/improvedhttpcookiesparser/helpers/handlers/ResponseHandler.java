@@ -37,8 +37,8 @@ public class ResponseHandler implements Handler {
     private static final String RESPONSE_BODY_BAD_REQUEST =
             "There was an error with the requested functionality due to malformed request.";
 
-    private Consumer<String> resultConsumer;
-    private HttpReader httpReader;
+    private final Consumer<String> resultConsumer;
+    private final HttpReader httpReader;
 
     public ResponseHandler(HttpReader httpReader, Consumer<String> resultConsumer) {
         this.httpReader = httpReader;

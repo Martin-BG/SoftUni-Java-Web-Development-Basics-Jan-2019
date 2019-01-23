@@ -13,9 +13,9 @@ public class HttpRequestImpl implements HttpRequest {
     private static final Pattern COOKIES_SPLIT_PATTERN = Pattern.compile(HttpConstants.COOKIES_SEPARATOR);
     private static final Pattern COOKIES_PAIR_SPLIT_PATTERN = Pattern.compile(HttpConstants.COOKIE_PAIR_SEPARATOR);
 
-    private Map<String, String> headers;
-    private Map<String, String> bodyParameters;
-    private List<HttpCookie> cookies;
+    private final Map<String, String> headers;
+    private final Map<String, String> bodyParameters;
+    private final List<HttpCookie> cookies;
     private HttpMethod method;
     private String requestUrl;
 

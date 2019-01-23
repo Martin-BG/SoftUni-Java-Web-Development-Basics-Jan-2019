@@ -2,8 +2,8 @@ package improvedhttpcookiesparser.http;
 
 public class HttpCookie {
 
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
     public HttpCookie(String key, String value) {
         this.key = key;

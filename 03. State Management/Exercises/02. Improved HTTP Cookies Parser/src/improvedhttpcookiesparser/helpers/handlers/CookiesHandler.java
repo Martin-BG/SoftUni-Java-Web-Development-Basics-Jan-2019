@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 
 public class CookiesHandler implements Handler {
 
-    private Consumer<String> resultConsumer;
-    private HttpReader httpReader;
+    private final Consumer<String> resultConsumer;
+    private final HttpReader httpReader;
 
     public CookiesHandler(HttpReader httpReader, Consumer<String> resultConsumer) {
         this.httpReader = httpReader;

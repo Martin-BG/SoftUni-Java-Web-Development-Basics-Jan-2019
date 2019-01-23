@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class HttpReaderImpl implements HttpReader {
 
-    private BufferedReader bufferedReader;
+    private final BufferedReader bufferedReader;
 
     public HttpReaderImpl(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;

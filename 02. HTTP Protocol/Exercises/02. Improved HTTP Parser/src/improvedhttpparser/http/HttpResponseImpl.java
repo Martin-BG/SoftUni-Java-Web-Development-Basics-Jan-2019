@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class HttpResponseImpl implements HttpResponse {
 
-    private Map<String, String> headers;
+    private final Map<String, String> headers;
     private byte[] content;
     private HttpStatus httpStatus;
 

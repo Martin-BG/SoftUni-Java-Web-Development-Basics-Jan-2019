@@ -11,8 +11,8 @@ public class HttpRequestImpl implements HttpRequest {
     private static final Pattern PARAMS_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAMS_SEPARATOR);
     private static final Pattern PARAMS_PAIR_SPLIT_PATTERN = Pattern.compile(HttpConstants.PARAM_PAIR_SEPARATOR);
 
-    private Map<String, String> headers;
-    private Map<String, String> bodyParameters;
+    private final Map<String, String> headers;
+    private final Map<String, String> bodyParameters;
     private HttpMethod method;
     private String requestUrl;
 

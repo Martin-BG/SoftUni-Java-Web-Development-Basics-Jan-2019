@@ -6,8 +6,8 @@ public enum HttpStatus {
     UNAUTHORIZED(401, "Unauthorized"),
     NOT_FOUND(404, "Not Found");
 
-    private int code;
-    private String name;
+    private final int code;
+    private final String name;
 
     HttpStatus(int code, String name) {
         this.code = code;

@@ -12,14 +12,12 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ResponseHandler implements Handler {
 
     private static final Pattern URLS_PATTERN = Pattern.compile("/[^ ]+");
 
-    private static final String PARAM_NAME = "name";
-    private static final String PARAM_QUANTITY = "quantity";
-    private static final String PARAM_PRICE = "price";
     private static final String HEADER_DATE = "Date";
     private static final String HEADER_HOST = "Host";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
@@ -27,11 +25,11 @@ public class ResponseHandler implements Handler {
     private static final String AUTHORIZATION_PREFIX = "Basic ";
 
     private static final Set<String> RESPONSE_HEADERS = Set.of(HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE);
-    private static final Set<String> REQUIRED_BODY_PARAMS = Set.of(PARAM_NAME, PARAM_QUANTITY, PARAM_PRICE);
 
     private static final String RESPONSE_BODY_GET = "Greetings %s!";
-    private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET +
-            " You have successfully created %s with quantity - %s, price - %s.";
+    private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET + " You have successfully created %s with %s.";
+    private static final String RESPONSE_BODY_POST_ITEMS_FORMAT = "%s - %s";
+    private static final String RESPONSE_BODY_POST_ITEMS_DELIMITER = ", ";
     private static final String RESPONSE_BODY_NOT_FOUND = "The requested functionality was not found.";
     private static final String RESPONSE_BODY_UNAUTHORIZED =
             "You are not authorized to access the requested functionality.";
@@ -61,8 +59,7 @@ public class ResponseHandler implements Handler {
         } else if (!request.getHeaders().containsKey(HEADER_AUTHORIZATION)) {
             response.setHttpStatus(HttpStatus.UNAUTHORIZED);
             response.setContent(RESPONSE_BODY_UNAUTHORIZED.getBytes(HttpConstants.CHARSET));
-        } else if ((request.getMethod() == HttpMethod.POST) &&
-                !request.getBodyParameters().keySet().containsAll(REQUIRED_BODY_PARAMS)) {
+        } else if ((request.getMethod() == HttpMethod.POST) && request.getBodyParameters().isEmpty()) {
             response.setHttpStatus(HttpStatus.BAD_REQUEST);
             response.setContent(RESPONSE_BODY_BAD_REQUEST.getBytes(HttpConstants.CHARSET));
         } else {
@@ -70,10 +67,14 @@ public class ResponseHandler implements Handler {
             String username = decodeAuthorization(request.getHeaders().get(HEADER_AUTHORIZATION));
             switch (request.getMethod()) {
             case POST:
-                response.setContent(String.format(RESPONSE_BODY_POST, username,
-                        request.getBodyParameters().get(PARAM_NAME),
-                        request.getBodyParameters().get(PARAM_QUANTITY),
-                        request.getBodyParameters().get(PARAM_PRICE)).getBytes(HttpConstants.CHARSET));
+                String itemName = request.getBodyParameters().entrySet().stream().findFirst().orElseThrow().getValue();
+                String itemParts = request.getBodyParameters().entrySet()
+                        .stream()
+                        .skip(1)
+                        .map(param -> String.format(RESPONSE_BODY_POST_ITEMS_FORMAT, param.getKey(), param.getValue()))
+                        .collect(Collectors.joining(RESPONSE_BODY_POST_ITEMS_DELIMITER));
+                response.setContent(String.format(RESPONSE_BODY_POST, username, itemName, itemParts)
+                        .getBytes(HttpConstants.CHARSET));
                 break;
             case GET:
                 response.setContent(String.format(RESPONSE_BODY_GET, username).getBytes(HttpConstants.CHARSET));

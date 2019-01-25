@@ -38,7 +38,7 @@ public class HttpParser {
     private static final String POST_RESPONSE_ITEMS_DELIMITER = ", ";
 
     private static final Pattern REQUEST_LINE_PATTERN = Pattern.compile(String.format(
-            "^(?<%s>[A-Z]{3,6}) (?<%s>/[a-zA-Z0-9/]+) (?<%s>HTTP/[0-9.]+)$",
+            "^(?<%s>[A-Z]{3,7}) (?<%s>/[a-zA-Z0-9/]+) (?<%s>HTTP/[0-9.]+)$",
             REQUEST_METHOD, REQUEST_RESOURCE, REQUEST_HTTP_VERSION));
 
     private static final Pattern BODY_PARAMS_PATTERN = Pattern.compile(String.format(

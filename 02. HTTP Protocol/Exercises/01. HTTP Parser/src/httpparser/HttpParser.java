@@ -22,9 +22,6 @@ public class HttpParser {
     private static final String REQUEST_METHOD = "method";
     private static final String REQUEST_RESOURCE = "resource";
     private static final String REQUEST_HTTP_VERSION = "version";
-    private static final String PARAM_NAME = "name";
-    private static final String PARAM_QUANTITY = "quantity";
-    private static final String PARAM_PRICE = "price";
     private static final String HEADER_DATE = "Date";
     private static final String HEADER_HOST = "Host";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
@@ -36,8 +33,9 @@ public class HttpParser {
 
     private static final String RESPONSE_LINE = HTTP_1_1 + " %d %s";
     private static final String RESPONSE_BODY_GET = "Greetings %s!";
-    private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET +
-            " You have successfully created %s with quantity - %s, price - %s.";
+    private static final String RESPONSE_BODY_POST = RESPONSE_BODY_GET + " You have successfully created %s with %s.";
+    private static final String POST_RESPONSE_ITEMS_FORMAT = "%s - %s";
+    private static final String POST_RESPONSE_ITEMS_DELIMITER = ", ";
 
     private static final Pattern REQUEST_LINE_PATTERN = Pattern.compile(String.format(
             "^(?<%s>[A-Z]{3,6}) (?<%s>/[a-zA-Z0-9/]+) (?<%s>HTTP/[0-9.]+)$",
@@ -58,14 +56,11 @@ public class HttpParser {
     private static final Set<String> VALID_HEADERS = Set.of(
             HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE, HEADER_AUTHORIZATION);
 
-    private static final Set<String> REQUIRED_BODY_PARAMS = Set.of(PARAM_NAME, PARAM_QUANTITY, PARAM_PRICE);
-
     private static final Set<String> HTTP_VERSIONS = Set.of(HTTP_1_1);
 
     private static final Set<String> HTTP_METHODS = Stream.of(HttpMethod.values())
             .map(Enum::name)
             .collect(Collectors.toUnmodifiableSet());
-
 
     public static void main(String[] args) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
@@ -98,15 +93,19 @@ public class HttpParser {
         String responseBody;
         switch (HttpMethod.valueOf(method)) {
         case POST:
-            responseBody = String.format(RESPONSE_BODY_POST, username,
-                    bodyParams.get(PARAM_NAME), bodyParams.get(PARAM_QUANTITY), bodyParams.get(PARAM_PRICE));
+            String itemName = bodyParams.entrySet().stream().findFirst().orElseThrow().getValue();
+            String itemParts = bodyParams.entrySet()
+                    .stream()
+                    .skip(1)
+                    .map(param -> String.format(POST_RESPONSE_ITEMS_FORMAT, param.getKey(), param.getValue()))
+                    .collect(Collectors.joining(POST_RESPONSE_ITEMS_DELIMITER));
+            responseBody = String.format(RESPONSE_BODY_POST, username, itemName, itemParts);
             break;
         case GET:
             responseBody = String.format(RESPONSE_BODY_GET, username);
             break;
         default:
             throw new IllegalArgumentException("Unknown or unsupported HTTP method: " + method);
-
         }
 
         buildResponse(headers, responseBuilder,
@@ -137,8 +136,7 @@ public class HttpParser {
             buildResponse(headers, responseBuilder,
                     getResponseLine(HttpResponse.UNAUTHORIZED),
                     HttpResponse.UNAUTHORIZED.description);
-        } else if (HttpMethod.POST == HttpMethod.valueOf(request.get(REQUEST_METHOD)) &&
-                !bodyParams.keySet().containsAll(REQUIRED_BODY_PARAMS)) {
+        } else if (HttpMethod.POST == HttpMethod.valueOf(request.get(REQUEST_METHOD)) && bodyParams.isEmpty()) {
             buildResponse(headers, responseBuilder,
                     getResponseLine(HttpResponse.BAD_REQUEST),
                     HttpResponse.BAD_REQUEST.description);
@@ -216,17 +214,15 @@ public class HttpParser {
     }
 
     private static Map<String, String> parseBodyParams(BufferedReader reader) throws IOException {
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new LinkedHashMap<>();
 
         String paramsLine = reader.readLine();
         if (paramsLine != null) {
             Matcher matcher = BODY_PARAMS_PATTERN.matcher(paramsLine);
             while (matcher.find()) {
                 String paramName = matcher.group(KEY);
-                if (REQUIRED_BODY_PARAMS.contains(paramName)) {
-                    String paramValue = matcher.group(VALUE);
-                    params.put(paramName, paramValue);
-                }
+                String paramValue = matcher.group(VALUE);
+                params.put(paramName, paramValue);
             }
         }
 

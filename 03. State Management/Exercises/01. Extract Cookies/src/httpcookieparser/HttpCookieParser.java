@@ -21,9 +21,6 @@ public class HttpCookieParser {
     private static final String REQUEST_METHOD = "method";
     private static final String REQUEST_RESOURCE = "resource";
     private static final String REQUEST_HTTP_VERSION = "version";
-    private static final String PARAM_NAME = "name";
-    private static final String PARAM_QUANTITY = "quantity";
-    private static final String PARAM_PRICE = "price";
     private static final String HEADER_DATE = "Date";
     private static final String HEADER_HOST = "Host";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
@@ -51,8 +48,6 @@ public class HttpCookieParser {
 
     private static final Set<String> VALID_HEADERS = Set.of(
             HEADER_DATE, HEADER_HOST, HEADER_CONTENT_TYPE, HEADER_AUTHORIZATION, HEADER_COOKIE);
-
-    private static final Set<String> REQUIRED_BODY_PARAMS = Set.of(PARAM_NAME, PARAM_QUANTITY, PARAM_PRICE);
 
     private static final Set<String> HTTP_VERSIONS = Set.of(HTTP_1_1);
 
@@ -125,17 +120,15 @@ public class HttpCookieParser {
     }
 
     private static Map<String, String> parseBodyParams(BufferedReader reader) throws IOException {
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new LinkedHashMap<>();
 
         String paramsLine = reader.readLine();
         if (paramsLine != null) {
             Matcher matcher = BODY_PARAMS_PATTERN.matcher(paramsLine);
             while (matcher.find()) {
                 String paramName = matcher.group(KEY);
-                if (REQUIRED_BODY_PARAMS.contains(paramName)) {
-                    String paramValue = matcher.group(VALUE);
-                    params.put(paramName, paramValue);
-                }
+                String paramValue = matcher.group(VALUE);
+                params.put(paramName, paramValue);
             }
         }
 

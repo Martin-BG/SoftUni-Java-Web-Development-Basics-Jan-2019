@@ -21,7 +21,7 @@ public class HttpRequestImpl implements HttpRequest {
 
     public HttpRequestImpl(String request) {
         headers = new LinkedHashMap<>();
-        bodyParameters = new HashMap<>();
+        bodyParameters = new LinkedHashMap<>();
         cookies = new ArrayList<>();
         init(request);
     }

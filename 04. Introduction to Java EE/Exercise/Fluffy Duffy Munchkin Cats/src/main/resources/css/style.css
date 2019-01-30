@@ -1,0 +1,55 @@
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a, a:visited {
+    color: lightseagreen;
+    text-decoration: none;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input {
+    background-color: white;
+    box-sizing: border-box;
+    display: block;
+    margin: 10px auto 20px;
+    width: 80%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #FE9E00;
+}
+
+input[type=submit] {
+    border: 1px solid #FE9E00;
+    background-color: #FEAE00;
+    color: aliceblue;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #FE7300;
+}
+
+.orange {
+    color: #FEAE00;
+}

@@ -1,0 +1,24 @@
+<form action="/cats/create" method="post">
+    <h1>Create a Cat!</h1>
+    <label>
+        Name:
+        <input name="catName" required type="text">
+    </label>
+    <label>
+        Breed:
+        <input name="breed" required type="text">
+    </label>
+    <label>
+        Color:
+        <input name="color" required type="text">
+    </label>
+    <label>
+        Age:
+        <input min="0" name="age" required type="number">
+    </label>
+    <input type="submit" value="Create Cat">
+</form>
+<hr>
+<ul>
+    <li><a href="/">Back to Home</a></li>
+</ul>

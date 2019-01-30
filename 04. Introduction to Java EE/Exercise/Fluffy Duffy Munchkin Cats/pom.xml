@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.softuni</groupId>
+    <artifactId>fluffyduffymunchkincats</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
+        <javaee.api.version>8.0</javaee.api.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>src/main/resources</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${javaee.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

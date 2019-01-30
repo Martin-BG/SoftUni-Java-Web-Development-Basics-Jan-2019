@@ -16,14 +16,18 @@ import java.util.logging.Logger;
 
 public abstract class BaseServlet extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(BaseServlet.class.getName());
+
+    private static final String ATTRIBUTE_CATS_NAME = "cats";
+
     protected static final String PARAM_CAT_NAME = "catName";
     protected static final String PARAM_CAT_BREED = "breed";
     protected static final String PARAM_CAT_COLOR = "color";
     protected static final String PARAM_CAT_AGE = "age";
+
     protected static final String HTML_SKELETON_URI = "/html/index.html";
     protected static final String HTML_SKELETON_BODY_PLACEHOLDER = "body";
-    private static final Logger LOGGER = Logger.getLogger(BaseServlet.class.getName());
-    private static final String ATTRIBUTE_CATS_NAME = "cats";
+
     protected final Reader fileReader;
     protected final TemplateEngine templateEngine;
 

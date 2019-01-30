@@ -17,8 +17,13 @@ li {
 }
 
 a, a:visited {
-    color: lightseagreen;
+    color: #FEAE00;
     text-decoration: none;
+    font-weight: bold;
+}
+
+a > span.orange:hover, a:hover {
+    color: #FE7300;
 }
 
 form {

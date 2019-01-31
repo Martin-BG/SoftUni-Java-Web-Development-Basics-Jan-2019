@@ -64,7 +64,7 @@ public class CatsAllServlet extends BaseServlet {
                         .buildFrom(URI_CATS_ALL_CAT_LINK_HTML)
                         .ifPresentOrElse(
                                 buildCatsList(cats, params),
-                                () -> notFound(resp, URI_CATS_ALL_CAT_LINK_HTML));
+                                notFound(resp, URI_CATS_ALL_CAT_LINK_HTML));
             }
 
             handleResponse(resp, templatesUris, params);

@@ -23,6 +23,7 @@ public class CatsCreateServlet extends BaseServlet {
     private static final Logger LOGGER = Logger.getLogger(CatsCreateServlet.class.getName());
 
     private static final String URI_CATS_CREATE_HTML = "/html/templates/cats/create.html";
+    private static final String URL_CATS_PROFILE_CAT_NAME = "/cats/profile?" + PARAM_CAT_NAME + "=";
 
     @Inject
     public CatsCreateServlet(HtmlBuilder htmlBuilder) {
@@ -32,8 +33,7 @@ public class CatsCreateServlet extends BaseServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            handleResponse(resp,
-                    Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML), Collections.emptyMap());
+            handleResponse(resp, Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML), Collections.emptyMap());
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
         }
@@ -51,7 +51,7 @@ public class CatsCreateServlet extends BaseServlet {
 
             getCats().put(name, cat);
 
-            resp.sendRedirect("/cats/profile?catName=" + name);
+            resp.sendRedirect(URL_CATS_PROFILE_CAT_NAME + name);
         } catch (IOException | NumberFormatException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
         }

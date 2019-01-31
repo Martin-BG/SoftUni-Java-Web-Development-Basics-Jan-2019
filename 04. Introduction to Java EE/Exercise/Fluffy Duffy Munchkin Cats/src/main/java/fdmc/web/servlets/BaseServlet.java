@@ -31,24 +31,28 @@ public abstract class BaseServlet extends HttpServlet {
         this.htmlBuilder = htmlBuilder;
     }
 
-    protected static void notFound(HttpServletResponse resp, String resource) {
-        String message = "Resource(s) not found:\r\n\t" + resource;
-        LOGGER.log(Level.SEVERE, message);
-        try {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND, message);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, message, e);
-        }
+    protected static Runnable notFound(HttpServletResponse resp, String resource) {
+        return () -> {
+            String message = "Resource(s) not found:\r\n\t" + resource;
+            LOGGER.log(Level.SEVERE, message);
+            try {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND, message);
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, message, e);
+            }
+        };
     }
 
-    protected static void badRequest(HttpServletResponse resp, String msg) {
-        String message = "Bad request:\r\n\t" + msg;
-        LOGGER.log(Level.SEVERE, message);
-        try {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, message);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, message, e);
-        }
+    protected static Runnable badRequest(HttpServletResponse resp, String msg) {
+        return () -> {
+            String message = "Bad request:\r\n\t" + msg;
+            LOGGER.log(Level.SEVERE, message);
+            try {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, message);
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, message, e);
+            }
+        };
     }
 
     protected void handleResponse(HttpServletResponse resp,
@@ -59,7 +63,7 @@ public abstract class BaseServlet extends HttpServlet {
                     .buildFrom(templatesUris, params)
                     .ifPresentOrElse(
                             writer::write,
-                            () -> notFound(resp, String.join("\r\n\t", templatesUris.values())));
+                            notFound(resp, String.join("\r\n\t", templatesUris.values())));
         }
     }
 

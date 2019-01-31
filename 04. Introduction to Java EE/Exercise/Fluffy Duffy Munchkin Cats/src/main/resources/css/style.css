@@ -59,8 +59,16 @@ input[type=submit]:hover {
     color: #FEAE00;
 }
 
-img {
+img.error {
     margin-top: 4rem;
     width: 50%;
     min-width: 400px;
+}
+
+img.bottom-center {
+    width: 500px;
+    position: absolute;
+    margin-left: -250px;
+    left: 50%;
+    bottom: 0;
 }

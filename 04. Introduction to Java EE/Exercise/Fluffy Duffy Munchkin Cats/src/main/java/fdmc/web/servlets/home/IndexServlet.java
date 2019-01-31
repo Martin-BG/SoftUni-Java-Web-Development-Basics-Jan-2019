@@ -1,7 +1,7 @@
-package fdmc.web.servlets;
+package fdmc.web.servlets.home;
 
-import fdmc.utils.Reader;
-import fdmc.utils.TemplateEngine;
+import fdmc.utils.htmlbuilder.HtmlBuilder;
+import fdmc.web.servlets.BaseServlet;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -18,20 +18,19 @@ public class IndexServlet extends BaseServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String URI_INDEX_HTML = "/html/templates/home.html";
+    private static final String URI_HOME_HTML = "/html/templates/home/home.html";
 
     private static final Logger LOGGER = Logger.getLogger(IndexServlet.class.getName());
 
     @Inject
-    public IndexServlet(Reader htmlFileReader, TemplateEngine templateEngine) {
-        super(htmlFileReader, templateEngine);
+    public IndexServlet(HtmlBuilder htmlBuilder) {
+        super(htmlBuilder);
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            loadAndBuildPage(resp, HTML_SKELETON_URI,
-                    Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_INDEX_HTML), Collections.emptyMap());
+            handleResponse(resp, Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_HOME_HTML), Collections.emptyMap());
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
         }

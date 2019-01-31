@@ -2,8 +2,7 @@ package fdmc.web.servlets.cats;
 
 
 import fdmc.domain.entities.Cat;
-import fdmc.utils.Reader;
-import fdmc.utils.TemplateEngine;
+import fdmc.utils.htmlbuilder.HtmlBuilder;
 import fdmc.web.servlets.BaseServlet;
 
 import javax.inject.Inject;
@@ -26,8 +25,8 @@ public class CatsProfileServlet extends BaseServlet {
     private static final String URI_CATS_NOT_FOUND_HTML = "/html/templates/cats/profile-not-found.html";
 
     @Inject
-    public CatsProfileServlet(Reader htmlFileReader, TemplateEngine templateEngine) {
-        super(htmlFileReader, templateEngine);
+    public CatsProfileServlet(HtmlBuilder htmlBuilder) {
+        super(htmlBuilder);
     }
 
     @Override
@@ -36,24 +35,23 @@ public class CatsProfileServlet extends BaseServlet {
             String catName = req.getParameter(PARAM_CAT_NAME);
             if (catName == null) {
                 LOGGER.log(Level.SEVERE, "No catName supplied: " + req.getQueryString());
-                resp.sendRedirect("/");
+                badRequest(resp, "No catName supplied");
                 return;
             }
 
             Cat cat = getCats().get(catName);
-            if (cat == null) {
-                loadAndBuildPage(resp, HTML_SKELETON_URI,
+            if (cat != null) {
+                handleResponse(resp,
+                        Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_PROFILE_HTML),
+                        Map.of(PARAM_CAT_NAME, cat.getName(),
+                                PARAM_CAT_AGE, Integer.toString(cat.getAge()),
+                                PARAM_CAT_BREED, cat.getBreed(),
+                                PARAM_CAT_COLOR, cat.getColor()));
+            } else {
+                handleResponse(resp,
                         Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_NOT_FOUND_HTML),
                         Map.of(PARAM_CAT_NAME, catName));
-                return;
             }
-
-            loadAndBuildPage(resp, HTML_SKELETON_URI,
-                    Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_PROFILE_HTML),
-                    Map.of(PARAM_CAT_NAME, cat.getName(),
-                            PARAM_CAT_AGE, Integer.toString(cat.getAge()),
-                            PARAM_CAT_BREED, cat.getBreed(),
-                            PARAM_CAT_COLOR, cat.getColor()));
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
         }

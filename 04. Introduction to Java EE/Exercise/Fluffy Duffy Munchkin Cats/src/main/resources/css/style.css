@@ -58,3 +58,9 @@ input[type=submit]:hover {
 .orange {
     color: #FEAE00;
 }
+
+img {
+    margin-top: 4rem;
+    width: 50%;
+    min-width: 400px;
+}

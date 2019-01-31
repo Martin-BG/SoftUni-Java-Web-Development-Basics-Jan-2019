@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class HtmlBuilderImpl implements HtmlBuilder {
 
-    private static final String HTML_INDEX_URI = "/html/index.html";
+    private static final String HTML_INDEX_URI = "/html/templates/index.html";
 
     private final Reader fileReader;
 

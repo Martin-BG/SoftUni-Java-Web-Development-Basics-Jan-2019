@@ -1,4 +1,4 @@
-package fdmc.utils;
+package fdmc.utils.reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class FileReader implements Reader {
+public class HtmlFileReader implements Reader {
 
     private static final String HTML_LINE_SEPARATOR = "\r\n";
     private static final Charset HTML_CHARSET = StandardCharsets.UTF_8;
 
-    private static final Logger LOGGER = Logger.getLogger(FileReader.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HtmlFileReader.class.getName());
 
     @Override
     public Optional<String> read(String uri) {

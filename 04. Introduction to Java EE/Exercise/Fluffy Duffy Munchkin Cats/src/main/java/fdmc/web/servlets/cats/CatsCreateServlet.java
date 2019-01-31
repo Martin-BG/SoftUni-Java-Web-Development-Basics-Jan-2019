@@ -2,8 +2,7 @@ package fdmc.web.servlets.cats;
 
 
 import fdmc.domain.entities.Cat;
-import fdmc.utils.Reader;
-import fdmc.utils.TemplateEngine;
+import fdmc.utils.htmlbuilder.HtmlBuilder;
 import fdmc.web.servlets.BaseServlet;
 
 import javax.inject.Inject;
@@ -26,14 +25,14 @@ public class CatsCreateServlet extends BaseServlet {
     private static final String URI_CATS_CREATE_HTML = "/html/templates/cats/create.html";
 
     @Inject
-    public CatsCreateServlet(Reader htmlFileReader, TemplateEngine templateEngine) {
-        super(htmlFileReader, templateEngine);
+    public CatsCreateServlet(HtmlBuilder htmlBuilder) {
+        super(htmlBuilder);
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            loadAndBuildPage(resp, HTML_SKELETON_URI,
+            handleResponse(resp,
                     Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML), Collections.emptyMap());
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);

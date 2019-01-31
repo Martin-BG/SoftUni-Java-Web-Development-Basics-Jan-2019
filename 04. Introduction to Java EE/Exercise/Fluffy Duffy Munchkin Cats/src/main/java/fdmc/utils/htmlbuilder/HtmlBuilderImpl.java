@@ -4,6 +4,7 @@ import fdmc.utils.reader.Reader;
 import fdmc.utils.templatebuilder.TemplateBuilder;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class HtmlBuilderImpl implements HtmlBuilder {
 
         String html = TemplateBuilder
                 .from(skeleton.orElse(""))
-                .put(templates.orElse(Map.of()))
+                .put(templates.orElse(Collections.emptyMap()))
                 .put(params)
                 .build();
 
@@ -47,11 +48,16 @@ public class HtmlBuilderImpl implements HtmlBuilder {
     @Override
     public Optional<String> buildFrom(String baseTemplateUri,
                                       Map<String, String> params) {
-        return buildFrom(baseTemplateUri, Map.of(), params);
+        return buildFrom(baseTemplateUri, Collections.emptyMap(), params);
     }
 
     @Override
     public Optional<String> buildFrom(Map<String, String> params) {
         return buildFrom(HTML_INDEX_URI, params);
+    }
+
+    @Override
+    public Optional<String> buildFrom(String baseTemplateUri) {
+        return buildFrom(baseTemplateUri, Collections.emptyMap(), Collections.emptyMap());
     }
 }

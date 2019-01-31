@@ -16,4 +16,6 @@ public interface HtmlBuilder {
                                Map<String, String> params);
 
     Optional<String> buildFrom(Map<String, String> params);
+
+    Optional<String> buildFrom(String baseTemplateUri);
 }

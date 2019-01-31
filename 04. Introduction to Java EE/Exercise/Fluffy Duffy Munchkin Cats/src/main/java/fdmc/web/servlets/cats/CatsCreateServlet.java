@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +32,12 @@ public class CatsCreateServlet extends BaseServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            handleResponse(resp, Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML), Collections.emptyMap());
+            handleResponse(resp,
+                    Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML),
+                    Map.of("catName", PARAM_CAT_NAME,
+                            "breed", PARAM_CAT_BREED,
+                            "color", PARAM_CAT_COLOR,
+                            "age", PARAM_CAT_AGE));
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
         }

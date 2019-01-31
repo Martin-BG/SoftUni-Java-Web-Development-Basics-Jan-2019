@@ -35,7 +35,7 @@ public class CatsProfileServlet extends BaseServlet {
             String catName = req.getParameter(PARAM_CAT_NAME);
             if (catName == null) {
                 LOGGER.log(Level.SEVERE, "No catName supplied: " + req.getQueryString());
-                badRequest(resp, "No catName supplied");
+                badRequest(resp, "No catName supplied").run();
                 return;
             }
 

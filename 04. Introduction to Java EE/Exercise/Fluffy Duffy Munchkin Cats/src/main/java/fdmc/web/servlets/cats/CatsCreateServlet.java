@@ -9,8 +9,8 @@ import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,35 +29,44 @@ public class CatsCreateServlet extends BaseServlet {
         super(htmlBuilder);
     }
 
-    @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            handleResponse(resp,
-                    Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML),
-                    Map.of("catName", PARAM_CAT_NAME,
-                            "breed", PARAM_CAT_BREED,
-                            "color", PARAM_CAT_COLOR,
-                            "age", PARAM_CAT_AGE));
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
-        }
-    }
+    private static Optional<Cat> makeCatFromRequest(HttpServletRequest req) {
+        Cat cat = null;
 
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String name = req.getParameter(PARAM_CAT_NAME);
             String breed = req.getParameter(PARAM_CAT_BREED);
             String color = req.getParameter(PARAM_CAT_COLOR);
             int age = Integer.parseInt(req.getParameter(PARAM_CAT_AGE));
 
-            Cat cat = new Cat(name, breed, color, age);
-
-            getCats().put(name, cat);
-
-            resp.sendRedirect(URL_CATS_PROFILE_CAT_NAME + name);
-        } catch (IOException | NumberFormatException e) {
-            LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
+            if (name != null && breed != null && color != null && age >= 0) {
+                cat = new Cat(name, breed, color, age);
+            }
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.SEVERE, "Invalid cat age", e);
         }
+
+        return Optional.ofNullable(cat);
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        handleResponse(resp,
+                Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_CREATE_HTML),
+                Map.of("catName", PARAM_CAT_NAME,
+                        "breed", PARAM_CAT_BREED,
+                        "color", PARAM_CAT_COLOR,
+                        "age", PARAM_CAT_AGE));
+
+    }
+
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        makeCatFromRequest(req)
+                .ifPresentOrElse(
+                        cat -> {
+                            addCat(cat);
+                            redirect(resp, URL_CATS_PROFILE_CAT_NAME + cat.getName());
+                        },
+                        badRequest(resp, "Invalid cat parameters"));
     }
 }

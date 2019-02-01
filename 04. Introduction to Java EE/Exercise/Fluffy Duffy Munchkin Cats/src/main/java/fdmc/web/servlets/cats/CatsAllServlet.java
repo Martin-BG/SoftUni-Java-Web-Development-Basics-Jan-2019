@@ -10,19 +10,14 @@ import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/cats/all")
 public class CatsAllServlet extends BaseServlet {
 
     private static final long serialVersionUID = 1L;
-
-    private static final Logger LOGGER = Logger.getLogger(CatsAllServlet.class.getName());
 
     private static final String URI_CATS_ALL_HTML = "/html/templates/cats/all.html";
     private static final String URI_CATS_ALL_NO_CATS_HTML = "/html/templates/cats/all-no-cats.html";
@@ -49,27 +44,29 @@ public class CatsAllServlet extends BaseServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            Map<String, String> params = new LinkedHashMap<>();
-            Map<String, String> templatesUris = new LinkedHashMap<>();
+        Map<String, String> params = new LinkedHashMap<>();
+        Map<String, String> templatesUris = new LinkedHashMap<>();
 
-            templatesUris.put(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_ALL_HTML);
+        getViewTemplates(resp, params, templatesUris);
 
-            Map<String, Cat> cats = getCats();
+        handleResponse(resp, templatesUris, params);
+    }
 
-            if (cats.isEmpty()) {
-                templatesUris.put(CATS_PLACEHOLDER, URI_CATS_ALL_NO_CATS_HTML);
-            } else {
-                htmlBuilder
-                        .buildFrom(URI_CATS_ALL_CAT_LINK_HTML)
-                        .ifPresentOrElse(
-                                buildCatsList(cats, params),
-                                notFound(resp, URI_CATS_ALL_CAT_LINK_HTML));
-            }
+    private void getViewTemplates(HttpServletResponse resp,
+                                  Map<String, String> params,
+                                  Map<String, String> templatesUris) {
+        templatesUris.put(HTML_SKELETON_BODY_PLACEHOLDER, URI_CATS_ALL_HTML);
 
-            handleResponse(resp, templatesUris, params);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, req.getRequestURL().toString(), e);
+        Map<String, Cat> cats = allCats();
+
+        if (cats.isEmpty()) {
+            templatesUris.put(CATS_PLACEHOLDER, URI_CATS_ALL_NO_CATS_HTML);
+        } else {
+            htmlBuilder
+                    .buildFrom(URI_CATS_ALL_CAT_LINK_HTML)
+                    .ifPresentOrElse(
+                            buildCatsList(cats, params),
+                            notFound(resp, URI_CATS_ALL_CAT_LINK_HTML));
         }
     }
 }

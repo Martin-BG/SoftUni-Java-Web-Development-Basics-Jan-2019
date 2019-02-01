@@ -72,10 +72,11 @@ public abstract class BaseServlet extends HttpServlet {
         // ServletContext Storage - for all clients - http://tutorials.jenkov.com/java-servlets/servletcontext.html
         // Session Storage - for single client - http://tutorials.jenkov.com/java-servlets/httpsession.html
         // #81 - https://javabeat.net/servlets-interview-questions/
-        if (this.getServletContext().getAttribute(ATTRIBUTE_CATS_NAME) == null) {
-            this.getServletContext().setAttribute(ATTRIBUTE_CATS_NAME, new ConcurrentHashMap<String, Cat>());
+        // https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context/35840742#35840742
+        if (getServletContext().getAttribute(ATTRIBUTE_CATS_NAME) == null) {
+            getServletContext().setAttribute(ATTRIBUTE_CATS_NAME, new ConcurrentHashMap<String, Cat>());
         }
 
-        return (ConcurrentHashMap<String, Cat>) this.getServletContext().getAttribute(ATTRIBUTE_CATS_NAME);
+        return (ConcurrentHashMap<String, Cat>) getServletContext().getAttribute(ATTRIBUTE_CATS_NAME);
     }
 }

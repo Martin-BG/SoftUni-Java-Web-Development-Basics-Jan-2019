@@ -2,6 +2,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    z-index: 0;
 }
 
 h1 {
@@ -71,4 +72,5 @@ img.bottom-center {
     margin-left: -250px;
     left: 50%;
     bottom: 0;
+    z-index: -1;
 }

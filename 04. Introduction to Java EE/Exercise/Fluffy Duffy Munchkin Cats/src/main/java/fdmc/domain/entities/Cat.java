@@ -1,6 +1,10 @@
 package fdmc.domain.entities;
 
-public class Cat {
+import java.io.Serializable;
+
+public class Cat implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final String name;
     private final String breed;

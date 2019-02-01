@@ -69,6 +69,9 @@ public abstract class BaseServlet extends HttpServlet {
 
     @SuppressWarnings("unchecked")
     protected Map<String, Cat> getCats() {
+        // ServletContext Storage - for all clients - http://tutorials.jenkov.com/java-servlets/servletcontext.html
+        // Session Storage - for single client - http://tutorials.jenkov.com/java-servlets/httpsession.html
+        // #81 - https://javabeat.net/servlets-interview-questions/
         if (this.getServletContext().getAttribute(ATTRIBUTE_CATS_NAME) == null) {
             this.getServletContext().setAttribute(ATTRIBUTE_CATS_NAME, new ConcurrentHashMap<String, Cat>());
         }

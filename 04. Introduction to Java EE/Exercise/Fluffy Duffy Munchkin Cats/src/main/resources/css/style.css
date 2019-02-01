@@ -1,12 +1,14 @@
 body {
+    box-sizing: border-box;
     text-align: center;
     margin: 0;
     padding: 0;
     z-index: 0;
+    font-size: 18px;
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 2.5rem;
 }
 
 ul {
@@ -58,6 +60,18 @@ input[type=submit]:hover {
 
 .orange {
     color: #FEAE00;
+}
+
+.font-med {
+    font-size: 1.5rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.margin-top-1 {
+    margin-top: 1rem;
 }
 
 img.error {

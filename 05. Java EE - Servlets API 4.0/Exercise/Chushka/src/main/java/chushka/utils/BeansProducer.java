@@ -1,4 +1,4 @@
-package chushka.util;
+package chushka.utils;
 
 import org.modelmapper.ModelMapper;
 

@@ -1,0 +1,40 @@
+<div class="jumbotron">
+    <div align="center" class="row">
+        <div class="col-md-12">
+            <h1>Create product</h1>
+            <hr>
+        </div>
+    </div>
+    <div align="center">
+        <form action="/products/create" method="post">
+            <div class="form-group">
+                <label>
+                    <div>Name:</div>
+                    <input class="width-300" minlength="1" name="name" required type="text">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <div>Description:</div>
+                    <textarea class="width-300" name="description" rows="5"></textarea>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <div>Type:</div>
+                    <select class="width-300 form-control" name="type" required>
+                        <option disabled selected value="">Choose type</option>
+                        {{options}}
+                    </select>
+                </label>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-info width-300" type="submit" value="Create Product"/>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div align="center">
+        <a href="/">Back to Home page</a>
+    </div>
+</div>

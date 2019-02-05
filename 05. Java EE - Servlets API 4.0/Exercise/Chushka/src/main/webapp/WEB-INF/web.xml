@@ -5,4 +5,24 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         version="4.0">
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/html/error/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>400</error-code>
+        <location>/html/error/400.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/html/error/500.html</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/html/error/500.html</location>
+    </error-page>
 </web-app>

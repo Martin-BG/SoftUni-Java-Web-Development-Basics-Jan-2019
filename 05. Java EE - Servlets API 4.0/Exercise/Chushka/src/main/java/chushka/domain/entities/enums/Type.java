@@ -13,7 +13,7 @@ public enum Type {
     OTHER("Other");
 
     private static final Map<String, Type> TYPE_MAP = Stream.of(Type.values())
-            .collect(Collectors.toUnmodifiableMap(Type::getName, type -> type));
+            .collect(Collectors.toUnmodifiableMap(type -> type.name(), type -> type));
 
     private final String name;
 

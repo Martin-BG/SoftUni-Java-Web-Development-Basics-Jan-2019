@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -16,12 +17,13 @@ import javax.persistence.Entity;
 @Entity(name = "products")
 public class Product extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
+    @Size(min = 1)
     private String name;
 
     private String description;
 
-    @Column
+    @Column(nullable = false)
     @Convert(converter = TypeConverter.class)
     private Type type;
 }

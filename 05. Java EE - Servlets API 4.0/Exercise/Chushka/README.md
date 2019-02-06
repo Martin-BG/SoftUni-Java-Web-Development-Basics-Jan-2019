@@ -180,7 +180,7 @@ public class Consumer {
         products.forEach(product -> itemsList.append(
                 TemplateBuilder
                         .from(html)
-                        .put("HTML_NAME_PLACEHOLDER", product.getName())
+                        .put(HTML_NAME_PLACEHOLDER, product.getName())
                         .build()));
         return itemsList.toString();
     }

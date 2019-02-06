@@ -22,7 +22,7 @@ This file should be present in **TomEE\lib** folder
 * hibernate-core-5.4.1.Final.jar
 ___
 #### Project configuration
-* [pom.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka) - dependencies and versions
+* [pom.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/pom.xml) - dependencies and versions
 * [beans.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/beans.xml) - default setup with **bean-discovery-mode="all"**
 * [web.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/web.xml) - handling of HTTP resp. codes 400, 404, 500 and exceptions 
 * [resources.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
@@ -39,6 +39,7 @@ Example:
         JtaManaged true
         LogSql true
     </Resource>
+    ...
 </resources>
 ```
 * [persistence.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/resources/META-INF/persistence.xml) - persistence unit setup
@@ -50,10 +51,10 @@ Example:
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <persistence-unit name="XXXX" transaction-type="JTA">
+    <persistence-unit name="myUnitName" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:openejb/Resource/MyResource</jta-data-source>
-        <non-jta-data-source>java:openejb/Resources/MyResourceUnmanaged</non-jta-data-source>
+        <!--<non-jta-data-source>java:openejb/Resources/MyResourceUnmanaged</non-jta-data-source>-->
         <properties>
             <property name="tomee.jpa.factory.lazy" value="true"/>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
@@ -67,6 +68,21 @@ Example:
 ```
 ___
 ## Takeaways
+* Using [JTA](https://docs.oracle.com/javaee/6/tutorial/doc/bnciy.html) enabled EntityManager - requires proper setup as described above
+
+[Example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/repository/ProductRepositoryImpl.java)
+```java
+@Stateless
+public class ProductRepository {
+
+    @PersistenceContext(unitName = "myUnitName")
+    private EntityManager entityManager;
+
+    public void save(Product entity) {
+        entityManager.persist(entity);
+    }
+}
+```
 * Creating beans for external classes with **@Produces** annotation
 
 [Example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/utils/BeansProducer.java)
@@ -160,5 +176,18 @@ public interface HtmlBuilder {
     Optional<String> buildFrom(Map<String, String> params);
 
     Optional<String> buildFrom(String baseTemplateUri);
+}
+```
+* Lombok - deal with code noise in POJOs - [example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/domain/models/service/ProductServiceModel.java)
+```java
+@Getter
+@Setter
+@NoArgsConstructor
+public class Model {
+
+    private String id;
+    private String name;
+    private String description;
+    private Type type;
 }
 ```

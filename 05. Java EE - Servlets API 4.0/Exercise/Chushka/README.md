@@ -10,16 +10,18 @@ Tested on Ubuntu 18.0.4 and Windows 7 x64
 * hibernate-core **5.4.1.Final**
 * Apache TomEE 8.0.0.M2 **webprofile**
 ### Other tools:
-* modelmapper
-* lombok
+* [ModelMapper](http://modelmapper.org/)
+* [Lombok](https://projectlombok.org/)
 ### Environment configuration
 System and IDE should be configured to use:
-* Java **11.0.2**
-* Maven **3.6.0**
-* MySQL with mysql-connector-java **8.0.15**
+* [Java **11.0.2**](https://docs.oracle.com/cd/E19509-01/820-3208/inst_cli_jdk_javahome_t/) - [IntelliJ](https://stackoverflow.com/questions/18987228/how-do-i-change-the-intellij-idea-default-jdk)
+* [Maven **3.6.0**](http://maven.apache.org/install.html) - [IntelliJ](https://www.jetbrains.com/help/idea/maven-support.html#create_new_maven_project)
+* [mysql-connector-java **8.0.15**](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-installing-classpath.html) - [IntelliJ](https://www.jetbrains.com/help/idea/connecting-to-a-database.html)
 
 This file should be present in **TomEE\lib** folder 
-* hibernate-core-5.4.1.Final.jar
+* [hibernate-core-5.4.1.Final.jar](http://central.maven.org/maven2/org/hibernate/hibernate-core/5.4.1.Final/hibernate-core-5.4.1.Final.jar)
+
+Configure IDE to recognize [Lombok](https://projectlombok.org/) - [instructions](https://projectlombok.org/setup/overview)
 ___
 #### Project configuration
 * [pom.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/pom.xml) - dependencies and versions
@@ -83,7 +85,7 @@ public class ProductRepository {
     }
 }
 ```
-* Creating beans for external classes with **@Produces** annotation
+* Creating beans of external classes by **@Produces** annotation
 
 [Example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/utils/BeansProducer.java)
 ```java

@@ -5,7 +5,7 @@
              version="2.2">
     <persistence-unit name="chushka" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:openejb/Resource/databaseDb</jta-data-source>
+        <jta-data-source>java:openejb/Resource/chushkaDb</jta-data-source>
         <non-jta-data-source>java:openejb/Resources/chushkaDbUnmanaged</non-jta-data-source>
         <properties>
             <property name="tomee.jpa.factory.lazy" value="true"/>

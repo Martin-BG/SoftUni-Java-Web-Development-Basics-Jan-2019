@@ -24,12 +24,40 @@ This file should be present in **TomEE\lib** folder
 Configure IDE to recognize [Lombok](https://projectlombok.org/) - [instructions](https://projectlombok.org/setup/overview)
 ___
 #### Project configuration
-* [pom.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/pom.xml) - dependencies and versions
+* [pom.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/pom.xml) - project setup - dependencies, compile, packaging
 * [beans.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/beans.xml) - default setup with **bean-discovery-mode="all"**
-* [web.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/web.xml) - handling of HTTP resp. codes 400, 404, 500 and exceptions 
-* [resources.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+            http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+        bean-discovery-mode="all">
+</beans>
+```
+* [web.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/web.xml) - handling of HTTP resp. codes 400, 404, 500 and exceptions
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+            http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+        version="4.0">
 
-Example:
+    <error-page>
+        <error-code>code number</error-code>
+        <location>html or JSP</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>ex. - java.lang.Throwable</exception-type>
+        <location>html or JSP</location>
+    </error-page>
+</web-app>
+``` 
+* [resources.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -45,8 +73,6 @@ Example:
 </resources>
 ```
 * [persistence.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/resources/META-INF/persistence.xml) - persistence unit setup
-
-Example:
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

@@ -29,6 +29,9 @@
             <hr>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">
+                    <% if (tubes.isEmpty()) { %>
+                    <p>No Tubes - <a href="<c:url value="/tubes/create"/>">Create Some</a>!</p>
+                    <%} else {%>
                     <ul>
                         <% for (TubeNameViewModel tube : tubes) {%>
                         <li>
@@ -40,6 +43,7 @@
                         </li>
                         <% }%>
                     </ul>
+                    <%}%>
                 </div>
             </div>
             <hr/>

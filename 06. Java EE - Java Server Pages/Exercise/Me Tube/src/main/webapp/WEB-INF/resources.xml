@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <Resource id="meTubeDb" type="DataSource">
+        JdbcDriver com.mysql.cj.jdbc.Driver
+        JdbcUrl jdbc:mysql://localhost:3306/metube_db?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC
+        UserName root
+        Password root
+        JtaManaged true
+        LogSql true
+    </Resource>
+
+    <Resource id="meTubeDbUnmanaged" type="DataSource">
+        JdbcDriver com.mysql.cj.jdbc.Driver
+        JdbcUrl jdbc:mysql://localhost:3306/metube_db?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC
+        UserName root
+        Password root
+        JtaManaged false
+        LogSql true
+    </Resource>
+</resources>

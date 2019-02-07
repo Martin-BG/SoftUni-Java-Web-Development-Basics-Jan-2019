@@ -6,6 +6,7 @@ Tested on Ubuntu 18.0.4 and Windows 7 x64
 ### Versions
 * Java **11.0.2**
 * Maven **3.6.0**
+* Maven Compiler **3.8.0**
 * MySQL with mysql-connector-java **8.0.15**
 * hibernate-core **5.4.1.Final**
 * Apache TomEE 8.0.0.M2 **webprofile**

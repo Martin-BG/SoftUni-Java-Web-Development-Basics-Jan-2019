@@ -219,3 +219,57 @@ public class Model {
     private Type type;
 }
 ```
+* Enum with AttributeConverter (change default string representation in DB).
+In following [example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/domain/entities) Type FOOD will be stored as "Food" in DB:
+```java
+public enum Type {
+    FOOD("Food"),
+    DOMESTIC("Domestic"),
+    HEALTH("Health"),
+    COSMETIC("Cosmetic"),
+    OTHER("Other")
+    //...
+}
+
+@Converter
+public class TypeConverter implements AttributeConverter<Type, String> {
+
+    @Override
+    public String convertToDatabaseColumn(Type type) {
+        return type == null ? null : type.getName();
+    }
+
+    @Override
+    public Type convertToEntityAttribute(String name) {
+        return Type.fromName(name);
+    }
+}
+
+@Entity(name = "products")
+public class Product {
+    //...
+    @Convert(converter = TypeConverter.class)
+    private Type type;
+}
+```
+* Read resource files by relative path - [example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/05.%20Java%20EE%20-%20Servlets%20API%204.0/Exercise/Chushka/src/main/java/chushka/web/servlets/ProductAllServlet.java)
+```java
+    // uri = "/html/templates/product/list-item.html"
+    public Optional<String> read(String uri) {
+        InputStream inputStream;
+        String content = null;
+
+        if (uri != null && (inputStream = getClass().getResourceAsStream(uri)) != null) {
+            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, HTML_CHARSET))) {
+                content = reader.lines().collect(Collectors.joining(HTML_LINE_SEPARATOR));
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Error reading file " + uri, e);
+            }
+        } else {
+            logger.log(Level.SEVERE, "File not found or not accessible: {0}", uri);
+        }
+
+        return Optional.ofNullable(content);
+    }
+
+```

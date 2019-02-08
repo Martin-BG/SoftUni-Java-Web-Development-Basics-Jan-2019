@@ -38,7 +38,7 @@
             <hr>
             <div class="row">
                 <div class="col col-md-6 d-flex justify-content-center">
-                    <a href="<%= model.getYouTubeLink() %>">Link to video.</a>
+                    <a target="_blank" href="<%= model.getYouTubeLink() %>">Link to video.</a>
                 </div>
                 <div class="col col-md-6 d-flex justify-content-center">
                     <p>

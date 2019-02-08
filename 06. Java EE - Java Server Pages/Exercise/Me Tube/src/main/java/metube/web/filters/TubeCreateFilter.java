@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
 
 @WebFilter(WebConstants.URL_TUBES_CREATE)
 public class TubeCreateFilter implements Filter {
@@ -62,9 +61,6 @@ public class TubeCreateFilter implements Filter {
 
         if (WebConstants.HTTP_METHOD_POST.equalsIgnoreCase(req.getMethod())) {
             request.setCharacterEncoding(WebConstants.SERVER_ENCODING_STR);
-            String serverEncodingStr = WebConstants.SERVER_ENCODING_STR;
-            Charset serverEncoding = WebConstants.SERVER_ENCODING;
-
             TubeCreateBindingModel model = getBindingModelFromParams(request, TubeCreateBindingModel.class);
             req.setAttribute(WebConstants.ATTRIBUTE_MODEL, model);
         }

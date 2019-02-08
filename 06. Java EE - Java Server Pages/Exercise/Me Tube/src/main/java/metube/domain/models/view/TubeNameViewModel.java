@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TubeNameViewModel {
+public class TubeNameViewModel implements Viewable {
 
     private String name;
 }

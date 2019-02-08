@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TubeCreateBindingModel {
+public class TubeCreateBindingModel implements Bindable {
 
     @NotNull
     @Size(min = 2, max = 64)

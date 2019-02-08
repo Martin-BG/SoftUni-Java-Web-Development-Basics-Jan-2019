@@ -1,14 +1,15 @@
 package metube.services;
 
-import metube.domain.models.service.TubeServiceModel;
+import metube.domain.models.binding.Bindable;
+import metube.domain.models.view.Viewable;
 
 import java.util.List;
 
 public interface TubeService {
 
-    void saveTube(TubeServiceModel tubeServiceModel);
+    <T extends Bindable> void saveTube(T model);
 
-    TubeServiceModel findByName(String name);
+    <T extends Viewable> T findByName(String name, Class<T> clazz);
 
-    List<TubeServiceModel> findAll();
+    <T extends Viewable> List<T> findAll(Class<T> clazz);
 }

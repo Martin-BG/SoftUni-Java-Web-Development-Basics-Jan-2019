@@ -1,23 +1,19 @@
 package metube.web.filters;
 
+import metube.domain.models.binding.Bindable;
 import metube.domain.models.binding.TubeCreateBindingModel;
+import metube.web.WebConstants;
 
-import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Set;
+import java.nio.charset.Charset;
 
-@WebFilter("/tubes/create")
+@WebFilter(WebConstants.URL_TUBES_CREATE)
 public class TubeCreateFilter implements Filter {
-    @Inject
-    private Validator validator;
 
     private static Object parseValue(Class<?> type, String value) {
         if (type == null || value == null) {
@@ -39,44 +35,40 @@ public class TubeCreateFilter implements Filter {
         }
     }
 
+    private static <T extends Bindable> T getBindingModelFromParams(ServletRequest request, Class<T> clazz) {
+        try {
+            T model = clazz.getConstructor().newInstance();
+            for (Field field : clazz.getDeclaredFields()) {
+                String value = request.getParameter(field.getName());
+                if (value != null) {
+                    String parameterStr = value.trim();
+                    Object parameterValue = parseValue(field.getType(), parameterStr);
+                    field.setAccessible(true);
+                    field.set(model, parameterValue);
+                }
+            }
+            return model;
+        } catch (IllegalAccessException | InstantiationException |
+                NoSuchMethodException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        request.setCharacterEncoding("UTF-8");
-        if ("POST".equalsIgnoreCase(req.getMethod())) {
-            try {
-                TubeCreateBindingModel model = TubeCreateBindingModel.class.getConstructor().newInstance();
-                for (Field field : TubeCreateBindingModel.class.getDeclaredFields()) {
-                    field.setAccessible(true);
-                    String value = request.getParameter(field.getName());
-                    if (value != null) {
-                        String parameterStr = value.trim();
-                        Object parameterValue = parseValue(field.getType(), parameterStr);
-                        field.set(model, parameterValue);
-                    }
-                }
-                Set<ConstraintViolation<TubeCreateBindingModel>> violations = validator.validate(model);
-                if (violations.isEmpty()) {
-                    req.setAttribute("model", model);
-                } else {
-                    req.setAttribute("violations", violations);
-                }
-            } catch (IllegalAccessException | InstantiationException |
-                    NoSuchMethodException | InvocationTargetException e) {
-            }
+
+        if (WebConstants.HTTP_METHOD_POST.equalsIgnoreCase(req.getMethod())) {
+            request.setCharacterEncoding(WebConstants.SERVER_ENCODING_STR);
+            String serverEncodingStr = WebConstants.SERVER_ENCODING_STR;
+            Charset serverEncoding = WebConstants.SERVER_ENCODING;
+
+            TubeCreateBindingModel model = getBindingModelFromParams(request, TubeCreateBindingModel.class);
+            req.setAttribute(WebConstants.ATTRIBUTE_MODEL, model);
         }
-//            TubeCreateBindingModel model = new TubeCreateBindingModel();
-//            model.setName(req.getParameter("name"));
-//            model.setDescription(req.getParameter("description"));
-//            model.setUploader(req.getParameter("uploader"));
-//            model.setYouTubeLink(req.getParameter("youTubeLink"));
 
-//        req.setAttribute("tubeCreateBindingModel", model);
-
-        chain.doFilter(req, resp);
-
+        chain.doFilter(req, response);
     }
 }

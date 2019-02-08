@@ -1,7 +1,8 @@
 package metube.services;
 
 import metube.domain.entities.Tube;
-import metube.domain.models.service.TubeServiceModel;
+import metube.domain.models.binding.Bindable;
+import metube.domain.models.view.Viewable;
 import metube.repository.TubeRepository;
 import org.modelmapper.ModelMapper;
 
@@ -33,36 +34,36 @@ public class TubeServiceImpl implements TubeService {
     }
 
     @Override
-    public void saveTube(TubeServiceModel tubeServiceModel) {
-        validateModel(tubeServiceModel);
-
-        tubeRepository.save(modelMapper.map(tubeServiceModel, Tube.class));
+    public <T extends Bindable> void saveTube(T model) {
+        validateModel(model);
+        tubeRepository.save(modelMapper.map(model, Tube.class));
     }
 
     @Override
-    public TubeServiceModel findByName(String name) {
+    public <T extends Viewable> T findByName(String name, Class<T> clazz) {
         return tubeRepository
                 .findByName(name)
-                .map(tube -> modelMapper.map(tube, TubeServiceModel.class))
+                .map(tube -> modelMapper.map(tube, clazz))
                 .orElse(null);
     }
 
     @Override
-    public List<TubeServiceModel> findAll() {
+    public <T extends Viewable> List<T> findAll(Class<T> clazz) {
         return tubeRepository
                 .findAll()
                 .stream()
-                .map(t -> modelMapper.map(t, TubeServiceModel.class))
+                .map(t -> modelMapper.map(t, clazz))
                 .collect(Collectors.toList());
     }
 
-    private <T> void validateModel(T model) {
+    private <T extends Bindable> void validateModel(T model) {
         Set<ConstraintViolation<T>> violations = validator.validate(model);
         if (!violations.isEmpty()) {
             String msg = "Failed validation on:\n\t" +
                     violations.stream()
-                            .map(ConstraintViolation::getMessage)
-                            .collect(Collectors.joining("\n\t"));
+                            .map(cv -> cv.getPropertyPath().toString()
+                                    + " (" + cv.getInvalidValue() + ") " + cv.getMessage())
+                            .collect(Collectors.joining("\r\n\t"));
             logger.log(Level.WARNING, msg);
             throw new IllegalArgumentException(msg);
         }

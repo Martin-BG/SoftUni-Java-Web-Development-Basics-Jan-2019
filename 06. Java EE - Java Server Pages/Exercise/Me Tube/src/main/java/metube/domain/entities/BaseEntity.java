@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @MappedSuperclass
 @NamedQuery(name = "BaseEntity.findById", query = "SELECT t FROM Tube t WHERE t.id = :id")
-abstract class BaseEntity {
+class BaseEntity {
 
     @Id
     @GeneratedValue(generator = "uuid-string")

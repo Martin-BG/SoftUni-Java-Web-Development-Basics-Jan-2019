@@ -10,6 +10,15 @@
 <div class="container">
     <main>
         <div class="jumbotron">
+            <% if (model == null) { %>
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h1>
+                        Tube not found!
+                    </h1>
+                </div>
+            </div>
+            <%} else {%>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">
                     <h1>
@@ -36,6 +45,7 @@
                     </p>
                 </div>
             </div>
+            <%}%>
             <hr/>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">

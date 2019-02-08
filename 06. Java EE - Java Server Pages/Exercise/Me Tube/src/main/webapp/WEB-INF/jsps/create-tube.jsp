@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="metube.web.WebConstants" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -11,7 +12,7 @@
             <div align="center">
                 <h1>Create Tube!</h1>
                 <hr/>
-                <form action="<c:url value="/tubes/create"/>" method="post">
+                <form action="<c:url value="<%=WebConstants.URL_TUBES_CREATE%>"/>" method="post">
                     <div class="form-group">
                         <label>
                             <div>Title</div>

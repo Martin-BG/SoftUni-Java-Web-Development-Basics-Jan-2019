@@ -1,12 +1,13 @@
-<%@ page import="metube.domain.models.view.TubeViewModel" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="metube.domain.models.view.TubeViewModel" %>
+<%@ page import="metube.web.WebConstants" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <c:import url="templates/head.jsp"/>
 </head>
 <body>
-<% TubeViewModel model = (TubeViewModel) request.getAttribute("model"); %>
+<% TubeViewModel model = (TubeViewModel) request.getAttribute(WebConstants.ATTRIBUTE_MODEL); %>
 <div class="container">
     <main>
         <div class="jumbotron">

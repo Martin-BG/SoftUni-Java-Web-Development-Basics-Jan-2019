@@ -209,7 +209,8 @@ public class TubeRepositoryImpl implements TubeRepository {
         }
     }
 ```
-* Service methods used for retrieving data accept desired desired return data type (ViewModel) - simplify Servlets and allows for use with various view models
+* Service methods used for retrieving data accept desired return data type (ViewModel). 
+This simplifies Servlets and allows for method reuse with various view models.
 
 [Example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/06.%20Java%20EE%20-%20Java%20Server%20Pages/Exercise/Me%20Tube/src/main/java/metube/services/TubeServiceImpl.java)
 ```java

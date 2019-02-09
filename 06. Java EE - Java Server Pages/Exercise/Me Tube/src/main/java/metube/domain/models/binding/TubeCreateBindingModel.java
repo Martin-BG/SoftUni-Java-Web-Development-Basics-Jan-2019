@@ -3,6 +3,7 @@ package metube.domain.models.binding;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import metube.domain.entities.Tube;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -11,7 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TubeCreateBindingModel implements Bindable {
+public class TubeCreateBindingModel implements Bindable<Tube> {
 
     @NotNull
     @Size(min = 2, max = 64)

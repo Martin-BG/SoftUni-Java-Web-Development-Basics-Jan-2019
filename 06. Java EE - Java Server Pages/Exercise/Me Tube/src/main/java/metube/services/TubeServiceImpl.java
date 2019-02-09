@@ -34,13 +34,13 @@ public class TubeServiceImpl implements TubeService {
     }
 
     @Override
-    public <T extends Bindable> void saveTube(T model) {
+    public <T extends Bindable<Tube>> void saveTube(T model) {
         validateModel(model);
         tubeRepository.save(modelMapper.map(model, Tube.class));
     }
 
     @Override
-    public <T extends Viewable> T findByName(String name, Class<T> clazz) {
+    public <T extends Viewable<Tube>> T findByName(String name, Class<T> clazz) {
         return tubeRepository
                 .findByName(name)
                 .map(tube -> modelMapper.map(tube, clazz))
@@ -48,7 +48,7 @@ public class TubeServiceImpl implements TubeService {
     }
 
     @Override
-    public <T extends Viewable> List<T> findAll(Class<T> clazz) {
+    public <T extends Viewable<Tube>> List<T> findAll(Class<T> clazz) {
         return tubeRepository
                 .findAll()
                 .stream()

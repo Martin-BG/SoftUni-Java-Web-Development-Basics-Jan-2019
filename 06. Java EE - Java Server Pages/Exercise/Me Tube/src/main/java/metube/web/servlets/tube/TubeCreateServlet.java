@@ -36,6 +36,5 @@ public class TubeCreateServlet extends HttpServlet {
         tubeService.saveTube(model);
         resp.sendRedirect(WebConstants.URL_TUBES_DETAILS_ATR_NAME + URLEncoder.encode(model.getName(),
                 WebConstants.SERVER_ENCODING));
-
     }
 }

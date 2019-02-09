@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "tubes")
 @NamedQueries({
+        @NamedQuery(name = "Tube.findById", query = "SELECT t FROM Tube t WHERE t.id = :id"),
         @NamedQuery(name = "Tube.findByName", query = "SELECT t FROM Tube t WHERE t.name = :name"),
         @NamedQuery(name = "Tube.findAllOrderByName", query = "SELECT t FROM Tube t ORDER BY t.name")
 })

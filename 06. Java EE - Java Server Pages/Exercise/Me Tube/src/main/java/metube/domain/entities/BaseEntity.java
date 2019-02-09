@@ -5,13 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @MappedSuperclass
-@NamedQuery(name = "BaseEntity.findById", query = "SELECT t FROM Tube t WHERE t.id = :id")
 class BaseEntity {
 
     @Id

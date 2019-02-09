@@ -55,7 +55,7 @@ public class TubeRepositoryImpl implements TubeRepository {
     public Optional<Tube> findById(String id) {
         try {
             return Optional.of(entityManager
-                    .createNamedQuery("BaseEntity.findById", Tube.class)
+                    .createNamedQuery("Tube.findById", Tube.class)
                     .setParameter("id", id)
                     .getSingleResult());
         } catch (NoResultException e) {

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <c:import url="templates/head.jsp"/>
+    <c:import url="<%=WebConstants.JSP_TEMPLATE_HEAD%>"/>
 </head>
 <body>
 <% TubeViewModel model = (TubeViewModel) request.getAttribute(WebConstants.ATTRIBUTE_MODEL); %>
@@ -50,13 +50,13 @@
             <hr/>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">
-                    <a href="<c:url value="/"/>">Back to Home.</a>
+                    <a href="<c:url value="<%=WebConstants.URL_HOME%>"/>">Back to Home.</a>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <c:import url="templates/footer.jsp"/>
+        <c:import url="<%=WebConstants.JSP_TEMPLATE_FOOTER%>"/>
     </footer>
 </div>
 </body>

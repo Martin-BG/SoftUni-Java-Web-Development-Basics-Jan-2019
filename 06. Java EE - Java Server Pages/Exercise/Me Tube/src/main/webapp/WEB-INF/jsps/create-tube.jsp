@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <c:import url="templates/head.jsp"/>
+    <c:import url="<%=WebConstants.JSP_TEMPLATE_HEAD%>"/>
 </head>
 <body>
 <div class="container">
@@ -45,12 +45,12 @@
                         <input class="btn btn-primary" type="submit" value="Create Tube"/>
                     </div>
                 </form>
-                <div class="mt-4"><a href="<c:url value="/"/>">Back to Home.</a></div>
+                <div class="mt-4"><a href="<c:url value="<%=WebConstants.URL_HOME%>"/>">Back to Home.</a></div>
             </div>
         </div>
     </main>
     <footer>
-        <c:import url="templates/footer.jsp"/>
+        <c:import url="<%=WebConstants.JSP_TEMPLATE_FOOTER%>"/>
     </footer>
 </div>
 </body>

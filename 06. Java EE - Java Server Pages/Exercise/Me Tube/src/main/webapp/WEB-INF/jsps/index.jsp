@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <c:import url="templates/head.jsp"/>
+    <c:import url="<%=WebConstants.JSP_TEMPLATE_HEAD%>"/>
 </head>
 <body>
 <div class="container">
@@ -31,7 +31,7 @@
         </div>
     </main>
     <footer>
-        <c:import url="templates/footer.jsp"/>
+        <c:import url="<%=WebConstants.JSP_TEMPLATE_FOOTER%>"/>
     </footer>
 </div>
 </body>

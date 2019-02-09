@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="metube.web.WebConstants" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isErrorPage="true" %>
 <html>
 <head>
-    <c:import url="../templates/head.jsp"/>
+    <c:import url="<%=WebConstants.JSP_TEMPLATE_HEAD%>"/>
 </head>
 <body>
 <h1>Opps... :)</h1>

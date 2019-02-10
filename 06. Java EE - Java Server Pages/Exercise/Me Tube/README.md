@@ -65,7 +65,7 @@ ___
 <resources>
     <Resource id="MyResource" type="DataSource">
         JdbcDriver com.mysql.cj.jdbc.Driver
-        JdbcUrl jdbc:mysql://localhost:3306/my_db?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC
+        JdbcUrl jdbc:mysql://localhost:3306/my_db?useSSL=false&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC
         UserName xxxxxx
         Password ****
         JtaManaged true
@@ -236,3 +236,9 @@ public class TubeDetailsServlet extends HttpServlet {
     }
 }
 ```
+* UTF-8 compliant application:
+  * JDBC ([resources.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/06.%20Java%20EE%20-%20Java%20Server%20Pages/Exercise/Me%20Tube/src/main/webapp/WEB-INF/resources.xml)): ```useUnicode=true&amp;characterEncoding=utf-8```
+  * Query strings: 
+    * ```URLEncoder.encode("+ Демо + Текст +", StandardCharsets.UTF_8))```
+    * ```URLDecoder.decode(queryString, StandardCharsets.UTF_8)```
+  * Parameters in HTTP request body ([example](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/06.%20Java%20EE%20-%20Java%20Server%20Pages/Exercise/Me%20Tube/src/main/java/metube/web/filters/TubeCreateFilter.java)): ```request.setCharacterEncoding("UTF-8")``` 

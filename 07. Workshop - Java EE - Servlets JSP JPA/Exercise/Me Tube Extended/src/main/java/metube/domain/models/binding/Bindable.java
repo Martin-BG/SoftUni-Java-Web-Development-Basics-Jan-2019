@@ -1,4 +1,4 @@
 package metube.domain.models.binding;
 
-public interface Bindable<T> {
+public interface Bindable<ENTITY> {
 }

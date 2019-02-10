@@ -15,10 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@NamedQueries({
-        @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-        @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
-})
+@NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 public class User extends BaseEntity {
 
     @NotNull

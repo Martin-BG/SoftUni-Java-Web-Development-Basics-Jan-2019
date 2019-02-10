@@ -16,11 +16,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Entity
 @Table(name = "tubes")
-@NamedQueries({
-        @NamedQuery(name = "Tube.findById", query = "SELECT t FROM Tube t WHERE t.id = :id"),
-        @NamedQuery(name = "Tube.findByName", query = "SELECT t FROM Tube t WHERE t.title = :title"),
-        @NamedQuery(name = "Tube.findAllOrderByName", query = "SELECT t FROM Tube t ORDER BY t.title")
-})
+@NamedQuery(name = "Tube.findByTitle", query = "SELECT t FROM Tube t WHERE t.title = :title")
 public class Tube extends BaseEntity {
 
     @NotNull

@@ -30,3 +30,7 @@ img.error {
     width: 50%;
     min-width: 400px;
 }
+
+.resize-none {
+    resize: none;
+}

@@ -1,5 +1,7 @@
 package metube.repositories;
 
+import metube.domain.entities.Identifiable;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,7 +12,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class BaseCrudRepository<ENTITY, ID> implements CrudRepository<ENTITY, ID> {
+class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRepository<ENTITY, ID> {
 
     protected final Logger logger;
     private final Class<ENTITY> entityClass;
@@ -26,6 +28,7 @@ class BaseCrudRepository<ENTITY, ID> implements CrudRepository<ENTITY, ID> {
     @Override
     public Optional<ENTITY> create(ENTITY entity) {
         try {
+            entity.setId(null); // Ensure that id is null - ModelMapper tends to assign values to this field
             entityManager.persist(entity);
             return Optional.of(entity);
         } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {

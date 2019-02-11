@@ -46,7 +46,7 @@ public class UserServiceImpl extends BaseService<User, String, UserRepository> i
             return Optional.empty();
         }
         return repository
-                .findByUsername(model.getUsername())
+                .findByUsername(model.getUsername(), false)
                 .filter(u -> passwordHasher.verifyEncoded(u.getPassword(), model.getPassword().toCharArray()))
                 .map(u -> mapper.map(u, UserLoggedViewModel.class));
     }
@@ -54,7 +54,7 @@ public class UserServiceImpl extends BaseService<User, String, UserRepository> i
     @Override
     public <MODEL extends Viewable<User>> Optional<MODEL> findByUsername(String username, Class<MODEL> clazz) {
         return repository
-                .findByUsername(username)
+                .findByUsername(username, true)
                 .map(e -> mapper.map(e, clazz));
     }
 }

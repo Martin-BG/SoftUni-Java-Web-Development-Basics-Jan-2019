@@ -28,10 +28,11 @@ public class UserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String[] path = {WebConstants.JSP_USER_LOGIN};
 
-        String loggedUserId = (String) req.getSession().getAttribute(WebConstants.ATTRIBUTE_USERNAME);
-        if (loggedUserId != null) {
+        String username = (String) req.getSession().getAttribute(WebConstants.ATTRIBUTE_USERNAME);
+
+        if (username != null) {
             userService
-                    .findByUsername(loggedUserId, UserProfileViewModel.class)
+                    .findByUsername(username, UserProfileViewModel.class)
                     .ifPresent(u -> {
                         req.setAttribute(WebConstants.ATTRIBUTE_MODEL, u);
                         path[0] = WebConstants.JSP_USER_PROFILE;

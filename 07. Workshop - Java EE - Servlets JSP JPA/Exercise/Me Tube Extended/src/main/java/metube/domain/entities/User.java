@@ -25,7 +25,7 @@ public class User extends BaseEntity {
 
     @NotNull
     @Size(min = 1, max = 32)
-    @Column(unique = true, nullable = false, length = 32)
+    @Column(nullable = false, length = 32)
     private String password;
 
     @NotNull
@@ -33,6 +33,6 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false, length = 64)
     private String email;
 
-    @OneToMany(targetEntity = Tube.class, mappedBy = "uploader")
+    @OneToMany(targetEntity = Tube.class, fetch = FetchType.LAZY, mappedBy = "uploader")
     private List<Tube> tubses = new ArrayList<>();
 }

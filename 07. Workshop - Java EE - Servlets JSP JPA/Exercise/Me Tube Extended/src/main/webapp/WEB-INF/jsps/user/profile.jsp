@@ -39,7 +39,7 @@
                         <td><%= model.getTubes().get(i).getAuthor()%>
                         </td>
                         <td>
-                            <a href="<%=WebConstants.URL_TUBES_DETAILS%>/<%=model.getTubes().get(i).getId()%>">Details</a>
+                            <a href="<%=WebConstants.URL_TUBE_DETAILS%>/<%=model.getTubes().get(i).getId()%>">Details</a>
                         </td>
                     </tr>
                     <% } %>

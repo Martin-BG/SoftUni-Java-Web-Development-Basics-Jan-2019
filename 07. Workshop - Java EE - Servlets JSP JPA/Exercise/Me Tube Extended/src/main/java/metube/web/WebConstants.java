@@ -26,8 +26,7 @@ public final class WebConstants {
 
     private static final String URL_TUBE_BASE = "/tube";
     public static final String URL_TUBE_UPLOAD = URL_TUBE_BASE + "/upload";
-    public static final String URL_TUBES_DETAILS = URL_TUBE_BASE + "/details";
-    public static final String URL_TUBES_UPLOAD = URL_TUBE_BASE + "/upload";
+    public static final String URL_TUBE_DETAILS = URL_TUBE_BASE + "/details";
 
     private static final String JSP_BASE_LOCATION = "/WEB-INF/jsps";
 

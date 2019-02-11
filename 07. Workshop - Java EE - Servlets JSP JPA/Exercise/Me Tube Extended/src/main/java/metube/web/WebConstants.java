@@ -12,6 +12,7 @@ public final class WebConstants {
 
     public static final String ATTRIBUTE_MODEL = "model";
     public static final String ATTRIBUTE_USERNAME = "username";
+    public static final String ATTRIBUTE_USER_ID = "userId";
 
     public static final String URL_INDEX_SERVLET = "";
     public static final String URL_INDEX = "/";

@@ -1,5 +1,6 @@
 package metube.services;
 
+import metube.domain.entities.Identifiable;
 import metube.domain.models.binding.Bindable;
 import metube.domain.models.view.Viewable;
 import metube.repositories.CrudRepository;
@@ -9,12 +10,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-class BaseService<ENTITY, ID, REPOSITORY extends CrudRepository<ENTITY, ID>> implements Service<ENTITY, ID> {
+class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRepository<ENTITY, ID>>
+        implements Service<ENTITY, ID> {
 
     protected final ModelMapper mapper;
     protected final Logger logger;
@@ -30,18 +33,15 @@ class BaseService<ENTITY, ID, REPOSITORY extends CrudRepository<ENTITY, ID>> imp
         this.repository = repository;
     }
 
-    @Override
-    public final <MODEL extends Bindable<ENTITY>> void save(MODEL model) {
-        validateModel(model);
-        repository.create(mapper.map(model, entityClass));
+    protected final <MODEL extends Bindable<ENTITY>> boolean create(MODEL model) {
+        return validateModel(model) && repository.create(mapper.map(model, entityClass)).isPresent();
     }
 
     @Override
-    public final <MODEL extends Viewable<ENTITY>> MODEL findById(ID id, Class<MODEL> clazz) {
+    public final <MODEL extends Viewable<ENTITY>> Optional<MODEL> findById(ID id, Class<MODEL> clazz) {
         return repository
                 .read(id)
-                .map(e -> mapper.map(e, clazz))
-                .orElse(null);
+                .map(e -> mapper.map(e, clazz));
     }
 
     @Override
@@ -53,7 +53,7 @@ class BaseService<ENTITY, ID, REPOSITORY extends CrudRepository<ENTITY, ID>> imp
                 .collect(Collectors.toList());
     }
 
-    private <MODEL extends Bindable<ENTITY>> void validateModel(MODEL model) {
+    private <MODEL extends Bindable<ENTITY>> boolean validateModel(MODEL model) {
         Set<ConstraintViolation<MODEL>> violations = validator.validate(model);
         if (!violations.isEmpty()) {
             String msg = "Failed validation on:\r\n\t" +
@@ -61,9 +61,10 @@ class BaseService<ENTITY, ID, REPOSITORY extends CrudRepository<ENTITY, ID>> imp
                             .map(cv -> cv.getPropertyPath().toString()
                                     + " (" + cv.getInvalidValue() + ") " + cv.getMessage())
                             .collect(Collectors.joining("\r\n\t"));
-            logger.log(Level.WARNING, msg);
-            throw new IllegalArgumentException(msg);
+            logger.log(Level.SEVERE, msg);
+            return false;
         }
+        return true;
     }
 
     @SuppressWarnings("unchecked")

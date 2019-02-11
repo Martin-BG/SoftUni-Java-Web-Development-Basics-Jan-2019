@@ -11,4 +11,6 @@ public interface TubeService extends Service<Tube, String> {
     <MODEL extends Bindable<Tube>> boolean upload(MODEL model);
 
     <MODEL extends Viewable<Tube>> Optional<MODEL> findByName(String name, Class<MODEL> clazz);
+
+    <MODEL extends Viewable<Tube>> Optional<MODEL> view(String id, Class<MODEL> clazz);
 }

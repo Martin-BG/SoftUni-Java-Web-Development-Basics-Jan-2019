@@ -32,4 +32,14 @@ public class TubeServiceImpl extends BaseService<Tube, String, TubeRepository> i
                 .findByName(name)
                 .map(e -> mapper.map(e, clazz));
     }
+
+    @Override
+    public <MODEL extends Viewable<Tube>> Optional<MODEL> view(String id, Class<MODEL> clazz) {
+        Optional<Tube> tube = repository.read(id);
+        tube.ifPresent(t -> {
+            t.setViews(t.getViews() + 1);
+            repository.update(t);
+        });
+        return tube.map(t -> mapper.map(t, clazz));
+    }
 }

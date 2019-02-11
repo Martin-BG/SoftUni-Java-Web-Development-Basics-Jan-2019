@@ -18,10 +18,11 @@ public class UserRepositoryImpl extends BaseCrudRepository<User, String> impleme
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByUsername(String username, boolean eager) {
+        String query = eager ? "User.findByUsernameEager" : "User.findByUsername";
         try {
             return Optional.of(entityManager
-                    .createNamedQuery("User.findByUsername", User.class)
+                    .createNamedQuery(query, User.class)
                     .setParameter("username", username)
                     .getSingleResult());
         } catch (IllegalStateException | PersistenceException e) {

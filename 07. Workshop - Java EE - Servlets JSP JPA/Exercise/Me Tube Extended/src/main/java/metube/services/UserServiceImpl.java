@@ -1,9 +1,12 @@
 package metube.services;
 
 import metube.domain.entities.User;
-import metube.domain.models.binding.Bindable;
+import metube.domain.models.binding.UserLoginBindingModel;
+import metube.domain.models.binding.UserRegisterBindingModel;
 import metube.domain.models.view.Viewable;
+import metube.domain.models.view.user.UserLoggedViewModel;
 import metube.repositories.UserRepository;
+import metube.util.PasswordHasher;
 import org.modelmapper.ModelMapper;
 
 import javax.inject.Inject;
@@ -13,17 +16,39 @@ import java.util.logging.Logger;
 
 public class UserServiceImpl extends BaseService<User, String, UserRepository> implements UserService {
 
+    private final PasswordHasher passwordHasher;
+
     @Inject
     public UserServiceImpl(Logger logger,
                            UserRepository repository,
                            ModelMapper mapper,
-                           Validator validator) {
+                           Validator validator,
+                           PasswordHasher passwordHasher) {
         super(mapper, validator, logger, repository);
+        this.passwordHasher = passwordHasher;
     }
 
     @Override
-    public <MODEL extends Bindable<User>> boolean register(MODEL model) {
+    public boolean register(UserRegisterBindingModel model) {
+        if (model == null || !model.getPassword().equals(model.getConfirmPassword())) {
+            return false;
+        }
+
+        String encodedPassword = passwordHasher.encodedHash(model.getPassword().toCharArray());
+        model.setPassword(encodedPassword);
+
         return create(model);
+    }
+
+    @Override
+    public Optional<UserLoggedViewModel> login(UserLoginBindingModel model) {
+        if (model == null || !validator.validate(model).isEmpty()) {
+            return Optional.empty();
+        }
+        return repository
+                .findByUsername(model.getUsername())
+                .filter(u -> passwordHasher.verifyEncoded(u.getPassword(), model.getPassword().toCharArray()))
+                .map(u -> mapper.map(u, UserLoggedViewModel.class));
     }
 
     @Override

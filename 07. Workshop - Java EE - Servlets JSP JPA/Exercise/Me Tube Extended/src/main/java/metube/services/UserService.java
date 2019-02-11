@@ -1,14 +1,18 @@
 package metube.services;
 
 import metube.domain.entities.User;
-import metube.domain.models.binding.Bindable;
+import metube.domain.models.binding.UserLoginBindingModel;
+import metube.domain.models.binding.UserRegisterBindingModel;
 import metube.domain.models.view.Viewable;
+import metube.domain.models.view.user.UserLoggedViewModel;
 
 import java.util.Optional;
 
 public interface UserService extends Service<User, String> {
 
-    <MODEL extends Bindable<User>> boolean register(MODEL model);
+    boolean register(UserRegisterBindingModel model);
+
+    Optional<UserLoggedViewModel> login(UserLoginBindingModel model);
 
     <MODEL extends Viewable<User>> Optional<MODEL> findByUsername(String username, Class<MODEL> clazz);
 }

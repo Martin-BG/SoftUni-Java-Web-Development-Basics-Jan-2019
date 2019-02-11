@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCreateBindingModel implements Bindable<User> {
+public class UserRegisterBindingModel implements Bindable<User> {
 
     @NotNull
     @Size(min = 1, max = 32)

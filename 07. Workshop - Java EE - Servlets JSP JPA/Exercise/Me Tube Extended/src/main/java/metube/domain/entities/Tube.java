@@ -21,7 +21,7 @@ public class Tube extends BaseEntity {
 
     @NotNull
     @Size(min = 2, max = 64)
-    @Column(unique = true, nullable = false, length = 64)
+    @Column(nullable = false, length = 64)
     private String title;
 
     @NotNull
@@ -39,7 +39,7 @@ public class Tube extends BaseEntity {
     @Min(0)
     private long views;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "uploader", referencedColumnName = "id")
     private User uploader;
 }

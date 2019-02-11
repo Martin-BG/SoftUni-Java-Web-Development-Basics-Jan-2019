@@ -29,6 +29,5 @@ public class TubeCreateBindingModel implements Bindable<Tube> {
     private String youtubeId;
 
     @NotNull
-    @Size(min = 2, max = 32)
-    private String uploader;
+    private UserIdBindingModel uploader;
 }

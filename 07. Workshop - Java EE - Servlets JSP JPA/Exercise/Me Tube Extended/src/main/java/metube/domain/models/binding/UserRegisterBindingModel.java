@@ -18,7 +18,7 @@ public class UserRegisterBindingModel implements Bindable<User> {
     private String username;
 
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 75)
     private String password;
 
     @NotNull

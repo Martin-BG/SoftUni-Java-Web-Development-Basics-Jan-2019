@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRepository<ENTITY, ID>>
         implements Service<ENTITY, ID> {
 
+    protected final Validator validator;
     protected final ModelMapper mapper;
+    private final Class<ENTITY> entityClass;
     protected final Logger logger;
     protected final REPOSITORY repository;
-    private final Class<ENTITY> entityClass;
-    private final Validator validator;
 
     protected BaseService(ModelMapper mapper, Validator validator, Logger logger, REPOSITORY repository) {
         entityClass = initEntityClass();

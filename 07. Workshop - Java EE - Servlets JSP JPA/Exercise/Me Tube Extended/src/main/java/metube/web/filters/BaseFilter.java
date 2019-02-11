@@ -13,7 +13,7 @@ import java.util.Optional;
 
 abstract class BaseFilter implements Filter {
 
-    private static Optional<String> getQueryParam(String queryString, String paramName) {
+    protected static Optional<String> getQueryParam(String queryString, String paramName) {
         if (queryString != null && paramName != null) {
             String decoded = URLDecoder.decode(queryString, WebConstants.SERVER_ENCODING);
             String[] params = decoded.split("&");
@@ -25,26 +25,6 @@ abstract class BaseFilter implements Filter {
             }
         }
         return Optional.empty();
-    }
-
-    private static Object parseValue(Class<?> type, String value) {
-        if (type == null || value == null) {
-            return null;
-        }
-
-        if (type.isAssignableFrom(int.class) || type.isAssignableFrom(Integer.class)) {
-            return Integer.valueOf(value);
-        } else if (type.isAssignableFrom(long.class) || type.isAssignableFrom(Long.class)) {
-            return Long.valueOf(value);
-        } else if (type.isAssignableFrom(float.class) || type.isAssignableFrom(Float.class)) {
-            return Float.valueOf(value);
-        } else if (type.isAssignableFrom(double.class) || type.isAssignableFrom(Double.class)) {
-            return Double.valueOf(value);
-        } else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {
-            return Boolean.valueOf(value);
-        } else {
-            return value;
-        }
     }
 
     protected static <T extends Bindable> T getBindingModelFromParams(ServletRequest request, Class<T> clazz) {
@@ -65,6 +45,26 @@ abstract class BaseFilter implements Filter {
                 NoSuchMethodException | InvocationTargetException |
                 UnsupportedEncodingException e) {
             throw new IllegalArgumentException(e);
+        }
+    }
+
+    private static Object parseValue(Class<?> type, String value) {
+        if (type == null || value == null) {
+            return null;
+        }
+
+        if (type.isAssignableFrom(int.class) || type.isAssignableFrom(Integer.class)) {
+            return Integer.valueOf(value);
+        } else if (type.isAssignableFrom(long.class) || type.isAssignableFrom(Long.class)) {
+            return Long.valueOf(value);
+        } else if (type.isAssignableFrom(float.class) || type.isAssignableFrom(Float.class)) {
+            return Float.valueOf(value);
+        } else if (type.isAssignableFrom(double.class) || type.isAssignableFrom(Double.class)) {
+            return Double.valueOf(value);
+        } else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {
+            return Boolean.valueOf(value);
+        } else {
+            return value;
         }
     }
 }

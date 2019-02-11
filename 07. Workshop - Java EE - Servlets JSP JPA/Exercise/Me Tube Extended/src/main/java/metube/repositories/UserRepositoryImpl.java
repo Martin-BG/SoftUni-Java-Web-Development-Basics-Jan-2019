@@ -29,9 +29,4 @@ public class UserRepositoryImpl extends BaseCrudRepository<User, String> impleme
             return Optional.empty();
         }
     }
-
-    @Override
-    public Optional<User> findById(String id) {
-        return read(id);
-    }
 }

@@ -29,11 +29,6 @@ public class TubeRepositoryImpl extends BaseCrudRepository<Tube, String> impleme
             return Optional.empty();
         }
     }
-
-    @Override
-    public Optional<Tube> findById(String id) {
-        return read(id);
-    }
 }
 
 

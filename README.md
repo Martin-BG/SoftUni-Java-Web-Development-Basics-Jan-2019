@@ -38,15 +38,7 @@ https://softuni.bg/trainings/2252/java-web-development-basics-january-2019
   * Bind model from request parameters in Filter (using Reflection)
   * Service methods used for retrieving data accept desired return data type (ViewModel)
 
-* [Me Tube Extended](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/07.%20Workshop%20-%20Java%20EE%20-%20Servlets%20JSP%20JPA/Exercise/Me%20Tube%20Extended) - Refactoring, new functionality
+* [Me Tube Extended](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/07.%20Workshop%20-%20Java%20EE%20-%20Servlets%20JSP%20JPA/Exercise/Me%20Tube%20Extended) - Refactoring, new functionality:
   * CRUD repository, extensive use of Generics for type safety, Optional<>, logging
   * Exported common service logic to base class, Generics
   * Use of [Jargon2](https://github.com/kosprov/jargon2-api) for password hashing
-  * JTA enabled EntityManager
-  * Use of NamedQueries in repositories for retrieving data
-  * Lombok - deal with code noise in POJOs
-  * Creating beans of external classes by @Produces annotation
-  * Access static resources in JSP files
-  * Basic JSP templating
-  * Bind model from request parameters in Filter (using Reflection)
-  * Service methods used for retrieving data accept desired return data type (ViewModel)

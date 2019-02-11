@@ -15,7 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+@NamedQueries({
+        @NamedQuery(name = "User.findByUsername",
+                query = "SELECT u FROM User u WHERE u.username = :username"),
+        @NamedQuery(name = "User.findByUsernameEager",
+                query = "SELECT u FROM User u LEFT JOIN FETCH u.tubes AS t WHERE u.username = :username"),
+})
 public class User extends BaseEntity {
 
     @NotNull
@@ -34,5 +39,5 @@ public class User extends BaseEntity {
     private String email;
 
     @OneToMany(targetEntity = Tube.class, fetch = FetchType.LAZY, mappedBy = "uploader")
-    private List<Tube> tubses = new ArrayList<>();
+    private List<Tube> tubes = new ArrayList<>();
 }

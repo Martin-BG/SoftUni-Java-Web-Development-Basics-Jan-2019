@@ -58,7 +58,7 @@ public class UserServiceImpl extends BaseService<User, String, UserRepository> i
     }
 
     @Override
-    public <MODEL extends Viewable<User>> Optional<MODEL> findByUsername(String username, Class<MODEL> clazz) {
+    public <M extends Viewable<User>> Optional<M> findByUsername(String username, Class<M> clazz) {
         return repository
                 .findByUsername(username, true)
                 .map(e -> mapper.map(e, clazz));

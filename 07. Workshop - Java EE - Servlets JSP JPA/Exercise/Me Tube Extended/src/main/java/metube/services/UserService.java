@@ -14,5 +14,5 @@ public interface UserService extends Service<User, String> {
 
     Optional<UserLoggedViewModel> login(UserLoginBindingModel model);
 
-    <MODEL extends Viewable<User>> Optional<MODEL> findByUsername(String username, Class<MODEL> clazz);
+    <M extends Viewable<User>> Optional<M> findByUsername(String username, Class<M> clazz);
 }

@@ -12,9 +12,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRepository<ENTITY, ID> {
+abstract class BaseCrudRepository<E extends Identifiable<I>, I> implements CrudRepository<E, I> {
 
-    private final Class<ENTITY> entityClass;
+    private final Class<E> entityClass;
 
     @PersistenceContext(unitName = "metube")
     protected EntityManager entityManager;
@@ -26,7 +26,7 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     protected abstract Logger logger();
 
     @Override
-    public Optional<ENTITY> create(ENTITY entity) {
+    public Optional<E> create(E entity) {
         try {
             entity.setId(null); // Ensure that id is null - ModelMapper tends to assign values to this field
             entityManager.persist(entity);
@@ -38,7 +38,7 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     }
 
     @Override
-    public Optional<ENTITY> read(ID id) {
+    public Optional<E> read(I id) {
         try {
             return Optional.ofNullable(entityManager.find(entityClass, id));
         } catch (IllegalArgumentException e) {
@@ -48,7 +48,7 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     }
 
     @Override
-    public Optional<ENTITY> update(ENTITY entity) {
+    public Optional<E> update(E entity) {
         try {
             return Optional.of(entityManager.merge(entity));
         } catch (IllegalArgumentException | TransactionRequiredException e) {
@@ -58,7 +58,7 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     }
 
     @Override
-    public boolean delete(ENTITY entity) {
+    public boolean delete(E entity) {
         try {
             entityManager.remove(entity);
             return true;
@@ -69,13 +69,13 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     }
 
     @Override
-    public List<ENTITY> all() {
+    public List<E> all() {
         try {
             CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-            CriteriaQuery<ENTITY> cq = cb.createQuery(entityClass);
-            Root<ENTITY> rootEntry = cq.from(entityClass);
-            CriteriaQuery<ENTITY> all = cq.select(rootEntry);
-            TypedQuery<ENTITY> allQuery = entityManager.createQuery(all);
+            CriteriaQuery<E> cq = cb.createQuery(entityClass);
+            Root<E> rootEntry = cq.from(entityClass);
+            CriteriaQuery<E> all = cq.select(rootEntry);
+            TypedQuery<E> allQuery = entityManager.createQuery(all);
             return allQuery.getResultList();
         } catch (IllegalStateException | IllegalArgumentException e) {
             logger().log(Level.SEVERE, "Retrieving of all entities failed", e);
@@ -84,7 +84,7 @@ abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implement
     }
 
     @SuppressWarnings("unchecked")
-    private Class<ENTITY> initEntityClass() {
-        return (Class<ENTITY>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    private Class<E> initEntityClass() {
+        return (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }

@@ -1,4 +1,4 @@
 package metube.domain.models.view;
 
-public interface Viewable<ENTITY> {
+public interface Viewable<E> {
 }

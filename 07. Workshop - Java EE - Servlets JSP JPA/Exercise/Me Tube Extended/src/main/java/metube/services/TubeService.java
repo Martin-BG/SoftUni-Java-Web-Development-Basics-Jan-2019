@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface TubeService extends Service<Tube, String> {
 
-    <MODEL extends Bindable<Tube>> boolean upload(MODEL model);
+    <M extends Bindable<Tube>> boolean upload(M model);
 
-    <MODEL extends Viewable<Tube>> Optional<MODEL> findByName(String name, Class<MODEL> clazz);
+    <M extends Viewable<Tube>> Optional<M> findByName(String name, Class<M> clazz);
 
-    <MODEL extends Viewable<Tube>> Optional<MODEL> view(String id, Class<MODEL> clazz);
+    <M extends Viewable<Tube>> Optional<M> view(String id, Class<M> clazz);
 }

@@ -5,15 +5,15 @@ import metube.domain.entities.Identifiable;
 import java.util.List;
 import java.util.Optional;
 
-public interface CrudRepository<ENTITY extends Identifiable<ID>, ID> {
+public interface CrudRepository<E extends Identifiable<I>, I> {
 
-    Optional<ENTITY> create(ENTITY entity);
+    Optional<E> create(E entity);
 
-    Optional<ENTITY> read(ID id);
+    Optional<E> read(I id);
 
-    Optional<ENTITY> update(ENTITY entity);
+    Optional<E> update(E entity);
 
-    boolean delete(ENTITY entity);
+    boolean delete(E entity);
 
-    List<ENTITY> all();
+    List<E> all();
 }

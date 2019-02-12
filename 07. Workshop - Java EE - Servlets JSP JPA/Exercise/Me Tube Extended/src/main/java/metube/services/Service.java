@@ -6,9 +6,9 @@ import metube.domain.models.view.Viewable;
 import java.util.List;
 import java.util.Optional;
 
-public interface Service<ENTITY extends Identifiable<ID>, ID> {
+public interface Service<E extends Identifiable<I>, I> {
 
-    <MODEL extends Viewable<ENTITY>> Optional<MODEL> findById(ID id, Class<MODEL> clazz);
+    <M extends Viewable<E>> Optional<M> findById(I id, Class<M> clazz);
 
-    <MODEL extends Viewable<ENTITY>> List<MODEL> findAll(Class<MODEL> clazz);
+    <M extends Viewable<E>> List<M> findAll(Class<M> clazz);
 }

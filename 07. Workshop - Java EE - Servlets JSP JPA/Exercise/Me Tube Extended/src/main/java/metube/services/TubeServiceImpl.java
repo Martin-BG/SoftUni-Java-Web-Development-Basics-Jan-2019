@@ -28,19 +28,19 @@ public class TubeServiceImpl extends BaseService<Tube, String, TubeRepository> i
     }
 
     @Override
-    public <MODEL extends Bindable<Tube>> boolean upload(MODEL model) {
+    public <M extends Bindable<Tube>> boolean upload(M model) {
         return create(model);
     }
 
     @Override
-    public <MODEL extends Viewable<Tube>> Optional<MODEL> findByName(String name, Class<MODEL> clazz) {
+    public <M extends Viewable<Tube>> Optional<M> findByName(String name, Class<M> clazz) {
         return repository
                 .findByName(name)
                 .map(e -> mapper.map(e, clazz));
     }
 
     @Override
-    public <MODEL extends Viewable<Tube>> Optional<MODEL> view(String id, Class<MODEL> clazz) {
+    public <M extends Viewable<Tube>> Optional<M> view(String id, Class<M> clazz) {
         Optional<Tube> tube = repository.read(id);
         tube.ifPresent(t -> {
             t.setViews(t.getViews() + 1);

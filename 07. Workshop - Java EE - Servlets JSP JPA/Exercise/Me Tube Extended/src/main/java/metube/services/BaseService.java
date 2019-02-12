@@ -16,15 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-abstract class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRepository<ENTITY, ID>>
-        implements Service<ENTITY, ID> {
+abstract class BaseService<E extends Identifiable<I>, I, R extends CrudRepository<E, I>> implements Service<E, I> {
 
-    private final Class<ENTITY> entityClass;
     protected final Validator validator;
     protected final ModelMapper mapper;
-    protected final REPOSITORY repository;
+    protected final R repository;
+    private final Class<E> entityClass;
 
-    protected BaseService(ModelMapper mapper, Validator validator, REPOSITORY repository) {
+    protected BaseService(ModelMapper mapper, Validator validator, R repository) {
         entityClass = initEntityClass();
         this.mapper = mapper;
         this.validator = validator;
@@ -33,19 +32,19 @@ abstract class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY exten
 
     protected abstract Logger logger();
 
-    protected final <MODEL extends Bindable<ENTITY>> boolean create(MODEL model) {
+    protected final <M extends Bindable<E>> boolean create(M model) {
         return validateModel(model) && repository.create(mapper.map(model, entityClass)).isPresent();
     }
 
     @Override
-    public final <MODEL extends Viewable<ENTITY>> Optional<MODEL> findById(ID id, Class<MODEL> clazz) {
+    public final <M extends Viewable<E>> Optional<M> findById(I id, Class<M> clazz) {
         return repository
                 .read(id)
                 .map(e -> mapper.map(e, clazz));
     }
 
     @Override
-    public final <MODEL extends Viewable<ENTITY>> List<MODEL> findAll(Class<MODEL> clazz) {
+    public final <M extends Viewable<E>> List<M> findAll(Class<M> clazz) {
         return repository
                 .all()
                 .stream()
@@ -53,8 +52,8 @@ abstract class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY exten
                 .collect(Collectors.toList());
     }
 
-    private <MODEL extends Bindable<ENTITY>> boolean validateModel(MODEL model) {
-        Set<ConstraintViolation<MODEL>> violations = validator.validate(model);
+    private <M extends Bindable<E>> boolean validateModel(M model) {
+        Set<ConstraintViolation<M>> violations = validator.validate(model);
         if (!violations.isEmpty()) {
             String msg = "Failed validation on:\r\n\t" +
                     violations.stream()
@@ -68,7 +67,7 @@ abstract class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY exten
     }
 
     @SuppressWarnings("unchecked")
-    private Class<ENTITY> initEntityClass() {
-        return (Class<ENTITY>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    private Class<E> initEntityClass() {
+        return (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }

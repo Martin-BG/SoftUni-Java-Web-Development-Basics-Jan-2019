@@ -1,8 +1,8 @@
 package metube.domain.entities;
 
-public interface Identifiable<ID> {
+public interface Identifiable<I> {
 
-    ID getId();
+    I getId();
 
-    void setId(ID id);
+    void setId(I id);
 }

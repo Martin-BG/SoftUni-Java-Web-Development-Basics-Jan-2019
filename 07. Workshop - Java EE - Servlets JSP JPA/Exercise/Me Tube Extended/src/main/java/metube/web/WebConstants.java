@@ -17,16 +17,16 @@ public final class WebConstants {
     public static final String URL_INDEX_SERVLET = "";
     public static final String URL_INDEX = "/";
 
+    public static final String URL_TUBE_BASE = "/tube";
+    public static final String URL_TUBE_UPLOAD = URL_TUBE_BASE + "/upload";
+    public static final String URL_TUBE_DETAILS = URL_TUBE_BASE + "/details";
+
     private static final String URL_USER_BASE = "/user";
     public static final String URL_USER_HOME = URL_USER_BASE + "/home";
     public static final String URL_USER_LOGIN = URL_USER_BASE + "/login";
     public static final String URL_USER_REGISTER = URL_USER_BASE + "/register";
     public static final String URL_USER_PROFILE = URL_USER_BASE + "/profile";
     public static final String URL_USER_LOGOUT = URL_USER_BASE + "/logout";
-
-    public static final String URL_TUBE_BASE = "/tube";
-    public static final String URL_TUBE_UPLOAD = URL_TUBE_BASE + "/upload";
-    public static final String URL_TUBE_DETAILS = URL_TUBE_BASE + "/details";
 
     private static final String JSP_BASE_LOCATION = "/WEB-INF/jsps";
 

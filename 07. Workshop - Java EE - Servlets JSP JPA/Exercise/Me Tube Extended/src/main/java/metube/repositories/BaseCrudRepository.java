@@ -12,18 +12,18 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRepository<ENTITY, ID> {
+abstract class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRepository<ENTITY, ID> {
 
-    protected final Logger logger;
     private final Class<ENTITY> entityClass;
 
     @PersistenceContext(unitName = "metube")
     protected EntityManager entityManager;
 
-    protected BaseCrudRepository(Logger logger) {
+    protected BaseCrudRepository() {
         entityClass = initEntityClass();
-        this.logger = logger;
     }
+
+    protected abstract Logger logger();
 
     @Override
     public Optional<ENTITY> create(ENTITY entity) {
@@ -32,7 +32,7 @@ class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRep
             entityManager.persist(entity);
             return Optional.of(entity);
         } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
-            logger.log(Level.SEVERE, "Failed to create new entity: " + entity, e);
+            logger().log(Level.SEVERE, "Failed to create new entity: " + entity, e);
             return Optional.empty();
         }
     }
@@ -42,7 +42,7 @@ class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRep
         try {
             return Optional.ofNullable(entityManager.find(entityClass, id));
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Invalid arguments for find entity provided: " + id, e);
+            logger().log(Level.SEVERE, "Invalid arguments for find entity provided: " + id, e);
             return Optional.empty();
         }
     }
@@ -52,7 +52,7 @@ class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRep
         try {
             return Optional.of(entityManager.merge(entity));
         } catch (IllegalArgumentException | TransactionRequiredException e) {
-            logger.log(Level.SEVERE, "Entity merge failed: " + entity, e);
+            logger().log(Level.SEVERE, "Entity merge failed: " + entity, e);
             return Optional.empty();
         }
     }
@@ -63,7 +63,7 @@ class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRep
             entityManager.remove(entity);
             return true;
         } catch (IllegalArgumentException | TransactionRequiredException e) {
-            logger.log(Level.SEVERE, "Entity remove failed: " + entity, e);
+            logger().log(Level.SEVERE, "Entity remove failed: " + entity, e);
             return false;
         }
     }
@@ -78,7 +78,7 @@ class BaseCrudRepository<ENTITY extends Identifiable<ID>, ID> implements CrudRep
             TypedQuery<ENTITY> allQuery = entityManager.createQuery(all);
             return allQuery.getResultList();
         } catch (IllegalStateException | IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Retrieving of all entities failed", e);
+            logger().log(Level.SEVERE, "Retrieving of all entities failed", e);
             return List.of();
         }
     }

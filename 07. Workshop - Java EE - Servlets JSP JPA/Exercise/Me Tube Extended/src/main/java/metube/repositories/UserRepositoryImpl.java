@@ -3,7 +3,6 @@ package metube.repositories;
 import metube.domain.entities.User;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -12,9 +11,11 @@ import java.util.logging.Logger;
 @Stateless
 public class UserRepositoryImpl extends BaseCrudRepository<User, String> implements UserRepository {
 
-    @Inject
-    public UserRepositoryImpl(Logger logger) {
-        super(logger);
+    private static final Logger LOG = Logger.getLogger(UserRepositoryImpl.class.getName());
+
+    @Override
+    protected Logger logger() {
+        return LOG;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class UserRepositoryImpl extends BaseCrudRepository<User, String> impleme
                     .setParameter("username", username)
                     .getSingleResult());
         } catch (IllegalStateException | PersistenceException e) {
-            logger.log(Level.SEVERE, "No User found by username: " + username, e);
+            LOG.log(Level.SEVERE, "No User found by username: " + username, e);
             return Optional.empty();
         }
     }

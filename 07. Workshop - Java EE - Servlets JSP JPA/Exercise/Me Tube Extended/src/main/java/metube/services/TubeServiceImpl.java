@@ -13,12 +13,18 @@ import java.util.logging.Logger;
 
 public class TubeServiceImpl extends BaseService<Tube, String, TubeRepository> implements TubeService {
 
+    private static final Logger LOG = Logger.getLogger(TubeServiceImpl.class.getName());
+
     @Inject
-    public TubeServiceImpl(Logger logger,
-                           TubeRepository repository,
+    public TubeServiceImpl(TubeRepository repository,
                            ModelMapper mapper,
                            Validator validator) {
-        super(mapper, validator, logger, repository);
+        super(mapper, validator, repository);
+    }
+
+    @Override
+    protected Logger logger() {
+        return LOG;
     }
 
     @Override

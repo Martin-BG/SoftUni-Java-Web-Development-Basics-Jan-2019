@@ -3,7 +3,6 @@ package metube.util;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,18 +14,16 @@ import static com.kosprov.jargon2.api.Jargon2.*;
 @ApplicationScoped
 public class PasswordHasher {
 
+    private static final Logger LOG = Logger.getLogger(PasswordHasher.class.getName());
+
     private static final int MEMORY_COST = 65536;
     private static final int TIME_COST = 3;
     private static final int LANES = 4;
     private static final int SALT_LENGTH = 16;
     private static final int HASH_LENGTH = 16;
 
-    @Inject
-    private Logger logger;
-
     private Hasher hasher;
     private Verifier verifier;
-
     private ByteArray secret;
 
     @PostConstruct
@@ -55,7 +52,7 @@ public class PasswordHasher {
         try (ByteArray passwordByteArray = toByteArray(password).clearSource()) {
             return hasher.password(passwordByteArray).encodedHash();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error during password hashing", e);
+            LOG.log(Level.SEVERE, "Error during password hashing", e);
             return null;
         }
     }
@@ -64,7 +61,7 @@ public class PasswordHasher {
         try (ByteArray passwordByteArray = toByteArray(password).clearSource()) {
             return verifier.hash(encodedHash).password(passwordByteArray).verifyEncoded();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error during password verification", e);
+            LOG.log(Level.SEVERE, "Error during password verification", e);
             return false;
         }
     }

@@ -16,22 +16,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRepository<ENTITY, ID>>
+abstract class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRepository<ENTITY, ID>>
         implements Service<ENTITY, ID> {
 
+    private final Class<ENTITY> entityClass;
     protected final Validator validator;
     protected final ModelMapper mapper;
-    private final Class<ENTITY> entityClass;
-    protected final Logger logger;
     protected final REPOSITORY repository;
 
-    protected BaseService(ModelMapper mapper, Validator validator, Logger logger, REPOSITORY repository) {
+    protected BaseService(ModelMapper mapper, Validator validator, REPOSITORY repository) {
         entityClass = initEntityClass();
         this.mapper = mapper;
         this.validator = validator;
-        this.logger = logger;
         this.repository = repository;
     }
+
+    protected abstract Logger logger();
 
     protected final <MODEL extends Bindable<ENTITY>> boolean create(MODEL model) {
         return validateModel(model) && repository.create(mapper.map(model, entityClass)).isPresent();
@@ -61,7 +61,7 @@ class BaseService<ENTITY extends Identifiable<ID>, ID, REPOSITORY extends CrudRe
                             .map(cv -> cv.getPropertyPath().toString()
                                     + " (" + cv.getInvalidValue() + ") " + cv.getMessage())
                             .collect(Collectors.joining("\r\n\t"));
-            logger.log(Level.SEVERE, msg);
+            logger().log(Level.SEVERE, msg);
             return false;
         }
         return true;

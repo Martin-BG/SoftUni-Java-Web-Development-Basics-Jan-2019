@@ -16,16 +16,22 @@ import java.util.logging.Logger;
 
 public class UserServiceImpl extends BaseService<User, String, UserRepository> implements UserService {
 
+    private static final Logger LOG = Logger.getLogger(TubeServiceImpl.class.getName());
+
     private final PasswordHasher passwordHasher;
 
     @Inject
-    public UserServiceImpl(Logger logger,
-                           UserRepository repository,
+    public UserServiceImpl(UserRepository repository,
                            ModelMapper mapper,
                            Validator validator,
                            PasswordHasher passwordHasher) {
-        super(mapper, validator, logger, repository);
+        super(mapper, validator, repository);
         this.passwordHasher = passwordHasher;
+    }
+
+    @Override
+    protected Logger logger() {
+        return LOG;
     }
 
     @Override

@@ -34,3 +34,7 @@ img.error {
 .resize-none {
     resize: none;
 }
+
+.width-30p {
+    width: 30%;
+}

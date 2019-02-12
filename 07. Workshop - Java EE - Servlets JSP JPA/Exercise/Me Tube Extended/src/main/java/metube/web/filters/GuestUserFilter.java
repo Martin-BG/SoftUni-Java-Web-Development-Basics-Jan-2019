@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {
         WebConstants.URL_USER_HOME,
         WebConstants.URL_USER_PROFILE,
+        WebConstants.URL_USER_LOGOUT,
         WebConstants.URL_TUBE_BASE + "/*"
 })
 public class GuestUserFilter implements Filter {

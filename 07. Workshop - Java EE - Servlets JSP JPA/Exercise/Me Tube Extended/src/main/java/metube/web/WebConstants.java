@@ -24,7 +24,7 @@ public final class WebConstants {
     public static final String URL_USER_PROFILE = URL_USER_BASE + "/profile";
     public static final String URL_USER_LOGOUT = URL_USER_BASE + "/logout";
 
-    private static final String URL_TUBE_BASE = "/tube";
+    public static final String URL_TUBE_BASE = "/tube";
     public static final String URL_TUBE_UPLOAD = URL_TUBE_BASE + "/upload";
     public static final String URL_TUBE_DETAILS = URL_TUBE_BASE + "/details";
 

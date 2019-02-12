@@ -4,16 +4,13 @@ import metube.domain.models.binding.TubeUploadBindingModel;
 import metube.domain.models.binding.UserIdBindingModel;
 import metube.web.WebConstants;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter(WebConstants.URL_TUBE_UPLOAD)
-public class TubeUploadFilter extends BaseFilter {
+public class TubeUploadFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -22,7 +19,8 @@ public class TubeUploadFilter extends BaseFilter {
         HttpServletRequest req = (HttpServletRequest) request;
 
         if (WebConstants.HTTP_METHOD_POST.equalsIgnoreCase(req.getMethod())) {
-            TubeUploadBindingModel model = getBindingModelFromParams(request, TubeUploadBindingModel.class);
+            TubeUploadBindingModel model = FilterUtils
+                    .getBindingModelFromParams(request, TubeUploadBindingModel.class);
             model.setUploader(new UserIdBindingModel());
             String userId = (String) req.getSession().getAttribute(WebConstants.ATTRIBUTE_USER_ID);
             model.getUploader().setId(userId);

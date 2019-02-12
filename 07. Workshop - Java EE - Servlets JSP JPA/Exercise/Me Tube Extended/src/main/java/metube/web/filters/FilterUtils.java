@@ -3,17 +3,28 @@ package metube.web.filters;
 import metube.domain.models.binding.Bindable;
 import metube.web.WebConstants;
 
-import javax.servlet.Filter;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.util.Optional;
 
-abstract class BaseFilter implements Filter {
+final class FilterUtils {
 
-    protected static Optional<String> getQueryParam(String queryString, String paramName) {
+    private FilterUtils() {
+    }
+
+    static boolean isGuestUser(HttpSession session) {
+        return !isAuthenticated(session);
+    }
+
+    static boolean isAuthenticated(HttpSession session) {
+        return session != null && session.getAttribute(WebConstants.ATTRIBUTE_USERNAME) != null;
+    }
+
+    static Optional<String> getQueryParam(String queryString, String paramName) {
         if (queryString != null && paramName != null) {
             String decoded = URLDecoder.decode(queryString, WebConstants.SERVER_ENCODING);
             String[] params = decoded.split("&");
@@ -27,7 +38,7 @@ abstract class BaseFilter implements Filter {
         return Optional.empty();
     }
 
-    protected static <T extends Bindable> T getBindingModelFromParams(ServletRequest request, Class<T> clazz) {
+    static <T extends Bindable> T getBindingModelFromParams(ServletRequest request, Class<T> clazz) {
         try {
             request.setCharacterEncoding(WebConstants.SERVER_ENCODING_STR);
             T model = clazz.getConstructor().newInstance();

@@ -1,8 +1,8 @@
 package metube.services;
 
 import metube.domain.entities.User;
-import metube.domain.models.binding.UserLoginBindingModel;
-import metube.domain.models.binding.UserRegisterBindingModel;
+import metube.domain.models.binding.user.UserLoginBindingModel;
+import metube.domain.models.binding.user.UserRegisterBindingModel;
 import metube.domain.models.view.Viewable;
 import metube.domain.models.view.user.UserLoggedViewModel;
 

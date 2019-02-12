@@ -1,7 +1,7 @@
 package metube.web.filters;
 
-import metube.domain.models.binding.TubeUploadBindingModel;
-import metube.domain.models.binding.UserIdBindingModel;
+import metube.domain.models.binding.tube.TubeUploadBindingModel;
+import metube.domain.models.binding.user.UserIdBindingModel;
 import metube.web.WebConstants;
 
 import javax.servlet.*;

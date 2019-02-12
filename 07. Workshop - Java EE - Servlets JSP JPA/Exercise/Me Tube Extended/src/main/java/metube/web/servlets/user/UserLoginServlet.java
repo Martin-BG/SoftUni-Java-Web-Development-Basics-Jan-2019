@@ -1,6 +1,6 @@
 package metube.web.servlets.user;
 
-import metube.domain.models.binding.UserLoginBindingModel;
+import metube.domain.models.binding.user.UserLoginBindingModel;
 import metube.domain.models.view.user.UserLoggedViewModel;
 import metube.services.UserService;
 import metube.web.WebConstants;

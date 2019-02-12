@@ -1,9 +1,11 @@
-package metube.domain.models.binding;
+package metube.domain.models.binding.tube;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import metube.domain.entities.Tube;
+import metube.domain.models.binding.Bindable;
+import metube.domain.models.binding.user.UserIdBindingModel;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

@@ -1,6 +1,6 @@
 package metube.web.filters;
 
-import metube.domain.models.binding.UserLoginBindingModel;
+import metube.domain.models.binding.user.UserLoginBindingModel;
 import metube.web.WebConstants;
 
 import javax.servlet.*;

@@ -1,6 +1,6 @@
 package metube.web.servlets.tube;
 
-import metube.domain.models.binding.TubeUploadBindingModel;
+import metube.domain.models.binding.tube.TubeUploadBindingModel;
 import metube.services.TubeService;
 import metube.web.WebConstants;
 

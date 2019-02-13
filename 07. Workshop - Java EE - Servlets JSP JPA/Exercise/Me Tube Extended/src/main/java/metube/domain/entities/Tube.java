@@ -32,6 +32,7 @@ public class Tube extends BaseEntity {
     @Size(max = 255)
     private String description;
 
+    @NotNull
     @Pattern(regexp = "[A-Za-z0-9-]{11}")
     @Column(name = "youtube_id", nullable = false, updatable = false, length = 11)
     private String youtubeId;

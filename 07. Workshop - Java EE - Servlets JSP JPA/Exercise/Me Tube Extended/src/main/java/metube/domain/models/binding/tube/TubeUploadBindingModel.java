@@ -27,6 +27,7 @@ public class TubeUploadBindingModel implements Bindable<Tube> {
     @Size(max = 255)
     private String description;
 
+    @NotNull
     @Pattern(regexp = "[A-Za-z0-9-]{11}")
     private String youtubeId;
 

@@ -3,7 +3,7 @@ package metube.web.servlets.user;
 import metube.domain.models.view.user.UserProfileViewModel;
 import metube.services.UserService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +32,8 @@ public class UserProfileServlet extends HttpServlet {
                 .ifPresentOrElse(
                         user -> {
                             req.setAttribute(WebConstants.ATTRIBUTE_MODEL, user);
-                            ServletUtil.forward(req, resp, WebConstants.JSP_USER_PROFILE);
+                            ServletUtils.forward(req, resp, WebConstants.JSP_USER_PROFILE);
                         },
-                        () -> ServletUtil.error(resp, HttpServletResponse.SC_UNAUTHORIZED, "Please login first!"));
+                        () -> ServletUtils.error(resp, HttpServletResponse.SC_UNAUTHORIZED, "Please login first!"));
     }
 }

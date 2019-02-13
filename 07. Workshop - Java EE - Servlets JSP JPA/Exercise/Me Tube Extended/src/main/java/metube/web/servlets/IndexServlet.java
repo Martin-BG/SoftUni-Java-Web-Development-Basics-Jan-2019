@@ -14,6 +14,6 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        ServletUtil.forward(req, resp, WebConstants.JSP_INDEX);
+        ServletUtils.forward(req, resp, WebConstants.JSP_INDEX);
     }
 }

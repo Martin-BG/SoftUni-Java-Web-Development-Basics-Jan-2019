@@ -3,7 +3,7 @@ package metube.web.servlets.tube;
 import metube.domain.models.binding.tube.TubeUploadBindingModel;
 import metube.services.TubeService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class TubeUploadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        ServletUtil.forward(req, resp, WebConstants.JSP_TUBE_UPLOAD);
+        ServletUtils.forward(req, resp, WebConstants.JSP_TUBE_UPLOAD);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class TubeUploadServlet extends HttpServlet {
         TubeUploadBindingModel model = (TubeUploadBindingModel) req.getAttribute(WebConstants.ATTRIBUTE_MODEL);
 
         if (tubeService.upload(model)) {
-            ServletUtil.redirect(resp, WebConstants.URL_USER_HOME);
+            ServletUtils.redirect(resp, WebConstants.URL_USER_HOME);
         } else {
-            ServletUtil.error(resp, HttpServletResponse.SC_BAD_REQUEST, "Tube upload failed");
+            ServletUtils.error(resp, HttpServletResponse.SC_BAD_REQUEST, "Tube upload failed");
         }
     }
 }

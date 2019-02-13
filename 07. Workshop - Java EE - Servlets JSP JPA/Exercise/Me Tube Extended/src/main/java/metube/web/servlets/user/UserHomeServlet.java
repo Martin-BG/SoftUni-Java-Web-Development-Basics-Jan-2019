@@ -3,7 +3,7 @@ package metube.web.servlets.user;
 import metube.domain.models.view.tube.TubeThumbnailViewModel;
 import metube.services.TubeService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +31,6 @@ public class UserHomeServlet extends HttpServlet {
 
         req.setAttribute(WebConstants.ATTRIBUTE_MODEL, tubes);
 
-        ServletUtil.forward(req, resp, WebConstants.JSP_USER_HOME);
+        ServletUtils.forward(req, resp, WebConstants.JSP_USER_HOME);
     }
 }

@@ -1,7 +1,7 @@
 package metube.web.servlets.user;
 
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +17,6 @@ public class UserLogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession(true).invalidate();
 
-        ServletUtil.redirect(resp, WebConstants.URL_INDEX);
+        ServletUtils.redirect(resp, WebConstants.URL_INDEX);
     }
 }

@@ -3,7 +3,7 @@ package metube.web.servlets.tube;
 import metube.domain.models.view.tube.TubeDetailsViewModel;
 import metube.services.TubeService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +31,8 @@ public class TubeDetailsServlet extends HttpServlet {
                 .ifPresentOrElse(
                         tube -> {
                             req.setAttribute(WebConstants.ATTRIBUTE_MODEL, tube);
-                            ServletUtil.forward(req, resp, WebConstants.JSP_TUBE_DETAILS);
+                            ServletUtils.forward(req, resp, WebConstants.JSP_TUBE_DETAILS);
                         },
-                        () -> ServletUtil.error(resp, HttpServletResponse.SC_NOT_FOUND, "Tube not found: " + tubeId));
+                        () -> ServletUtils.error(resp, HttpServletResponse.SC_NOT_FOUND, "Tube not found: " + tubeId));
     }
 }

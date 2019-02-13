@@ -4,7 +4,7 @@ import metube.domain.models.binding.user.UserLoginBindingModel;
 import metube.domain.models.view.user.UserLoggedViewModel;
 import metube.services.UserService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +27,7 @@ public class UserLoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        ServletUtil.forward(req, resp, WebConstants.JSP_USER_LOGIN);
+        ServletUtils.forward(req, resp, WebConstants.JSP_USER_LOGIN);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class UserLoginServlet extends HttpServlet {
                             HttpSession session = req.getSession(true);
                             session.setAttribute(WebConstants.ATTRIBUTE_USERNAME, user.getUsername());
                             session.setAttribute(WebConstants.ATTRIBUTE_USER_ID, user.getId());
-                            ServletUtil.redirect(resp, WebConstants.URL_USER_HOME);
+                            ServletUtils.redirect(resp, WebConstants.URL_USER_HOME);
                         },
-                        () -> ServletUtil.error(resp, HttpServletResponse.SC_BAD_REQUEST, "Invalid credentials!"));
+                        () -> ServletUtils.error(resp, HttpServletResponse.SC_BAD_REQUEST, "Invalid credentials!"));
     }
 }

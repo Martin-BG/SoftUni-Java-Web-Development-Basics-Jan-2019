@@ -3,7 +3,7 @@ package metube.web.servlets.user;
 import metube.domain.models.binding.user.UserRegisterBindingModel;
 import metube.services.UserService;
 import metube.web.WebConstants;
-import metube.web.servlets.ServletUtil;
+import metube.web.servlets.ServletUtils;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class UserRegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        ServletUtil.forward(req, resp, WebConstants.JSP_USER_REGISTER);
+        ServletUtils.forward(req, resp, WebConstants.JSP_USER_REGISTER);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class UserRegisterServlet extends HttpServlet {
         UserRegisterBindingModel model = (UserRegisterBindingModel) req.getAttribute(WebConstants.ATTRIBUTE_MODEL);
 
         if (userService.register(model)) {
-            ServletUtil.redirect(resp, WebConstants.URL_USER_LOGIN);
+            ServletUtils.redirect(resp, WebConstants.URL_USER_LOGIN);
         } else {
-            ServletUtil.error(resp, HttpServletResponse.SC_BAD_REQUEST, "User registration failed");
+            ServletUtils.error(resp, HttpServletResponse.SC_BAD_REQUEST, "User registration failed");
         }
     }
 }

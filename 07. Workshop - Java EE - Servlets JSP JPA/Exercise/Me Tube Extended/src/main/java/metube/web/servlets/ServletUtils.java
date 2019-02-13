@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class ServletUtil {
+public final class ServletUtils {
 
-    private static final Logger LOG = Logger.getLogger(ServletUtil.class.getName());
+    private static final Logger LOG = Logger.getLogger(ServletUtils.class.getName());
 
-    private ServletUtil() {
+    private ServletUtils() {
     }
 
     public static void forward(HttpServletRequest req, HttpServletResponse resp, String jsp) {

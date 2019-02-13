@@ -21,9 +21,13 @@ public class TubeUploadFilter implements Filter {
         if (WebConstants.HTTP_METHOD_POST.equalsIgnoreCase(req.getMethod())) {
             TubeUploadBindingModel model = FilterUtils
                     .getBindingModelFromParams(request, TubeUploadBindingModel.class);
+
+            model.setYoutubeId(FilterUtils.extractYoutubeId(model.getYoutubeId()));
+
             model.setUploader(new UserIdBindingModel());
             String userId = (String) req.getSession().getAttribute(WebConstants.ATTRIBUTE_USER_ID);
             model.getUploader().setId(userId);
+
             req.setAttribute(WebConstants.ATTRIBUTE_MODEL, model);
         }
 

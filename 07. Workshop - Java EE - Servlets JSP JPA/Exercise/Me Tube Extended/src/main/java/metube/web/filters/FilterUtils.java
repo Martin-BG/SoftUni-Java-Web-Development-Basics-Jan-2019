@@ -10,8 +10,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 final class FilterUtils {
+
+    private static final String YOUTUBE_VIDEO_ID_REGEX = "(?<=[/=]|^)(?<id>[a-zA-Z0-9-]{11})(?=$|[&?])";
+    private static final Pattern YOUTUBE_VIDEO_ID_PATTERN = Pattern.compile(YOUTUBE_VIDEO_ID_REGEX);
 
     private FilterUtils() {
     }
@@ -22,6 +27,16 @@ final class FilterUtils {
 
     static boolean isAuthenticated(HttpSession session) {
         return session != null && session.getAttribute(WebConstants.ATTRIBUTE_USERNAME) != null;
+    }
+
+    static String extractYoutubeId(String youtubeLink) {
+        if (youtubeLink != null) {
+            Matcher matcher = YOUTUBE_VIDEO_ID_PATTERN.matcher(youtubeLink);
+            if (matcher.find()) {
+                return matcher.group("id");
+            }
+        }
+        return null;
     }
 
     static Optional<String> getQueryParam(String queryString, String paramName) {

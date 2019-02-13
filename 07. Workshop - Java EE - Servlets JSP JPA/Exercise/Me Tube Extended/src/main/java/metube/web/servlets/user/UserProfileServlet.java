@@ -3,14 +3,13 @@ package metube.web.servlets.user;
 import metube.domain.models.view.user.UserProfileViewModel;
 import metube.services.UserService;
 import metube.web.WebConstants;
+import metube.web.servlets.ServletUtil;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @WebServlet(WebConstants.URL_USER_PROFILE)
 public class UserProfileServlet extends HttpServlet {
@@ -25,20 +24,16 @@ public class UserProfileServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String[] path = {WebConstants.JSP_USER_LOGIN};
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String username = (String) req.getSession().getAttribute(WebConstants.ATTRIBUTE_USERNAME);
 
-        if (username != null) {
-            userService
-                    .findByUsername(username, UserProfileViewModel.class)
-                    .ifPresent(u -> {
-                        req.setAttribute(WebConstants.ATTRIBUTE_MODEL, u);
-                        path[0] = WebConstants.JSP_USER_PROFILE;
-                    });
-        }
-
-        req.getRequestDispatcher(path[0]).forward(req, resp);
+        userService
+                .findByUsername(username, UserProfileViewModel.class)
+                .ifPresentOrElse(
+                        user -> {
+                            req.setAttribute(WebConstants.ATTRIBUTE_MODEL, user);
+                            ServletUtil.forward(req, resp, WebConstants.JSP_USER_PROFILE);
+                        },
+                        () -> ServletUtil.error(resp, HttpServletResponse.SC_UNAUTHORIZED, "Please login first!"));
     }
 }

@@ -15,12 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@NamedQueries({
-        @NamedQuery(name = "User.findByUsername",
-                query = "SELECT u FROM User u WHERE u.username = :username"),
-        @NamedQuery(name = "User.findByUsernameEager",
-                query = "SELECT u FROM User u LEFT JOIN FETCH u.tubes AS t WHERE u.username = :username"),
-})
+@NamedQuery(name = "User.findByUsername",
+        query = "SELECT u FROM User u WHERE u.username = :username")
+@NamedQuery(name = "User.findByUsernameEager",
+        query = "SELECT u FROM User u LEFT JOIN FETCH u.tubes AS t WHERE u.username = :username")
 public class User extends BaseEntity {
 
     @NotNull

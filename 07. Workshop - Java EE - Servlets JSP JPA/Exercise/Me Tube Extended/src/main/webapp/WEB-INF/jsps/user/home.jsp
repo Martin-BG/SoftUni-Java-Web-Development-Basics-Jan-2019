@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row text-center">
                 <% for (TubeThumbnailViewModel tube : tubes) {%>
-                <div class="m-2 justify-content-center .width-30p">
+                <div class="m-2 justify-content-center width-30p">
                     <div>
                         <a href="<%=WebConstants.URL_TUBE_DETAILS%>/<%=tube.getId()%>">
                             <img class="img-fluid img-thumbnail"

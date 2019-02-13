@@ -26,6 +26,10 @@ public class PasswordHasher {
     private Verifier verifier;
     private ByteArray secret;
 
+    public PasswordHasher() {
+        // Empty constructor and comment into it to please SonarLint's complains on not initialized private fields :)
+    }
+
     @PostConstruct
     private void init() {
         int threads = Runtime.getRuntime().availableProcessors() - 1;

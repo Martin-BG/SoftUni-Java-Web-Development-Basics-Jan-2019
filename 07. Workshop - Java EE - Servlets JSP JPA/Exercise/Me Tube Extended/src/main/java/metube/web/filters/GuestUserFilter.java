@@ -22,7 +22,7 @@ public class GuestUserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        if (req.getSession().getAttribute(WebConstants.ATTRIBUTE_USERNAME) == null) {
+        if (FilterUtils.isGuestUser(req.getSession())) {
             resp.sendRedirect(WebConstants.URL_USER_LOGIN);
             return;
         }

@@ -21,7 +21,7 @@ public class AuthenticatedUserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        if (req.getSession().getAttribute(WebConstants.ATTRIBUTE_USERNAME) != null) {
+        if (FilterUtils.isAuthenticated(req.getSession())) {
             resp.sendRedirect(WebConstants.URL_USER_HOME);
             return;
         }

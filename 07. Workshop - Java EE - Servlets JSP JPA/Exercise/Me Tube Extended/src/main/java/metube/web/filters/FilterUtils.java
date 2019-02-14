@@ -10,11 +10,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 final class FilterUtils {
 
+    private static final Logger LOG = Logger.getLogger(FilterUtils.class.getName());
     private static final String YOUTUBE_VIDEO_ID_REGEX = "(?<=[/=]|^)(?<id>[a-zA-Z0-9-]{11})(?=$|[&?])";
     private static final Pattern YOUTUBE_VIDEO_ID_PATTERN = Pattern.compile(YOUTUBE_VIDEO_ID_REGEX);
 
@@ -70,7 +73,8 @@ final class FilterUtils {
         } catch (IllegalAccessException | InstantiationException |
                 NoSuchMethodException | InvocationTargetException |
                 UnsupportedEncodingException e) {
-            throw new IllegalArgumentException(e);
+            LOG.log(Level.SEVERE, "Failed to construct model from params: " + clazz.getName(), e);
+            return null;
         }
     }
 

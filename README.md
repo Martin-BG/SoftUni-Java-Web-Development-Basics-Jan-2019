@@ -42,3 +42,7 @@ https://softuni.bg/trainings/2252/java-web-development-basics-january-2019
   * CRUD repository, extensive use of Generics for type safety, Optional<>, logging
   * Exported common service logic to base class, Generics
   * Use of [Jargon2](https://github.com/kosprov/jargon2-api) for password hashing
+  
+* [Employee Register](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/08.%20Java%20EE%20-%20JavaServer%20Faces/Exercise/Employee%20Register) - Simple single page web application with *JS*F and Hibernate, deployed on TomEE.
+  * Same setup as in [Me Tube Extended](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/07.%20Workshop%20-%20Java%20EE%20-%20Servlets%20JSP%20JPA/Exercise/Me%20Tube%20Extended)
+  * [PrimeFaces](https://www.primefaces.org/)

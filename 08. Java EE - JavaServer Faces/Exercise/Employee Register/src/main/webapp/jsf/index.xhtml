@@ -32,50 +32,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="row">
-                <th scope="row" class="col-md-1">1</th>
-                <td class="col-md-2">Mark</td>
-                <td class="col-md-2">Otto</td>
-                <td class="col-md-3">Computer Specialist</td>
-                <td class="col-md-1">$5500.00</td>
-                <td class="col-md-1">29</td>
-                <td class="col-md-2">
-                    <button class="btn btn-danger">Remove</button>
-                </td>
-            </tr>
-            <tr class="row">
-                <th scope="row" class="col-md-1">2</th>
-                <td class="col-md-2">Donald</td>
-                <td class="col-md-2">Fitzgerald</td>
-                <td class="col-md-3">Marketing Manager</td>
-                <td class="col-md-1">$2500.00</td>
-                <td class="col-md-1">34</td>
-                <td class="col-md-2">
-                    <button class="btn btn-danger">Remove</button>
-                </td>
-            </tr>
-            <tr class="row">
-                <th scope="row" class="col-md-1">1</th>
-                <td class="col-md-2">Casio</td>
-                <td class="col-md-2">Florenco</td>
-                <td class="col-md-3">Graphic Designer</td>
-                <td class="col-md-1">$4000.00</td>
-                <td class="col-md-1">27</td>
-                <td class="col-md-2">
-                    <button class="btn btn-danger">Remove</button>
-                </td>
-            </tr>
-            <tr class="row">
-                <th scope="row" class="col-md-1">1</th>
-                <td class="col-md-2">Isacc</td>
-                <td class="col-md-2">Netero</td>
-                <td class="col-md-3">Tech Support</td>
-                <td class="col-md-1">$4900.00</td>
-                <td class="col-md-1">30</td>
-                <td class="col-md-2">
-                    <button class="btn btn-danger">Remove</button>
-                </td>
-            </tr>
+            <p:repeat value="#{employeeListBean.employees}" var="employee" varStatus="status">
+                <tr class="row">
+                    <th scope="row" class="col-md-1">#{status.index + 1}</th>
+                    <td class="col-md-2">#{employee.firstName}</td>
+                    <td class="col-md-2">#{employee.lastName}</td>
+                    <td class="col-md-3">#{employee.position}</td>
+                    <td class="col-md-1">$#{employee.salary}</td>
+                    <td class="col-md-1">#{employee.age}</td>
+                    <td class="col-md-2">
+                        <p:commandButton styleClass="btn btn-danger" value="Remove" immediate="true"
+                                         action="#{employeeRemoveBean.remove(employee.id)}"/>
+                    </td>
+                </tr>
+            </p:repeat>
             </tbody>
         </table>
         <hr class="bg-dark height-2"/>
@@ -83,38 +53,44 @@
             <div class="names-holder d-flex justify-content-between">
                 <div class="form-group w-25">
                     <h:outputLabel for="firstName" value="First Name"/>
-                    <p:inputText styleClass="form-control" id="firstName" placeholder="First Name..." required="true"/>
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.firstName}" styleClass="form-control"
+                                 id="firstName" placeholder="First Name..." required="true"/>
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="lastName" value="Last Name"/>
-                    <p:inputText styleClass="form-control" id="lastName" placeholder="Last Name..." required="true"/>
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.lastName}" styleClass="form-control"
+                                 id="lastName" placeholder="Last Name..." required="true"/>
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="position" value="Position"/>
-                    <p:inputText styleClass="form-control" id="position" placeholder="Position..." required="true"/>
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.position}" styleClass="form-control"
+                                 id="position" placeholder="Position..." required="true"/>
                 </div>
             </div>
             <div class="numbers-holders d-flex justify-content-between">
                 <div class="form-group w-25">
                     <h:outputLabel for="salary" value="Salary"/>
-                    <p:inputNumber type="number" styleClass="form-control input-number" id="salary"
-                                   placeholder="Salry.."
-                                   required="true" minValue="0"/>
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.salary}" type="number"
+                                 styleClass="form-control" id="salary"
+                                 placeholder="Salry.."
+                                 required="true"/>
                 </div>
                 <div class="form-submit-holder d-flex justify-content-center w-25">
-                    <h:commandButton styleClass="btn btn-success mt-4 mb-3 mx-auto w-100 m-t-2rem" value="Register"/>
+                    <h:commandButton action="#{employeeRegisterBean.register}"
+                                     styleClass="btn btn-success mt-4 mb-3 mx-auto w-100 m-t-2rem" value="Register"/>
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="age" value="Age"/>
-                    <p:inputNumber type="number" styleClass="form-control input-number" id="age" placeholder="Age..."
-                                   required="true" minValue="0"/>
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.age}" type="number"
+                                 styleClass="form-control" id="age" placeholder="Age..."
+                                 required="true"/>
                 </div>
             </div>
         </h:form>
         <hr class="bg-dark height-2"/>
         <div class="d-flex justify-content-between">
-            <h5 class="w-50">Total Money Needed: $16900.00</h5>
-            <h5 class="w-50 text-right">Average Salary: $4225.00</h5>
+            <h5 class="w-50">Total Money Needed: $#{employeeListBean.totalMoneyNeeded}</h5>
+            <h5 class="w-50 text-right">Average Salary: $#{employeeListBean.averageSalary}</h5>
         </div>
         <hr class="bg-dark height-2"/>
     </div>

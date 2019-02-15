@@ -10,8 +10,8 @@
 
     <packaging>war</packaging>
 
-    <name>Me Tube Extended</name>
-    <description>JSP and Hibernate demo program</description>
+    <name>Employee Register</name>
+    <description>JSF and Hibernate demo program</description>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -83,13 +83,6 @@
             <version>${primefaces.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api --> <!--TODO-->
-        <!--<dependency>-->
-        <!--<groupId>com.sun.faces</groupId>-->
-        <!--<artifactId>jsf-api</artifactId>-->
-        <!--<version>2.2.18</version>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>

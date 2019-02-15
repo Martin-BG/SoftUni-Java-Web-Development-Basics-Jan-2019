@@ -24,7 +24,7 @@ public class EmployeeRegisterBean {
     }
 
     public void register() throws IOException {
-        this.service.saveEmployee(bindingModel);
+        service.saveEmployee(bindingModel);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect("/");
     }

@@ -30,7 +30,7 @@ public class EmployeeListBean {
 
     private void init() {
         if (!employees.isEmpty()) {
-            totalMoneyNeeded = this.employees.stream()
+            totalMoneyNeeded = employees.stream()
                     .map(EmployeeViewModel::getSalary)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             averageSalary = totalMoneyNeeded

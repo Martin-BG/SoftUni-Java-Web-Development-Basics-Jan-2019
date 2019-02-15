@@ -4,6 +4,7 @@ import metube.domain.entities.Identifiable;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
@@ -64,6 +65,21 @@ abstract class BaseCrudRepository<E extends Identifiable<I>, I> implements CrudR
             return true;
         } catch (IllegalArgumentException | TransactionRequiredException e) {
             logger().log(Level.SEVERE, "Entity remove failed: " + entity, e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(I id) {
+        try {
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+            CriteriaDelete<E> delete = cb.createCriteriaDelete(entityClass);
+            Root<E> e = delete.from(entityClass);
+            delete.where(cb.equal(e.get("id"), id));
+            int deleted = entityManager.createQuery(delete).executeUpdate();
+            return deleted > 0;
+        } catch (IllegalStateException | IllegalArgumentException | PersistenceException e) {
+            logger().log(Level.SEVERE, "Failed to delete entity by id " + id, e);
             return false;
         }
     }

@@ -15,5 +15,7 @@ public interface CrudRepository<E extends Identifiable<I>, I> {
 
     boolean delete(E entity);
 
+    boolean delete(I id);
+
     List<E> all();
 }

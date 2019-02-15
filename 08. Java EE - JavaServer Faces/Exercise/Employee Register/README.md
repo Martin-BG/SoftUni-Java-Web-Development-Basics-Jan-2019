@@ -74,3 +74,17 @@ Same as in [Me Tube Extended](https://github.com/Martin-BG/SoftUni-Java-Web-Deve
 * Lombok - deal with code noise in POJOs
 * Service methods used for retrieving data accept desired return data type (ViewModel). 
 This simplifies Servlets and allows for method reuse with various view models.
+* Remove stylization from [PrimeFaces](https://www.primefaces.org/) components - [web.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/08.%20Java%20EE%20-%20JavaServer%20Faces/Exercise/Employee%20Register/src/main/webapp/WEB-INF/web.xml):
+
+```xml
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>none</param-value>
+    </context-param>
+```
+* Prevent automatic validation on [PrimeFaces](https://www.primefaces.org/) commandButton click: immediate="true"
+
+```xml
+    <p:commandButton styleClass="btn btn-danger" value="Remove" immediate="true"
+                     action="#{employeeRemoveBean.remove(employee.id)}"/>
+```

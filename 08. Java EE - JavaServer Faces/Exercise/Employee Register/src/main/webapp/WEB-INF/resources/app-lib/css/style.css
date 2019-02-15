@@ -23,19 +23,3 @@ input:focus, input:hover {
     height: 2px;
 }
 
-/* // TODO
-.error {
-    box-sizing: border-box;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    z-index: 0;
-    font-size: 18px;
-}
-
-img.error {
-    margin-top: 4rem;
-    width: 50%;
-    min-width: 400px;
-}
-*/

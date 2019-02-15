@@ -6,10 +6,6 @@
             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         version="4.0">
 
-    <!--<error-page>--> <!--// TODO-->
-    <!--<location>/WEB-INF/jsps/error/error.jsp</location>-->
-    <!--</error-page>-->
-
     <context-param>
         <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
         <param-value>WEB-INF/resources</param-value>

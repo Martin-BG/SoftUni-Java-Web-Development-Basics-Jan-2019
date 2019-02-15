@@ -1,4 +1,4 @@
-# Me Tube Extended
+# Employee Register
 Simple single page web application with JSF and Hibernate, deployed on TomEE.
 ___
 ## Setup

@@ -14,6 +14,7 @@ Tested on Ubuntu 18.0.4 and Windows 7 x64
 * [ModelMapper](http://modelmapper.org/)
 * [Lombok](https://projectlombok.org/)
 * [PrimeFaces](https://www.primefaces.org/)
+
 System and IDE should be configured to use:
 * [Java **11.0.2**](https://docs.oracle.com/cd/E19509-01/820-3208/inst_cli_jdk_javahome_t/) - [IntelliJ](https://stackoverflow.com/questions/18987228/how-do-i-change-the-intellij-idea-default-jdk)
 * [Maven **3.6.0**](http://maven.apache.org/install.html) - [IntelliJ](https://www.jetbrains.com/help/idea/maven-support.html#create_new_maven_project)

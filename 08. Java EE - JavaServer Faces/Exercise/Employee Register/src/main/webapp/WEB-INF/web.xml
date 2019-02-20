@@ -17,37 +17,36 @@
     </context-param>
 
     <security-constraint>
+        <display-name>No access to /resources folder</display-name>
         <web-resource-collection>
             <web-resource-name>The /resources folder</web-resource-name>
             <url-pattern>/resources/*</url-pattern>
         </web-resource-collection>
     </security-constraint>
 
-    <welcome-file-list>
-        <welcome-file>faces/jsf/index.xhtml</welcome-file>
-    </welcome-file-list>
+    <security-constraint>
+        <display-name>No access to Facelets source</display-name>
+        <web-resource-collection>
+            <web-resource-name>XHTML</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
 
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
+    <!-- Remove from Production -->
+    <context-param>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
 
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.faces</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
 
+    <context-param>
+        <param-name>javax.faces.validator.ENABLE_VALIDATE_WHOLE_BEAN</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- Remove from Production -->
 </web-app>

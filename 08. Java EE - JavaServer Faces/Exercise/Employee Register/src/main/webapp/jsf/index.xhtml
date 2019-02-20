@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
@@ -54,26 +55,26 @@
                 <div class="form-group w-25">
                     <h:outputLabel for="firstName" value="First Name"/>
                     <p:inputText value="#{employeeRegisterBean.bindingModel.firstName}" styleClass="form-control"
-                                 id="firstName" placeholder="First Name..." required="true"/>
+                                 id="firstName" placeholder="First Name..." pt:required="true"/>
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="lastName" value="Last Name"/>
                     <p:inputText value="#{employeeRegisterBean.bindingModel.lastName}" styleClass="form-control"
-                                 id="lastName" placeholder="Last Name..." required="true"/>
+                                 id="lastName" placeholder="Last Name..." pt:required="true"/>
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="position" value="Position"/>
                     <p:inputText value="#{employeeRegisterBean.bindingModel.position}" styleClass="form-control"
-                                 id="position" placeholder="Position..." required="true"/>
+                                 id="position" placeholder="Position..." pt:required="true"/>
                 </div>
             </div>
             <div class="numbers-holders d-flex justify-content-between">
                 <div class="form-group w-25">
                     <h:outputLabel for="salary" value="Salary"/>
-                    <p:inputText value="#{employeeRegisterBean.bindingModel.salary}" type="number"
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.salary}" pt:type="number"
                                  styleClass="form-control" id="salary"
                                  placeholder="Salry.."
-                                 required="true"/>
+                                 pt:required="true" pt:step="0.01" pt:min="0.0"/>
                 </div>
                 <div class="form-submit-holder d-flex justify-content-center w-25">
                     <h:commandButton action="#{employeeRegisterBean.register}"
@@ -81,9 +82,9 @@
                 </div>
                 <div class="form-group w-25">
                     <h:outputLabel for="age" value="Age"/>
-                    <p:inputText value="#{employeeRegisterBean.bindingModel.age}" type="number"
+                    <p:inputText value="#{employeeRegisterBean.bindingModel.age}" pt:type="number"
                                  styleClass="form-control" id="age" placeholder="Age..."
-                                 required="true"/>
+                                 pt:required="true" pt:min="0"/>
                 </div>
             </div>
         </h:form>

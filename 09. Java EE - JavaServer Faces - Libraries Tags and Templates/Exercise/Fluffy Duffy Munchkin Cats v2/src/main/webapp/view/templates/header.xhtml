@@ -7,7 +7,7 @@
 
 <ui:component>
     <nav class="navbar navbar-expand-lg navbar-background">
-        <h:link outcome="/" class="navbar-brand h4" value="FDMC"/>
+        <h:link outcome="index" class="navbar-brand h4" value="FDMC"/>
         <h:form>
             <h:commandButton class="navbar-toggler" p:type="button" p:data-toggle="collapse"
                              p:data-target="#navbarSupportedContent"
@@ -19,10 +19,10 @@
         <div class="collapse navbar-collapse justify-content-end row" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active col-md-6">
-                    <h:link outcome="/create" style="white-space: nowrap;" class="nav-link h5" value="Create Cat"/>
+                    <h:link outcome="create" style="white-space: nowrap;" class="nav-link h5" value="Create Cat"/>
                 </li>
                 <li class="nav-item active col-md-6">
-                    <h:link outcome="/all" class="nav-link h5" value="All Cats"/>
+                    <h:link outcome="all" class="nav-link h5" value="All Cats"/>
                 </li>
             </ul>
         </div>

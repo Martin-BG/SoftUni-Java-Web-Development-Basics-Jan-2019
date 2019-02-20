@@ -27,6 +27,9 @@ public class RewriteServletConfig extends HttpConfigurationProvider {
                 .when(Direction.isInbound().and(Path.matches("/{path}")))
                 .perform(Log.message(Logger.Level.INFO, "Client requested path: {path}"))
                 .where("path").matches(".*")
-                .addRule(Join.path("/").to("/faces/jsf/index.xhtml"));
+                .addRule(Join.path("/").to("/faces/view/index.xhtml"))
+                .addRule(Join.path("/index").to("/faces/view/index.xhtml"))
+                .addRule(Join.path("/create").to("/faces/view/create.xhtml"))
+                .addRule(Join.path("/all").to("/faces/view/all.xhtml"));
     }
 }

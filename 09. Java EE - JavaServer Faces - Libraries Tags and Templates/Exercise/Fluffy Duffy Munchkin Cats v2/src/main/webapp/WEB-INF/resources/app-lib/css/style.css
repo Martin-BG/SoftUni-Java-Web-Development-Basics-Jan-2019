@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url("https://res.cloudinary.com/rado-cloud/image/upload/v1546187828/cats-animated.jpg") no-repeat center center fixed;
+    background: url("#{resource['app-lib:images/cats-animated.jpg']}") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

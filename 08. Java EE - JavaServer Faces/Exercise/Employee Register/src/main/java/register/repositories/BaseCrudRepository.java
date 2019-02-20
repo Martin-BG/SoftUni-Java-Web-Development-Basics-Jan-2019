@@ -77,7 +77,7 @@ abstract class BaseCrudRepository<E extends Identifiable<I>, I> implements CrudR
     @Override
     public boolean delete(E entity) {
         try {
-            entityManager.remove(entity);
+            entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
             return true;
         } catch (IllegalArgumentException | TransactionRequiredException e) {
             logger().log(Level.SEVERE, "Entity remove failed: " + entity, e);

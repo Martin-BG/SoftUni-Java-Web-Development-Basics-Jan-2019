@@ -1,0 +1,30 @@
+.navbar-background {
+    background-color: #552190;
+    color: #AAA8CF;
+}
+
+body {
+    background: url("https://res.cloudinary.com/rado-cloud/image/upload/v1546187828/cats-animated.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.jumbotron-background {
+    background-color: 	#ED8B16;
+    color: #552190;
+}
+
+.hr-background {
+    background-color: #552190;
+    height: 2px;
+}
+
+.footer-background {
+    color: #ED8B16;
+}
+
+.error-message {
+    color: red;
+}

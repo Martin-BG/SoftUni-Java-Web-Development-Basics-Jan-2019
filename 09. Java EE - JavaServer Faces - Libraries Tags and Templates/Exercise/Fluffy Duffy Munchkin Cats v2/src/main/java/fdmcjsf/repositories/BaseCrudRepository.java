@@ -17,7 +17,7 @@ abstract class BaseCrudRepository<E extends Identifiable<I>, I> implements CrudR
 
     private final Class<E> entityClass;
 
-    @PersistenceContext(unitName = "employeeRegister")
+    @PersistenceContext(unitName = "jtaPersistenceUnit")
     protected EntityManager entityManager;
 
     protected BaseCrudRepository() {

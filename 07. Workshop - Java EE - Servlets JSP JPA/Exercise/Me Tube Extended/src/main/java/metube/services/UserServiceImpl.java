@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class UserServiceImpl extends BaseService<User, String, UserRepository> implements UserService {
 
-    private static final Logger LOG = Logger.getLogger(TubeServiceImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(UserServiceImpl.class.getName());
 
     private final PasswordHasher passwordHasher;
 

@@ -33,3 +33,7 @@ body {
 .padding-reset {
     padding: .375rem .75rem !important;
 }
+
+.input-field-width {
+    width: 227px;
+}

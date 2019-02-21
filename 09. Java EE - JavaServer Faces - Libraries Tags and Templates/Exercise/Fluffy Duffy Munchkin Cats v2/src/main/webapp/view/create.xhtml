@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <div class="jumbotron justify-content-center jumbotron-background">
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h1>Create Cat!</h1>
+                </div>
+            </div>
+            <hr class="hr-background"/>
+            <h:form>
+                <div class="row">
+                    <div class="col-md-12  d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="name" value="Name"/>
+                            <h:inputText id="name" value="#{catCreate.model.name}"
+                                         styleClass="form-control"
+                                         required="true" requiredMessage="Name is required" label="Name">
+                                <f:validateLength minimum="2" maximum="10"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <h:message id="m1" for="name" styleClass="error-message"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="breed" value="Breed"/>
+                            <h:inputText id="breed" value="#{catCreate.model.breed}" styleClass="form-control"
+                                         required="true" requiredMessage="Breed is required" label="Breed">
+                                <f:validateLength minimum="5" maximum="20"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <h:message id="m2" for="breed" styleClass="error-message"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="color" value="Color"/>
+                            <h:inputText id="color" value="#{catCreate.model.color}" styleClass="form-control"
+                                         required="true" requiredMessage="Color is required">
+                                <f:validateLength minimum="3" maximum="15"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <h:message id="m3" for="color" styleClass="error-message"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="age" value="Age"/>
+                            <h:inputText id="age" value="#{catCreate.model.age}" styleClass="form-control"
+                                         required="true" validatorMessage="Age must be an integer between 1 and 31."
+                                         label="Age" pt:type="number" pt:step="1">
+                                <f:validateLongRange minimum="1" maximum="31" for="age"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <h:message id="m4" for="age" styleClass="error-message"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="price" value="Price"/>
+                            <p:inputText id="price" value="#{catCreate.model.price}"
+                                         styleClass="form-control padding-reset"
+                                         required="true" validatorMessage="Price value, must be at least 0.01"
+                                         label="Price" pt:type="number" pt:step="0.01">
+                                <f:validateDoubleRange minimum="0.01" for="price"/>
+                            </p:inputText>
+                        </div>
+                    </div>
+                    <h:message id="m5" for="price" styleClass="error-message"/>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <h:outputLabel styleClass="mr-4" for="gender" value="Gender"/>
+                        <h:selectOneRadio value="#{catCreate.model.gender}" id="gender" required="true"
+                                          requiredMessage="Gender is required">
+                            <f:selectItem itemValue="Male" itemLabel="Male"/>
+                            <f:selectItem itemValue="Female" itemLabel="Female"/>
+                        </h:selectOneRadio>
+                    </div>
+                    <h:message id="m6" for="gender" styleClass="error-message"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-check">
+                            <h:selectBooleanCheckbox id="hasPassport" value="#{catCreate.model.hasPassport}"
+                                                     styleClass="form-check-input"/>
+                            <h:outputLabel styleClass="form-check-label mr-4" for="hasPassport" value="Has Passport"/>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="addedOn" value="Added On"/><br/>
+                            <p:inputText pt:type="date" id="addedOn" required="true"
+                                         requiredMessage="Added On Date is required" value="#{catCreate.date}"/>
+                        </div>
+                    </div>
+                    <h:message id="m7" for="addedOn" styleClass="error-message"/>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <h:commandButton action="#{catCreate.create}" styleClass="btn btn-success" value="Create cat"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

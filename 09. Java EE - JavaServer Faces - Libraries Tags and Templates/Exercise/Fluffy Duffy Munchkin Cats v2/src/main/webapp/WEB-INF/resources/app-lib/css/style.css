@@ -29,3 +29,7 @@ body {
     color: red;
     margin: 0 auto;
 }
+
+.padding-reset {
+    padding: .375rem .75rem !important;
+}

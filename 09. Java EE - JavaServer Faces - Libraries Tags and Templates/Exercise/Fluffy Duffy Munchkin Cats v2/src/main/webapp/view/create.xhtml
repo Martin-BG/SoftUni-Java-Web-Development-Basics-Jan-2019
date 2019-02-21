@@ -59,7 +59,8 @@
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="form-group">
                             <h:outputLabel for="age" value="Age"/>
-                            <h:inputText id="age" value="#{catCreate.model.age}" styleClass="form-control"
+                            <h:inputText id="age" value="#{catCreate.model.age}"
+                                         styleClass="form-control input-field-width"
                                          required="true" validatorMessage="Age must be an integer between 1 and 31."
                                          label="Age" pt:type="number" pt:step="1">
                                 <f:validateLongRange minimum="1" maximum="31" for="age"/>
@@ -108,8 +109,10 @@
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="form-group">
                             <h:outputLabel for="addedOn" value="Added On"/><br/>
-                            <p:inputText pt:type="date" id="addedOn" required="true"
-                                         requiredMessage="Added On Date is required" value="#{catCreate.date}"/>
+                            <h:inputText pt:type="date" id="addedOn" required="true"
+                                         styleClass="form-control input-field-width"
+                                         label="Added On Date" requiredMessage="Added On Date is required"
+                                         converter="dateConverter" value="#{catCreate.model.addedOn}"/>
                         </div>
                     </div>
                     <h:message id="m7" for="addedOn" styleClass="error-message"/>

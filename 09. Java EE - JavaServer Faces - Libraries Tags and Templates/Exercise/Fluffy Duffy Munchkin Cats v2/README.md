@@ -168,3 +168,9 @@ public class DateConverter extends DateTimeConverter {
 $('#table').dataTable();
 ```
 * Simple JSF [templating](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/09.%20Java%20EE%20-%20JavaServer%20Faces%20-%20Libraries%20Tags%20and%20Templates/Exercise/Fluffy%20Duffy%20Munchkin%20Cats%20v2/src/main/webapp/view/templates/base-layout.xhtml)
+* PrimeFaces calendar example (addedOn is of type Date):
+```xml
+   <p:calendar for="catAddedOnInput" pattern="yyyy/MM/dd"
+       value="#{catCreateBean.createCatBindingModel.addedOn}">Added On
+    </p:calendar>
+```

@@ -2,7 +2,7 @@
 <resources>
     <Resource id="jtaManaged" type="DataSource">
         JdbcDriver com.mysql.cj.jdbc.Driver
-        JdbcUrl jdbc:mysql://localhost:3306/sboj_bg_db?useSSL=false&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC
+        JdbcUrl jdbc:mysql://localhost:3306/sboj_bg_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC
         UserName root
         Password root
         JtaManaged true

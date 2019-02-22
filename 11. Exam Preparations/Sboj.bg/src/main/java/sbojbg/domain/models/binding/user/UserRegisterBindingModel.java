@@ -6,6 +6,7 @@ import lombok.Setter;
 import sbojbg.domain.entities.User;
 import sbojbg.domain.models.binding.Bindable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,6 +28,7 @@ public class UserRegisterBindingModel implements Bindable<User> {
     private String confirmPassword;
 
     @NotNull
+    @Email
     @Size(min = 1, max = 64)
     private String email;
 }

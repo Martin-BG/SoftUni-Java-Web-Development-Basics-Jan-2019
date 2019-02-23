@@ -13,20 +13,26 @@ public enum Sector {
     DOMESTIC("Domestic"),
     SECURITY("Security");
 
-    private static final Map<String, Sector> TYPE_MAP = Stream.of(Sector.values())
-            .collect(Collectors.toUnmodifiableMap(Enum::name, type -> type));
+    private static final Map<String, Sector> LABEL_TO_SECTOR_MAP = Stream.of(Sector.values())
+            .collect(Collectors.toUnmodifiableMap(Sector::getLabel, sector -> sector));
 
-    private final String name;
+    private final String label;
+    private final String imageFileName;
 
-    Sector(String name) {
-        this.name = name;
+    Sector(String label) {
+        this.label = label;
+        imageFileName = name().toLowerCase(Locale.ENGLISH) + ".jpg";
     }
 
-    public static Sector fromName(String name) {
-        return name == null ? null : TYPE_MAP.get(name.toUpperCase(Locale.ENGLISH));
+    public static Sector fromLabel(String label) {
+        return label == null ? null : LABEL_TO_SECTOR_MAP.get(label.toUpperCase(Locale.ENGLISH));
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
     }
 }

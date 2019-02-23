@@ -7,11 +7,11 @@ import javax.persistence.Converter;
 public class SectorConverter implements AttributeConverter<Sector, String> {
     @Override
     public String convertToDatabaseColumn(Sector sector) {
-        return sector == null ? null : sector.getName();
+        return sector == null ? null : sector.getLabel();
     }
 
     @Override
-    public Sector convertToEntityAttribute(String name) {
-        return Sector.fromName(name);
+    public Sector convertToEntityAttribute(String label) {
+        return Sector.fromLabel(label);
     }
 }

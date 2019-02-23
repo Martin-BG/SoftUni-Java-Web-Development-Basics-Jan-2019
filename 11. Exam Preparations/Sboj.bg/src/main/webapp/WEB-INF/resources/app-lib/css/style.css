@@ -1,11 +1,19 @@
 .bg-sboj {
-	background-color: #606060;
+    background-color: #606060;
 }
 
 .w-15 {
-	width: 15%;
+    width: 15%;
+}
+
+.min-w-300 {
+    min-width: 300px;
+}
+
+.min-w-360 {
+    min-width: 360px;
 }
 
 textarea {
-	resize: none;
+    resize: none;
 }

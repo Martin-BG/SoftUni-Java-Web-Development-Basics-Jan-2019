@@ -19,7 +19,7 @@ public class JobDeleteBacking extends BaseBackingBean {
     @Inject
     private HttpServletRequest request;
 
-    private JobApplicationViewModel model;
+    private JobApplicationViewModel model = new JobApplicationViewModel();
 
     @PostConstruct
     public void init() {

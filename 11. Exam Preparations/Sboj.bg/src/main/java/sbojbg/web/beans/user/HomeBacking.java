@@ -16,7 +16,7 @@ public class HomeBacking extends BaseBackingBean {
     @Inject
     private JobApplicationService service;
 
-    private List<JobApplicationViewModel> jobs;
+    private List<JobApplicationViewModel> jobs = List.of();
 
     @PostConstruct
     private void init() {

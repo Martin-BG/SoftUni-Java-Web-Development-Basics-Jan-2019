@@ -45,6 +45,9 @@
         <primefaces.version> <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
             6.2
         </primefaces.version>
+        <omnifaces.version> <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
+            3.2
+        </omnifaces.version>
         <rewrite-servlet.version> <!-- https://mvnrepository.com/artifact/org.ocpsoft.rewrite/rewrite-servlet -->
             3.4.2.Final
         </rewrite-servlet.version>
@@ -87,6 +90,12 @@
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>${omnifaces.version}</version>
         </dependency>
 
         <dependency>

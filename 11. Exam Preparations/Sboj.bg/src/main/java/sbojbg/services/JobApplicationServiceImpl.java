@@ -2,6 +2,7 @@ package sbojbg.services;
 
 import org.modelmapper.ModelMapper;
 import sbojbg.domain.entities.JobApplication;
+import sbojbg.domain.models.binding.jobapp.JobApplicationAddBindingModel;
 import sbojbg.repositories.JobApplicationRepository;
 
 import javax.inject.Inject;
@@ -25,4 +26,8 @@ public class JobApplicationServiceImpl extends BaseService<JobApplication, Strin
         return LOG;
     }
 
+    @Override
+    public boolean add(JobApplicationAddBindingModel model) {
+        return create(model);
+    }
 }

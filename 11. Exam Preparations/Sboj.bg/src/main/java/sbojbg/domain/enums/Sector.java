@@ -25,7 +25,7 @@ public enum Sector {
     }
 
     public static Sector fromLabel(String label) {
-        return label == null ? null : LABEL_TO_SECTOR_MAP.get(label.toUpperCase(Locale.ENGLISH));
+        return label == null ? null : LABEL_TO_SECTOR_MAP.get(label);
     }
 
     public String getLabel() {

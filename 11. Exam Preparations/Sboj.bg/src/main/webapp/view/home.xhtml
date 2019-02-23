@@ -13,6 +13,7 @@
                 <ui:repeat value="#{homeBacking.jobs}" var="job">
                     <div class="col-md-4 d-flex flex-column text-center p-4">
                         <h:graphicImage library="app-lib" name="images/#{job.sector.imageFileName}"
+                                        alt="#{job.sector.label}"
                                         styleClass="img-thumbnail mx-auto" width="300" height="300"/>
                         <h5 class="text-center">#{job.profession}</h5>
                         <a href="/jobs/details?id=#{job.id}" class="btn btn-info">Details</a>

@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 public class JobApplicationAddBindingModel implements Bindable<JobApplication> {
 
     @NotNull
-//    @Size(min = 1, max = 16)
     private Sector sector;
 
     @NotNull

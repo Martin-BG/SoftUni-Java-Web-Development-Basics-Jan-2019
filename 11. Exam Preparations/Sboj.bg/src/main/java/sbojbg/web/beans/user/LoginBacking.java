@@ -23,10 +23,10 @@ public class LoginBacking extends BaseBackingBean {
 
     public void login() {
         service.login(model)
-                .ifPresent(user -> {
+                .ifPresentOrElse(user -> {
                     addUserToSession(user);
                     redirect("home");
-                });
+                }, addMessageRunnable("Authentication Failed. Check username or password."));
     }
 
     public UserLoginBindingModel getModel() {

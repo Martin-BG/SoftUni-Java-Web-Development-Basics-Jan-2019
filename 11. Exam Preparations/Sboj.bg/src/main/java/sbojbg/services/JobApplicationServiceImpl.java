@@ -30,4 +30,9 @@ public class JobApplicationServiceImpl extends BaseService<JobApplication, Strin
     public boolean add(JobApplicationAddBindingModel model) {
         return create(model);
     }
+
+    @Override
+    public boolean delete(String id) {
+        return repository.delete(id);
+    }
 }

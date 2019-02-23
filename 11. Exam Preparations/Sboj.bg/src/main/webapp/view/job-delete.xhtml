@@ -1,0 +1,47 @@
+<ui:composition template="templates/base-layout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="main-content">
+        <hr class="my-3"/>
+        <h1 class="text-center">Delete Job</h1>
+        <hr class="hr-3"/>
+        <h:form class="mx-auto w-15 min-w-300">
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <label for="sector" class="h3 mb-2">Sector</label>
+                </div>
+                <input type="text" class="form-control" id="sector" name="sector"
+                       value="#{jobDeleteBacking.model.sector.label}" disabled="true"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <label for="profession" class="h3 mb-2">Profession</label>
+                </div>
+                <input type="text" class="form-control" id="profession" name="profession"
+                       value="#{jobDeleteBacking.model.profession}"
+                       disabled="true"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <label for="salary" class="h3 mb-2">Salary</label>
+                </div>
+                <input type="number" class="form-control" id="salary" name="salary"
+                       value="#{jobDeleteBacking.model.salary}" disabled="true"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <label for="description" class="h3 mb-2">Description</label>
+                </div>
+                <textarea rows="4" class="form-control" id="description" name="description"
+                          disabled="true">#{jobDeleteBacking.model.description}</textarea>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <input type="hidden" name="id" value="#{jobDeleteBacking.model.id}"/>
+                <h:commandButton action="#{jobDeleteBacking.deleteJob}" styleClass="btn btn-danger text-white"
+                                 value="Delete Job"/>
+            </div>
+        </h:form>
+        <h:messages styleClass="error-msg"/>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>

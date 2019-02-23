@@ -1,0 +1,45 @@
+<ui:composition template="templates/base-layout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+    <ui:define name="main-content">
+        <hr class="my-3"/>
+        <h1 class="text-center">Register</h1>
+        <hr class="hr-3"/>
+        <h:form styleClass="mx-auto w-15 min-w-300">
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="username" styleClass="h3 mb-2" value="Username"/>
+                </div>
+                <h:inputText value="#{registerBacking.model.username}" styleClass="form-control" id="username"
+                             required="true" label="Username"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="password" styleClass="h3 mb-2" value="Password"/>
+                </div>
+                <h:inputSecret value="#{registerBacking.model.password}" styleClass="form-control" id="password"
+                               required="true" label="Password"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="confirmPassword" styleClass="h3 mb-2" value="Confirm Password"/>
+                </div>
+                <h:inputSecret value="#{registerBacking.model.confirmPassword}" styleClass="form-control"
+                               id="confirmPassword" required="true" label="Confirm Password"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="email" styleClass="h3 mb-2" value="Email"/>
+                </div>
+                <h:inputText value="#{registerBacking.model.email}" styleClass="form-control" id="email" required="true"
+                             label="Email"/>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <h:commandButton action="#{registerBacking.register}" styleClass="btn btn-info text-white"
+                                 value="Register"/>
+            </div>
+        </h:form>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>

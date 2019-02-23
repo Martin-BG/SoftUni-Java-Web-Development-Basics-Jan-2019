@@ -12,7 +12,7 @@ import javax.persistence.NoResultException;
 import java.util.Map;
 
 @Model
-public class JobDeleteBacking extends BaseBackingBean {
+public class JobDetailsBacking extends BaseBackingBean {
 
     @Inject
     private JobApplicationService service;
@@ -29,14 +29,6 @@ public class JobDeleteBacking extends BaseBackingBean {
         model = service
                 .findById(id, JobApplicationViewModel.class)
                 .orElseThrow(() -> new NoResultException("Job Application not found"));
-    }
-
-    public void deleteJob() {
-        if (service.delete(requestMap.get("id"))) {
-            redirect("/home");
-        } else {
-            addMessage("Job Application delete failed. Please try again or contact support.");
-        }
     }
 
     public JobApplicationViewModel getModel() {

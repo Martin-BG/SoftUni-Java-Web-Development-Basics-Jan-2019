@@ -17,7 +17,7 @@ public class RegisterBacking extends BaseBackingBean {
 
     public void register() {
         if (service.register(model)) {
-            redirect("login");
+            redirect("/login");
         } else {
             addMessage("Registration failed. Please try again or contact support.");
         }

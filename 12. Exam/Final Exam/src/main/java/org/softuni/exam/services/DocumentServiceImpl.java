@@ -3,7 +3,6 @@ package org.softuni.exam.services;
 import org.modelmapper.ModelMapper;
 import org.softuni.exam.domain.entities.Document;
 import org.softuni.exam.domain.models.binding.document.DocumentScheduleBindingModel;
-import org.softuni.exam.domain.models.view.Viewable;
 import org.softuni.exam.repositories.DocumentRepository;
 
 import javax.inject.Inject;
@@ -35,12 +34,5 @@ public class DocumentServiceImpl extends BaseService<Document, String, DocumentR
     @Override
     public boolean print(String id) {
         return repository.delete(id);
-    }
-
-    @Override
-    public <M extends Viewable<Document>> Optional<M> findByTitle(String title, Class<M> clazz) {
-        return repository
-                .findByTitle(title)
-                .map(e -> mapper.map(e, clazz));
     }
 }

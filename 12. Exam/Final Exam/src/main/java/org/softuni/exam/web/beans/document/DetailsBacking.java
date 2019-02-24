@@ -1,6 +1,6 @@
 package org.softuni.exam.web.beans.document;
 
-import org.softuni.exam.domain.models.view.document.DocumentViewModel;
+import org.softuni.exam.domain.models.view.document.DocumentDetailsViewModel;
 import org.softuni.exam.services.DocumentService;
 import org.softuni.exam.web.beans.BaseBackingBean;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 @Model
 public class DetailsBacking extends BaseBackingBean {
 
-    private DocumentViewModel model = new DocumentViewModel();
+    private DocumentDetailsViewModel model = new DocumentDetailsViewModel();
 
     @Inject
     private DocumentService service;
@@ -27,11 +27,11 @@ public class DetailsBacking extends BaseBackingBean {
     public void init() {
         String id = requestMap.get("id");
         model = service
-                .findById(id, DocumentViewModel.class)
+                .findById(id, DocumentDetailsViewModel.class)
                 .orElseThrow(() -> new NoResultException("Document not found"));
     }
 
-    public DocumentViewModel getModel() {
+    public DocumentDetailsViewModel getModel() {
         return model;
     }
 }

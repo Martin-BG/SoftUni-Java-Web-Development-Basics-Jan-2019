@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.softuni</groupId>
+    <artifactId>exam</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
+    <name>EXODIA</name>
+    <description>Final Exam 24.02.2019</description>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.compiler.release>
+            11
+        </maven.compiler.release>
+        <maven.compiler.plugin.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            3.8.0
+        </maven.compiler.plugin.version>
+        <maven.war.plugin.version>  <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+            3.2.2
+        </maven.war.plugin.version>
+        <javaee.api.version> <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+            8.0
+        </javaee.api.version>
+        <mysql.connector.version> <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+            8.0.15
+        </mysql.connector.version>
+        <hibernate.core.version> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+            5.4.1.Final
+        </hibernate.core.version>
+        <modelmapper.version> <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+            2.3.2
+        </modelmapper.version>
+        <lombok.version> <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            1.18.6
+        </lombok.version>
+        <primefaces.version> <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+            6.2
+        </primefaces.version>
+        <omnifaces.version> <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
+            3.2
+        </omnifaces.version>
+        <rewrite-servlet.version> <!-- https://mvnrepository.com/artifact/org.ocpsoft.rewrite/rewrite-servlet -->
+            3.4.2.Final
+        </rewrite-servlet.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${javaee.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>${omnifaces.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-servlet</artifactId>
+            <version>${rewrite-servlet.version}</version>
+        </dependency>
+
+        <!--Password tool: https://github.com/kosprov/jargon2-api -->
+        <!-- https://mvnrepository.com/artifact/com.kosprov.jargon2/jargon2-api -->
+        <dependency>
+            <groupId>com.kosprov.jargon2</groupId>
+            <artifactId>jargon2-api</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.kosprov.jargon2/jargon2-native-ri-backend -->
+        <dependency>
+            <groupId>com.kosprov.jargon2</groupId>
+            <artifactId>jargon2-native-ri-backend</artifactId>
+            <version>1.1.1</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

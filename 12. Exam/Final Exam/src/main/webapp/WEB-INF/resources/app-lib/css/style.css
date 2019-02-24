@@ -19,7 +19,7 @@ textarea {
     margin: 8px;
     text-align: center
 }
-/*TODO - use or remove*/
+
 .min-w-300 {
     min-width: 300px;
 }
@@ -27,4 +27,3 @@ textarea {
 .min-w-360 {
     min-width: 360px;
 }
-

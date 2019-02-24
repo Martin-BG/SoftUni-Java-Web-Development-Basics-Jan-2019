@@ -1,0 +1,35 @@
+<ui:composition template="templates/base-layout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="main-content">
+        <hr class="bg-exodia hr-2"/>
+        <h1 class="text-center text-exodia">Document - #{printBacking.model.id}</h1>
+        <hr class="bg-exodia hr-2 w-75 min-w-300"/>
+        <h:form styleClass="mx-auto w-75 min-w-300">
+            <div class="form-group">
+                <div class="label-center d-flex justify-content-center">
+                    <h:outputLabel for="title" styleClass="text-exodia h3" value="Title"/>
+                </div>
+                <h:inputText value="#{printBacking.model.title}" styleClass="form-control" id="title"
+                             disabled="true" label="Title"/>
+            </div>
+            <div class="form-group">
+                <div class="label-center d-flex justify-content-center">
+                    <h:outputLabel for="content" styleClass="text-exodia h3" value="Content"/>
+                </div>
+                <h:inputTextarea rows="10" value="#{printBacking.model.content}" styleClass="form-control"
+                                 disabled="true" id="content" label="Content"/>
+            </div>
+            <hr class="bg-exodia hr-2"/>
+            <div class="button-holder d-flex justify-content-center">
+                <h:commandButton action="#{printBacking.print}" styleClass="btn bg-exodia text-white"
+                                 value="Print">
+                    <f:param name="id" value="#{printBacking.model.id}"/>
+                </h:commandButton>
+            </div>
+        </h:form>
+        <h:messages styleClass="error-msg"/>
+        <hr class="bg-exodia hr-2 mt-5"/>
+    </ui:define>
+</ui:composition>

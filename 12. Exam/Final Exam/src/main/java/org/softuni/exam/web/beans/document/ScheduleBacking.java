@@ -18,7 +18,7 @@ public class ScheduleBacking extends BaseBackingBean {
     public void schedule() {
         service.schedule(model)
                 .ifPresentOrElse(
-                        id -> redirect("/details?=" + id),
+                        id -> redirect("/details?id=" + id),
                         addMessageRunnable("Document scheduling failed. Please retry or contact support."));
     }
 

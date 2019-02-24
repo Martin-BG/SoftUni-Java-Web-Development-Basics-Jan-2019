@@ -33,9 +33,16 @@ abstract class BaseService<E extends Identifiable<I>, I, R extends CrudRepositor
     protected abstract Logger logger();
 
     protected final <M extends Bindable<E>> boolean create(M model) {
-        return validateModel(model) && repository.create(mapper.map(model, entityClass)).isPresent();
+        return createAndReturn(model).isPresent();
     }
 
+    protected final <M extends Bindable<E>> Optional<E> createAndReturn(M model) {
+        if (!validateModel(model)) {
+            return Optional.empty();
+        }
+
+        return repository.create(mapper.map(model, entityClass));
+    }
     @Override
     public final <M extends Viewable<E>> Optional<M> findById(I id, Class<M> clazz) {
         return repository

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <ui:include src="head.xhtml"/>
+</h:head>
+<h:body styleClass="min-w-360">
+    <div class="container-fluid">
+        <header>
+            <ui:include src="header.xhtml"/>
+        </header>
+
+        <main class="mt-3">
+            <ui:insert name="main-content"/>
+        </main>
+
+        <footer>
+            <ui:include src="footer.xhtml"/>
+        </footer>
+    </div>
+</h:body>
+</html>

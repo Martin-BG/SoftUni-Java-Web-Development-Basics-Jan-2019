@@ -11,6 +11,7 @@ import javax.inject.Inject;
 public class ScheduleBacking extends BaseBackingBean {
 
     private final DocumentScheduleBindingModel model = new DocumentScheduleBindingModel();
+
     @Inject
     private DocumentService service;
 

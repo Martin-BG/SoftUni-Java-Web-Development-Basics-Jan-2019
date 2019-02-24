@@ -1,0 +1,28 @@
+<ui:composition template="templates/base-layout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="main-content">
+        <hr class="bg-exodia hr-2"/>
+        <div class="print-container container-fluid">
+            <div class="row mb-4 d-flex flex-wrap">
+                <ui:repeat value="#{homeBacking.documents}" var="document">
+                    <div class="print-scheduled home-doc bg-exodia rounded">
+                        <h5 class="text-center text-white font-weight-bold py-3 mt-3">#{document.title}</h5>
+                        <hr class="bg-white"/>
+                        <div class="buttons-holder w-75 mx-auto d-flex justify-content-between">
+                            <h:form>
+                                <h:commandButton action="#{homeBacking.print(document.id)}" value="Print"
+                                                 styleClass="btn bg-exodia text-white font-weight-bold mb-3"/>
+                            </h:form>
+                            <h:form>
+                                <h:commandButton action="#{homeBacking.details(document.id)}" value="Details"
+                                                 styleClass="btn bg-exodia text-white font-weight-bold mb-3"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
+        </div>
+        <hr class="bg-exodia hr-2 mt-5"/>
+    </ui:define>
+</ui:composition>

@@ -1,5 +1,5 @@
 # EXODIA 
-[The Final Exam](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/EXODIA.pdf) (24/02/2018) - multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
+[The Final Exam](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/EXODIA.pdf) (24/02/2019) - multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
 
 ___
 ## Setup

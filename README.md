@@ -65,5 +65,5 @@ https://softuni.bg/trainings/2252/java-web-development-basics-january-2019
 
 5. Final exam (24/02/2019):
 
-* [EXODIA](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/12.%20Exam/Final%20Exam) - [Simple](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/EXODIA.pdf) - multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
+* [EXODIA](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/12.%20Exam/Final%20Exam) - [Simple](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/EXODIA.pdf) multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
   * Same setup as in [Sboj.gb](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/11.%20Exam%20Preparations/Sboj.bg)

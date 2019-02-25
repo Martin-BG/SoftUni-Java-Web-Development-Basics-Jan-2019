@@ -5,7 +5,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/faces/javax.faces.resource/*")
+@WebFilter(filterName = "cacheFilter",
+        urlPatterns = "/faces/javax.faces.resource/*")
 public class CacheFilter implements Filter {
 
     private static final long MAX_AGE = 60 * 60 * 24 * 30L; // 30 days in seconds

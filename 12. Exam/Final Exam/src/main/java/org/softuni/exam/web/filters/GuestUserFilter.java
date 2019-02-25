@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter({"/home", "/schedule", "/print", "/details", "/logout"})
+@WebFilter(filterName = "guestUserFilter",
+        urlPatterns = {"/home", "/schedule", "/print", "/details", "/logout"})
 public class GuestUserFilter implements Filter {
 
     @Override

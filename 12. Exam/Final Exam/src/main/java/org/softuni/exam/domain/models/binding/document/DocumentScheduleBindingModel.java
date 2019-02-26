@@ -18,12 +18,9 @@ public class DocumentScheduleBindingModel implements Bindable<Document> {
 
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(unique = true, nullable = false)
     private String title;
 
     @NotNull
     @Size(min = 1)
-    @Lob
-    @Column(nullable = false)
     private String content;
 }

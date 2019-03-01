@@ -14,9 +14,9 @@ import java.util.List;
 public class HomeBacking extends BaseBackingBean {
 
     @Inject
-    DocumentService service;
+    private DocumentService service;
 
-    List<DocumentShortViewModel> documents = List.of();
+    private List<DocumentShortViewModel> documents = List.of();
 
     private static String getShortTitle(String title) {
         int maxTitleLength = 15;

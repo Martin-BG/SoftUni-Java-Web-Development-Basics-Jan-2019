@@ -10,14 +10,10 @@
                         <h5 class="text-center text-white font-weight-bold py-3 mt-3">#{document.title}</h5>
                         <hr class="bg-white"/>
                         <div class="buttons-holder w-75 mx-auto d-flex justify-content-between">
-                            <h:form>
-                                <h:commandButton action="#{homeBacking.print(document.id)}" value="Print"
-                                                 styleClass="btn bg-exodia text-white font-weight-bold mb-3"/>
-                            </h:form>
-                            <h:form>
-                                <h:commandButton action="#{homeBacking.details(document.id)}" value="Details"
-                                                 styleClass="btn bg-exodia text-white font-weight-bold mb-3"/>
-                            </h:form>
+                            <a href="/print?id=#{document.id}" class="btn bg-exodia text-white font-weight-bold mb-3">
+                                Print</a>
+                            <a href="/details?id=#{document.id}" class="btn bg-exodia text-white font-weight-bold mb-3">
+                                Details</a>
                         </div>
                     </div>
                 </ui:repeat>

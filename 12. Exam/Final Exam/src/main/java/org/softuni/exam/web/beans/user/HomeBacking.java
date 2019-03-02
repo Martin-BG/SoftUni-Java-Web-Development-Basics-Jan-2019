@@ -35,12 +35,4 @@ public class HomeBacking extends BaseBackingBean {
     public List<DocumentShortViewModel> getDocuments() {
         return Collections.unmodifiableList(documents);
     }
-
-    public void details(String id) {
-        redirect("/details?id=" + id);
-    }
-
-    public void print(String id) {
-        redirect("/print?id=" + id);
-    }
 }

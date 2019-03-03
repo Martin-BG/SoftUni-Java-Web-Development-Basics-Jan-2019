@@ -17,7 +17,7 @@ public abstract class BaseBackingBean {
     protected FacesContext facesContext;
 
     @Inject
-    private Logger logger;
+    protected Logger logger;
 
     protected void redirect(String url) {
         try {

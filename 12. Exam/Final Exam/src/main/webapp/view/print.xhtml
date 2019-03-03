@@ -27,6 +27,10 @@
                                  value="Print">
                     <f:param name="id" value="#{printBacking.model.id}"/>
                 </h:commandButton>
+                <h:commandButton action="#{printBacking.downloadAsPdf}" styleClass="btn bg-exodia text-white ml-4"
+                                 value="Download as PDF">
+                    <f:param name="id" value="#{printBacking.model.id}"/>
+                </h:commandButton>
             </div>
         </h:form>
         <h:messages styleClass="error-msg"/>

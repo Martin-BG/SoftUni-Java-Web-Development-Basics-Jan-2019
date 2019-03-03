@@ -7,23 +7,28 @@ import org.softuni.exam.util.PdfMaker;
 import org.softuni.exam.web.beans.BaseBackingBean;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.annotation.RequestParameterMap;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.logging.Level;
 
-@Model
-public class PrintBacking extends BaseBackingBean {
+@Named
+@ViewScoped
+public class PrintBacking extends BaseBackingBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private DocumentDetailsViewModel model = new DocumentDetailsViewModel();
 
     @Inject
-    private DocumentService service;
+    private transient DocumentService service;
 
     @Inject
     private PdfMaker pdfMaker;

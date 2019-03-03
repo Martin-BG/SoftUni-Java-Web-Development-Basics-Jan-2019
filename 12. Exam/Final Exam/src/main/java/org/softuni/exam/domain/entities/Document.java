@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,6 +13,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Entity
 @Table(name = "documents")
+@NamedQuery(
+        name = "Document.idAndTitle",
+        query = "SELECT NEW org.softuni.exam.domain.models.view.document.DocumentShortViewModel(d.id, d.title) " +
+                "FROM Document AS d")
 public class Document extends BaseEntity {
 
     @NotNull

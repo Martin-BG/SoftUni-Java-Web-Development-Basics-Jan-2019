@@ -18,18 +18,9 @@ public class HomeBacking extends BaseBackingBean {
 
     private List<DocumentShortViewModel> documents = List.of();
 
-    private static String getShortTitle(String title) {
-        int maxTitleLength = 15;
-        if (title.length() > maxTitleLength) {
-            return title.substring(0, maxTitleLength - 3) + "...";
-        }
-        return title;
-    }
-
     @PostConstruct
     private void init() {
-        documents = service.findAll(DocumentShortViewModel.class);
-        documents.forEach(d -> d.setTitle(getShortTitle(d.getTitle())));
+        documents = service.findAllShortView();
     }
 
     public List<DocumentShortViewModel> getDocuments() {

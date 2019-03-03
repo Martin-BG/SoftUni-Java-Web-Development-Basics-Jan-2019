@@ -4,9 +4,9 @@
     <ui:define name="main-content">
         <hr class="bg-exodia hr-2"/>
         <div class="print-container container-fluid">
-            <div class="row mb-4 d-flex flex-wrap">
+            <div class="row mb-4 home-container">
                 <ui:repeat value="#{homeBacking.documents}" var="document">
-                    <div class="print-scheduled home-doc bg-exodia rounded">
+                    <div class="print-scheduled bg-exodia rounded">
                         <h5 class="text-center text-white font-weight-bold py-3 mt-3">#{document.title}</h5>
                         <hr class="bg-white"/>
                         <div class="buttons-holder w-75 mx-auto d-flex justify-content-between">

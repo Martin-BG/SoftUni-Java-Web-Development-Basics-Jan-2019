@@ -28,7 +28,9 @@ textarea {
     min-width: 360px;
 }
 
-.home-doc {
-    width: 16%;
-    margin: auto 2% 2%;
+.home-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 1.5rem 3rem;
 }

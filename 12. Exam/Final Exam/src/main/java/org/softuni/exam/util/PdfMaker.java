@@ -6,7 +6,6 @@ import com.qkyrie.markdown2pdf.internal.exceptions.Markdown2PdfLogicException;
 import com.qkyrie.markdown2pdf.internal.writing.Markdown2PdfWriter;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,9 +16,9 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class PdfMaker {
 
+    private static final Logger LOG = Logger.getLogger(PdfMaker.class.getName());
+
     private static final String PDF_LAYOUT = "<center><h1>%s</h1></center><hr>%s";
-    @Inject
-    protected Logger logger;
 
     private static void markdownToPdf(String content, OutputStream output)
             throws Markdown2PdfLogicException, ConversionException {
@@ -49,7 +48,7 @@ public class PdfMaker {
             markdownToPdf(formatted, output);
             return Optional.of(output.toByteArray());
         } catch (IOException | PdfMakerException | ConversionException | Markdown2PdfLogicException e) {
-            logger.log(Level.SEVERE, "Failed to covert data to PDF format", e);
+            LOG.log(Level.SEVERE, "Failed to covert data to PDF format", e);
             return Optional.empty();
         }
     }

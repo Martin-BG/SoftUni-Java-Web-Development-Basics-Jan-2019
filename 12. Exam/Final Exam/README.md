@@ -17,6 +17,7 @@ Tested on Ubuntu 18.0.4 and Windows 7 x64
 * [PrimeFaces](https://www.primefaces.org/)
 * [rewrite](https://www.ocpsoft.org/rewrite/) - Routing ↑↓ and /url/{rewriting} solution for Servlet, Java Web Frameworks, and Java EE
 * [OmniFaces](http://showcase.omnifaces.org/) - Powerful JSF 2 utility library
+* [Markdown2Pdf](https://mvnrepository.com/artifact/eu.de-swaef.pdf/Markdown2Pdf) - .md to .pdf converter
 
 System and IDE should be configured to use:
 * [Java **11.0.2**](https://docs.oracle.com/cd/E19509-01/820-3208/inst_cli_jdk_javahome_t/) - [IntelliJ](https://stackoverflow.com/questions/18987228/how-do-i-change-the-intellij-idea-default-jdk)
@@ -80,3 +81,5 @@ Same as in [Sboj.gb](https://github.com/Martin-BG/SoftUni-Java-Web-Development-B
 * Simple JSF [templating](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/Final%20Exam/src/main/webapp/view/templates/base-layout.xhtml)
 * Static resources caching by [filter](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/Final%20Exam/src/main/java/org/softuni/exam/web/filters/CacheFilter.java):
 * Static resources compression using [OmniFaces](http://showcase.omnifaces.org/), setup in [web.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/Final%20Exam/src/main/webapp/WEB-INF/web.xml):
+* Convert Markdown data to PDF format with [Markdown2Pdf](https://mvnrepository.com/artifact/eu.de-swaef.pdf/Markdown2Pdf)
+* **Build of PDF file and download by client**

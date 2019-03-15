@@ -67,3 +67,5 @@ https://softuni.bg/trainings/2252/java-web-development-basics-january-2019
 
 * [EXODIA](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/12.%20Exam/Final%20Exam) - [Simple](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/12.%20Exam/EXODIA.pdf) multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
   * Same setup as in [Sboj.gb](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/11.%20Exam%20Preparations/Sboj.bg)
+  * Convert Markdown data to PDF format with [Markdown2Pdf](https://mvnrepository.com/artifact/eu.de-swaef.pdf/Markdown2Pdf)
+  * **Build of PDF file and download by client**

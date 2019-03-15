@@ -43,7 +43,7 @@ public class ProductCreateServlet extends BaseServlet {
         ProductServiceModel productServiceModel = new ProductServiceModel();
         productServiceModel.setName(req.getParameter(PARAM_NAME));
         String tp = req.getParameter(HTML_TYPE_PLACEHOLDER);
-        productServiceModel.setType(Type.fromName(tp));
+        productServiceModel.setType(Type.fromLabel(tp));
         productServiceModel.setDescription(req.getParameter(PARAM_DESCRIPTION));
         return productServiceModel;
     }
@@ -58,7 +58,7 @@ public class ProductCreateServlet extends BaseServlet {
                             .forEach(type -> options.append(
                                     TemplateBuilder
                                             .from(html)
-                                            .put(HTML_TYPE_PLACEHOLDER, type.getName())
+                                            .put(HTML_TYPE_PLACEHOLDER, type.getLabel())
                                             .build()));
                     handleResponse(resp,
                             Map.of(HTML_SKELETON_BODY_PLACEHOLDER, URI_PRODUCT_CREATE_HTML),

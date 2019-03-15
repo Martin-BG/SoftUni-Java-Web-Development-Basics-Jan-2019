@@ -8,11 +8,11 @@ public class TypeConverter implements AttributeConverter<Type, String> {
 
     @Override
     public String convertToDatabaseColumn(Type type) {
-        return type == null ? null : type.getName();
+        return type == null ? null : type.getLabel();
     }
 
     @Override
-    public Type convertToEntityAttribute(String name) {
-        return Type.fromName(name);
+    public Type convertToEntityAttribute(String label) {
+        return Type.fromLabel(label);
     }
 }

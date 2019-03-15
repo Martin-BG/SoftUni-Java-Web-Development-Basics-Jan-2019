@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.isPresent()) {
             ProductVewModel model = modelMapper.map(product.get(), ProductVewModel.class);
             if (product.get().getType() != null) {
-                model.setType(product.get().getType().getName());
+                model.setType(product.get().getType().getLabel());
             }
             return Optional.of(model);
         }

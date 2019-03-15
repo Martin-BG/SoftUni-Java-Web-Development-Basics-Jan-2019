@@ -229,7 +229,23 @@ public enum Type {
     HEALTH("Health"),
     COSMETIC("Cosmetic"),
     OTHER("Other")
-    //...
+
+    private static final Map<String, Type> LABEL_TO_ENUM_MAP = Stream.of(Type.values())
+            .collect(Collectors.toUnmodifiableMap(Type::getLabel, type -> type));
+
+    private final String label;
+
+    Type(String label) {
+        this.label = label;
+    }
+
+    public static Type fromLabel(String label) {
+        return label == null ? null : LABEL_TO_ENUM_MAP.get(label);
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }
 
 @Converter
@@ -237,12 +253,12 @@ public class TypeConverter implements AttributeConverter<Type, String> {
 
     @Override
     public String convertToDatabaseColumn(Type type) {
-        return type == null ? null : type.getName();
+        return type == null ? null : type.getLabel();
     }
 
     @Override
-    public Type convertToEntityAttribute(String name) {
-        return Type.fromName(name);
+    public Type convertToEntityAttribute(String label) {
+        return Type.fromLabel(label);
     }
 }
 

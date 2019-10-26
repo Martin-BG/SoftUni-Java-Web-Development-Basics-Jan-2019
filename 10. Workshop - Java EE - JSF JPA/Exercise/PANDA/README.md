@@ -1,5 +1,5 @@
 # PANDA
-[Simple](/../../10.%20Workshop%20-%20Java%20EE%20-%20JSF%20JPA.pdf) multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
+[Simple](../../10.%20Workshop%20-%20Java%20EE%20-%20JSF%20JPA.pdf) multi-page 2-entities web application with JSF and Hibernate, deployed on TomEE.
 
 ___
 ## Setup
@@ -27,9 +27,9 @@ Configure IDE to recognize [Lombok](https://projectlombok.org/) - [instructions]
 ___
 #### Project configuration
 * [pom.xml](pom.xml) - project setup - dependencies, compile, packaging
-* [beans.xml](/src/main/webapp/WEB-INF/beans.xml) - default setup with **bean-discovery-mode="all"**
-* [web.xml](/src/main/webapp/WEB-INF/web.xml) - web configuration: resources, security, JSF, resources compression, encoding
-* [resources.xml](/src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
+* [beans.xml](src/main/webapp/WEB-INF/beans.xml) - default setup with **bean-discovery-mode="all"**
+* [web.xml](src/main/webapp/WEB-INF/web.xml) - web configuration: resources, security, JSF, resources compression, encoding
+* [resources.xml](src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>

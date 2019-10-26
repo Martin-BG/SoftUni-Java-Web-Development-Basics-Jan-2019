@@ -30,41 +30,8 @@ ___
 * [beans.xml](src/main/webapp/WEB-INF/beans.xml) - default setup with **bean-discovery-mode="all"**
 * [web.xml](src/main/webapp/WEB-INF/web.xml) - web configuration: resources, security, JSF, resources compression, encoding
 * [resources.xml](src/main/webapp/WEB-INF/resources.xml) - data sources config - type, driver, url, credentials
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<resources>
-    <Resource id="MyResource" type="DataSource">
-        JdbcDriver com.mysql.cj.jdbc.Driver
-        JdbcUrl jdbc:mysql://localhost:3306/sboj_bg_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC
-        UserName xxxxxx
-        Password ****
-        JtaManaged true
-        LogSql true
-    </Resource>
-</resources>
-```
-* [persistence.xml](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/blob/master/11.%20Exam%20Preparations/Sboj.bg/src/main/webapp/META-INF/persistence.xml) - JTA persistence unit setup
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
-                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
-             version="2.2">
-    <persistence-unit name="myUnitName" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:openejb/Resource/MyResource</jta-data-source>
-        <properties>
-            <property name="tomee.jpa.factory.lazy" value="true"/>
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-        </properties>
-    </persistence-unit>
-</persistence>
-```
+* [persistence.xml](src/main/webapp/META-INF/persistence.xml) - JTA persistence unit setup
+
 ___
 ## Takeaways
 Same as in [Fluffy Duffy Munchkin Cats v2](https://github.com/Martin-BG/SoftUni-Java-Web-Development-Basics-Jan-2019/tree/master/09.%20Java%20EE%20-%20JavaServer%20Faces%20-%20Libraries%20Tags%20and%20Templates/Exercise/Fluffy%20Duffy%20Munchkin%20Cats%20v2)

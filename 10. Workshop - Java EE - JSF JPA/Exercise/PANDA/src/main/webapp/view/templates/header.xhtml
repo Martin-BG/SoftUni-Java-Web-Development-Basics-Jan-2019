@@ -1,0 +1,44 @@
+<ui:component
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-panda">
+        <c:choose>
+            <c:when test="#{username == null}">
+                <a href="/" class="navbar-brand nav-link-white">PANDA</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/home" class="navbar-brand nav-link-white">PANDA</a>
+            </c:otherwise>
+        </c:choose>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"/>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                <c:choose>
+                    <c:when test="#{username == null}">
+                        <li class="nav-item ml-3">
+                            <a href="/" class="nav-link nav-link-white active">Home</a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="/login" class="nav-link nav-link-white active">Login</a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="/register" class="nav-link nav-link-white active">Register</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item ml-3">
+                            <a href="/home" class="nav-link nav-link-white active">Home</a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="/logout" class="nav-link nav-link-white active">Logout</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </div>
+    </nav>
+</ui:component>

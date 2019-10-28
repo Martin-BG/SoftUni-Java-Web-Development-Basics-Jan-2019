@@ -45,7 +45,7 @@ public class User extends BaseUuidEntity {
     private String email;
 
     @NotNull
-    @Column(nullable = false, length = 12)
+    @Column(nullable = false, length = 5)
     @Convert(converter = RoleConverter.class)
     private Role role;
 }

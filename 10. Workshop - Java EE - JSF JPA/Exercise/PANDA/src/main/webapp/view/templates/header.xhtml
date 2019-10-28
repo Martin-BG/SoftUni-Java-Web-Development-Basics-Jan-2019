@@ -15,25 +15,28 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"/>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <c:choose>
                     <c:when test="#{username == null}">
-                        <li class="nav-item ml-3">
+                        <li class="nav-item">
                             <a href="/" class="nav-link nav-link-white active">Home</a>
                         </li>
-                        <li class="nav-item ml-3">
+                        <li class="nav-item">
                             <a href="/login" class="nav-link nav-link-white active">Login</a>
                         </li>
-                        <li class="nav-item ml-3">
+                        <li class="nav-item">
                             <a href="/register" class="nav-link nav-link-white active">Register</a>
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item ml-3">
+                        <li class="nav-item">
                             <a href="/home" class="nav-link nav-link-white active">Home</a>
                         </li>
-                        <li class="nav-item ml-3">
+                        <li class="nav-item">
+                            <a href="/receipts" class="nav-link nav-link-white active">Receipts</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/logout" class="nav-link nav-link-white active">Logout</a>
                         </li>
                     </c:otherwise>

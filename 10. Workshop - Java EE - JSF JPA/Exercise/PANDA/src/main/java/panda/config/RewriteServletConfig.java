@@ -19,6 +19,10 @@ import javax.servlet.ServletContext;
 @RewriteConfiguration
 public class RewriteServletConfig extends HttpConfigurationProvider {
 
+    private static final String FACES_VIEW = "/faces/view";
+    private static final String FACES_VIEW_GUEST = FACES_VIEW + "/guest";
+    private static final String FACES_VIEW_USER = FACES_VIEW + "/user";
+
     @Override
     public int priority() {
         return 10;
@@ -45,9 +49,9 @@ public class RewriteServletConfig extends HttpConfigurationProvider {
                 .when(Direction.isInbound().and(Path.matches("/index")))
                 .perform(Redirect.temporary(context.getContextPath() + "/"))
 
-                .addRule(Join.path("/").to("/faces/view/index.xhtml"))
-                .addRule(Join.path("/home").to("/faces/view/user/home.xhtml"))
-                .addRule(Join.path("/login").to("/faces/view/user/login.xhtml"))
-                .addRule(Join.path("/register").to("/faces/view/user/register.xhtml"));
+                .addRule(Join.path("/").to(FACES_VIEW_GUEST + "/index.xhtml"))
+                .addRule(Join.path("/home").to(FACES_VIEW_USER + "/home.xhtml"))
+                .addRule(Join.path("/login").to(FACES_VIEW_USER + "/login.xhtml"))
+                .addRule(Join.path("/register").to(FACES_VIEW_USER + "/register.xhtml"));
     }
 }

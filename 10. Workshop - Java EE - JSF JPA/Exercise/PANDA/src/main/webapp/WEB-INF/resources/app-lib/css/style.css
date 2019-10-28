@@ -43,3 +43,9 @@ footer {
     border: 0;
     width: 98%;
 }
+
+.error-msg {
+    color: red;
+    margin: 8px;
+    text-align: center
+}

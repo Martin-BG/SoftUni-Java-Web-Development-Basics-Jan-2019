@@ -25,7 +25,7 @@ public class LoginBacking extends BaseBackingBean {
         service.login(model)
                 .ifPresentOrElse(user -> {
                     addUserToSession(user);
-                    redirect("/home");
+                    redirect("/");
                 }, addMessageRunnable("Authentication failed. Invalid username or password."));
     }
 

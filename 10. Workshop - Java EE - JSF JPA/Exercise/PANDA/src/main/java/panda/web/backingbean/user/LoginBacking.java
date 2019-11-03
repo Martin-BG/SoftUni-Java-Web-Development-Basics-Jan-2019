@@ -33,6 +33,7 @@ public class LoginBacking extends BaseBackingBean {
         HttpSession session = request.getSession();
         session.setAttribute("userId", user.getId());
         session.setAttribute("username", user.getUsername());
+        session.setAttribute("role", user.getRole().getTitle());
     }
 
     public UserLoginBindingModel getModel() {

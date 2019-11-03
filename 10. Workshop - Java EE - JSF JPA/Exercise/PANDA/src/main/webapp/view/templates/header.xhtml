@@ -10,7 +10,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
-                <c:if test="#{role ne null and role eq 'Admin'}">
+                <c:if test="#{role != null and role == 'Admin'}">
                     <li class="nav-item">
                         <a class="nav-link nav-link-white active" href="/pending">Pending</a>
                     </li>
@@ -28,7 +28,7 @@
             <ul class="navbar-nav">
                 <a href="/" class="nav-link nav-link-white active">Home</a>
                 <c:choose>
-                    <c:when test="#{role ne null}">
+                    <c:when test="#{role == null}">
                         <li class="nav-item">
                             <a href="/login" class="nav-link nav-link-white active">Login</a>
                         </li>

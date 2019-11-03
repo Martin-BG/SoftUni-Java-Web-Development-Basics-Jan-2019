@@ -12,6 +12,7 @@ import org.ocpsoft.rewrite.servlet.config.rule.Join;
 import org.ocpsoft.rewrite.servlet.http.event.HttpInboundServletRewrite;
 import org.ocpsoft.rewrite.servlet.http.event.HttpServletRewrite;
 import org.ocpsoft.rewrite.servlet.impl.HttpInboundRewriteImpl;
+import panda.domain.entity.role.Role;
 
 import javax.servlet.ServletContext;
 
@@ -21,6 +22,7 @@ public class RewriteServletConfig extends HttpConfigurationProvider {
     private static final String FACES_VIEW = "/faces/view";
     private static final String FACES_VIEW_GUEST = FACES_VIEW + "/guest";
     private static final String FACES_VIEW_USER = FACES_VIEW + "/user";
+    private static final String FACES_VIEW_ADMIN = FACES_VIEW + "/admin";
 
     @Override
     public int priority() {
@@ -35,6 +37,12 @@ public class RewriteServletConfig extends HttpConfigurationProvider {
             HttpInboundServletRewrite httpServletRewrite = (HttpInboundRewriteImpl) rewrite;
             Object username = httpServletRewrite.getRequest().getSession().getAttribute("username");
             return username != null;
+        };
+
+        Condition admin = (rewrite, evaluationContext) -> {
+            HttpInboundServletRewrite httpServletRewrite = (HttpInboundRewriteImpl) rewrite;
+            String role = (String) httpServletRewrite.getRequest().getSession().getAttribute("role");
+            return Role.ADMIN.getTitle().equals(role);
         };
 
         Condition guest = (rewrite, evaluationContext) -> !authenticated.evaluate(rewrite, evaluationContext);
@@ -63,7 +71,10 @@ public class RewriteServletConfig extends HttpConfigurationProvider {
                 .when(Direction.isInbound().and(Path.matches("/")).and(guest))
 
             .addRule(Join.path("/").to(FACES_VIEW_USER + "/home.xhtml"))
-                .when(Direction.isInbound().and(Path.matches("/")).and(authenticated))
+                .when(Direction.isInbound().and(Path.matches("/")).and(authenticated).andNot(admin))
+
+            .addRule(Join.path("/").to(FACES_VIEW_ADMIN + "/home.xhtml"))
+                .when(Direction.isInbound().and(Path.matches("/")).and(admin))
 
             .addRule(Join.path("/login").to(FACES_VIEW_GUEST + "/login.xhtml"))
             .addRule(Join.path("/register").to(FACES_VIEW_GUEST + "/register.xhtml"))

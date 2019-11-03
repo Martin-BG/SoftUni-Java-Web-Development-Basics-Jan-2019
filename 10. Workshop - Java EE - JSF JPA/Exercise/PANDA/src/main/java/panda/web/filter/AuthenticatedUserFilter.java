@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter({"/", "/login", "/register"})
+@WebFilter({"/login", "/register"})
 public class AuthenticatedUserFilter implements Filter {
 
     @Override
@@ -17,7 +17,7 @@ public class AuthenticatedUserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
 
         if (req.getSession().getAttribute("username") != null) {
-            res.sendRedirect("/home");
+            res.sendRedirect("/");
             return;
         }
 

@@ -33,9 +33,7 @@
         <mysql.connector.version> <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
             8.0.15
         </mysql.connector.version>
-        <hibernate.core.version> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-            5.4.1.Final
-        </hibernate.core.version>
+        <hibernate.core.version>5.4.24.Final</hibernate.core.version>
         <modelmapper.version> <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
             2.3.2
         </modelmapper.version>

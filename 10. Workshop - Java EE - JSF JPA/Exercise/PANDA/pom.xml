@@ -34,9 +34,7 @@
         <javaee.api.version> <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
             8.0.1
         </javaee.api.version>
-        <mysql.connector.version> <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-            8.0.18
-        </mysql.connector.version>
+        <mysql.connector.version>8.0.28</mysql.connector.version>
         <hibernate.core.version> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
             5.4.7.Final
         </hibernate.core.version>

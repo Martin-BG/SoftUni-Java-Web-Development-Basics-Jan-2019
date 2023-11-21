@@ -46,9 +46,7 @@
         <lombok.version> <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
             1.18.10
         </lombok.version>
-        <primefaces.version> <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
-            7.0
-        </primefaces.version>
+        <primefaces.version>8.0</primefaces.version>
         <omnifaces.version> <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
             3.3
         </omnifaces.version>
